@@ -1,21 +1,39 @@
 :root {
-    /* The Canvas - Keep it bright */
-    --bg-color: #f5f5f5;
-    /* White */
+  /* Light backgrounds */
+  --color-bg-main: #EBEBEB;        /* Main page background */
+  --color-bg-subtle: #DCDCE0;      /* Slight variation for sections/cards */
 
-    /* The Text & Accents - For grounding and readability */
-    --text-primary: #1F0F0D;
-    /* Black (Deep Brown/Red tint) */
-    --text-secondary: #445855;
-    /* Green */
-    --accent-blue: #31444B;
-    /* Blue */
-    --accent-soft: #6C8381;
-    /* Soft green */
+  /* Dark tones */
+  --color-primary: #2B2D36;        /* Main text / dark sections */
+  --color-secondary: #5B5A60;      /* Secondary text / muted elements */
 
-    /* Functional colors */
-    --btn-bg: var(--accent-blue);
-    --btn-text: var(--bg-color);
+  /* Accent */
+  --color-accent: #2D162C;         /* Buttons, highlights, key actions */
+  --color-accent-hover: #3A1C38;   /* Hover state for buttons */
+
+  /* Text on dark backgrounds */
+  --color-text-light: #EBEBEB;     /* Text when background is dark */
+
+  /* Primary brand gradient (hero / key sections) */
+  --gradient-primary: linear-gradient(
+    135deg,
+    #2B2D36 0%,
+    #2D162C 100%
+  );
+
+  /* Softer gradient (buttons, cards, hover states) */
+  --gradient-soft: linear-gradient(
+    135deg,
+    #3A3D47 0%,
+    #2D162C 100%
+  );
+
+  /* Light background gradient (subtle depth) */
+  --gradient-light: linear-gradient(
+    135deg,
+    #EBEBEB 0%,
+    #DCDCE0 100%
+  );
 }
 
 /* reset */
@@ -25,11 +43,23 @@
     box-sizing: border-box;
 }
 
+/* Google Fonts, headings */
+h1, h2, h3 {
+    font-family: "cormorant", serif;
+}
+
+/* Google Fonts, p */
+body {
+    font-family: "Cormorant", serif;
+    font-weight: 550;
+    line-height: 1.6;
+    font-size: 20px;
+}
+
 /* MH */
 body {
-    background-color: #f5f5f5;
-    color: #1F0F0D;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--gradient-light);
+    color: var(--color-primary);
     line-height: 1.6;
 }
 
@@ -41,17 +71,26 @@ body {
 
 header {
     width: 100%;
-    background-color: #8eaba9;
+    background: var(--gradient-primary);
     display: flex;
     justify-content: center;
     padding: 20px;
+    color: var(--color-text-light);
+}
+
+.header-logo {
+    width: 225px;
 }
 
 .logo {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
 }
+
+
+
+
 
 header ul {
     display: flex;
@@ -62,8 +101,13 @@ header ul {
 
 header a {
     text-decoration: none;
-    color: #31444B;
+    color: var(--color-text-light);
     font-weight: bold;
+}
+
+header h2 {
+    color: var(--color-text-light);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
 }
 
 main {
@@ -72,13 +116,128 @@ main {
     text-align: center;
 }
 
-footer {
-    width: 100%;
-    background-color: #8eaba9;
-    justify-content: center;
-    padding: 50px 200px;
+.intro {
+    margin: 2rem 0 3rem;
 }
 
+main h1,
+main h2 {
+    color: var(--color-primary);
+}
+
+/* Booking section container */
+.booking-section {
+    max-width: 700px;
+    margin: 0 auto 4rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 18%, transparent);
+    border-radius: 20px;
+}
+
+/* Short text above the Google button */
+.booking-text {
+    max-width: 38ch;
+    margin: 0.75rem auto 1.5rem;
+    color: var(--color-secondary);
+}
+
+/* The Google button will be inserted here by Google's script */
+.booking-button-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+main a {
+    color: var(--color-accent);
+    text-decoration-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+    text-underline-offset: 0.18em;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+main a:hover,
+main a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration-color: var(--color-accent-hover);
+}
+
+footer {
+    width: 100%;
+    background: var(--gradient-primary);
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--color-text-light);
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.footer-logo img {
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 100;
+}
+
+footer a {
+    color: var(--color-text-light);
+    text-decoration-color: color-mix(in srgb, var(--color-text-light) 50%, transparent);
+    text-underline-offset: 0.18em;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: var(--color-bg-subtle);
+    text-decoration-color: var(--color-bg-subtle);
+}
+
+/*
+.marcus {
+  font-family: "Parisienne", cursive;
+  font-size: 64px;
+  font-weight: 400;
+  padding: 15px;
+}
+
+.heier {
+    font-family: "inter", sans-serif;
+    font-size: 26px;
+    color: #EBEBEB;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.medial-coach {
+    font-style: "serif";
+    font-size: 36px;
+    padding: 15px;
+}
+*/
+
+.mobile-booking-link {
+    display: none;
+}
 
 /* Mobile Styles (For screens smaller than 768px) */
 @media (max-width: 768px) {
@@ -86,16 +245,45 @@ footer {
         padding: 20px;
     }
 
-    footer {
-        padding: 40px 20px;
+    .booking-button-wrap {
+        display: none;
     }
 
-    header ul {
-        gap: 20px;
+    .mobile-booking-link {
+        display: inline-block;
+        background: #5a2d57;
+        color: #ffffff;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1;
+        padding: 16px 32px;
+        border-radius: 10px;
+    }
+
+    .booking-section {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
     }
 
     .logo {
         width: 60px;
         height: 60px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .footer-links {
+        order: 1;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .footer-logo {
+        order: 2;
     }
 }
