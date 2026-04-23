@@ -3,6 +3,27 @@
   --color-bg-main: #EBEBEB;        /* Main page background */
   --color-bg-subtle: #DCDCE0;      /* Slight variation for sections/cards */
 
+  /* MH purple */
+  --color-mh-purple1: #452843;
+  --color-mh-purple2: #533551;
+  --color-mh-purple3: #4A3148;
+  --color-mh-purple4: #624760;
+  --color-mh-purple5: #7B6078;
+  --color-mh-purple6: #998294;
+  --color-mh-purple7: #2D162C;
+  --color-mh-purple8: #3A1C38;
+
+
+  /* MH Medium gray */
+  --color-mh-gray-dark: #34353a;
+  --color-mh-gray1: #4f5056;
+  --color-mh-gray2: #78777c;
+  --color-mh-gray3: #929197;
+  --color-mh-gray4: #acabb0;
+  --color-mh-gray5: #c7c5c9;
+  --color-mh-gray6: #e1e0e3;
+  --color-mh-gray-light: #f2f1f3;
+
   /* Dark tones */
   --color-primary: #2B2D36;        /* Main text / dark sections */
   --color-secondary: #5B5A60;      /* Secondary text / muted elements */
@@ -10,6 +31,7 @@
   /* Accent */
   --color-accent: #2D162C;         /* Buttons, highlights, key actions */
   --color-accent-hover: #3A1C38;   /* Hover state for buttons */
+  --color-accent-googlebutton: 5a2d57;
 
   /* Text on dark backgrounds */
   --color-text-light: #EBEBEB;     /* Text when background is dark */
@@ -31,8 +53,15 @@
   /* Light background gradient (subtle depth) */
   --gradient-light: linear-gradient(
     135deg,
-    #EBEBEB 0%,
-    #DCDCE0 100%
+    #f7f7f7 0%,
+    #a4a4a4 100%
+  );
+
+  /* MH Light background gradient (subtle depth) */
+  --gradient-light-to-dark: linear-gradient(
+    90deg,
+    #78777c 0%,
+    #533551 100%
   );
 }
 
@@ -42,6 +71,8 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
 
 /* Google Fonts, headings */
 h1, h2, h3 {
@@ -72,14 +103,21 @@ body {
 header {
     width: 100%;
     background: var(--gradient-primary);
-    display: flex;
-    justify-content: center;
     padding: 20px;
     color: var(--color-text-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .header-logo {
-    width: 225px;
+    width: 100px;
 }
 
 .logo {
@@ -88,51 +126,33 @@ header {
     border-radius: 50%;
 }
 
-
-
-
-
 header ul {
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
+    width: 100%;
+}
+
+header li:first-child {
+    margin-right: auto;
 }
 
 header a {
     text-decoration: none;
     color: var(--color-text-light);
-    font-weight: bold;
-}
-
-header h2 {
-    color: var(--color-text-light);
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: medium;
+    font-weight: 700;
 }
 
 main {
-    flex: 1;
-    padding: 20px 200px;
     text-align: center;
-}
-
-.intro {
-    margin: 2rem 0 3rem;
+    padding: 0;
 }
 
 main h1,
 main h2 {
     color: var(--color-primary);
-}
-
-/* Booking section container */
-.booking-section {
-    max-width: 700px;
-    margin: 0 auto 4rem;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid color-mix(in srgb, var(--color-secondary) 18%, transparent);
-    border-radius: 20px;
 }
 
 /* Short text above the Google button */
@@ -162,19 +182,120 @@ main a:focus-visible {
     text-decoration-color: var(--color-accent-hover);
 }
 
+/* Box Design */
+.testimonial-homepage-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.main-box {
+    min-width: 0;
+    padding: 2rem;
+    min-height: 240px;
+}
+
+.box1 {
+    position: relative;
+    aspect-ratio: 1/1;
+    background-image:
+        
+        url("images/marcus.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box2 {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.box3 {
+    background: #8274814d;
+}
+
+.box4 {
+    background: var(--color-mh-gray2) ;
+}
+
+.box-testimonials {
+    background: var(--color-bg-main);
+    grid-column: 1 / -1;
+}
+
+.button,
+button {
+    display: inline-block;
+    padding: 1rem 2.25rem;
+    border: none;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.button:active,
+button:active {
+    transform: translateY(1px);
+}
+
+.button-dark {
+    background: #5a2d57;
+    color: #ffffff;
+}
+
+.button-dark:hover,
+.button-dark:focus-visible {
+    background: #5a3158;
+    color: #ffffff;
+}
+
+a.button,
+a.button:hover,
+a.button:focus-visible {
+    text-decoration: none;
+}
+
+
+/* Footer */
 footer {
     width: 100%;
     background: var(--gradient-primary);
     justify-content: center;
-    padding: 60px 20px;
+    padding: 60px 60px;
     color: var(--color-text-light);
 }
 
 .footer-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    gap: 25rem;
     justify-content: center;
-    gap: 100px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0 0 0;
 }
 
 .footer-logo img {
@@ -187,8 +308,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    text-align: left;
-    gap: 12px;
+    gap: 20px;
 }
 
 .footer-links a {
@@ -208,6 +328,12 @@ footer a:hover,
 footer a:focus-visible {
     color: var(--color-bg-subtle);
     text-decoration-color: var(--color-bg-subtle);
+}
+
+footer p {
+    font-size: medium;
+    text-align: center;
+    padding: 40px 0 0 0;
 }
 
 /*
@@ -242,7 +368,7 @@ footer a:focus-visible {
 /* Mobile Styles (For screens smaller than 768px) */
 @media (max-width: 768px) {
     main {
-        padding: 20px;
+        padding: 0;
     }
 
     .booking-button-wrap {
@@ -262,14 +388,17 @@ footer a:focus-visible {
         border-radius: 10px;
     }
 
-    .booking-section {
-        padding: 1.5rem 1rem;
-        border-radius: 16px;
-    }
-
     .logo {
         width: 60px;
         height: 60px;
+    }
+
+    .testimonial-homepage-container {
+        grid-template-columns: 1fr;
+    }
+
+    .main-box {
+        min-height: auto;
     }
 
     .footer-content {
