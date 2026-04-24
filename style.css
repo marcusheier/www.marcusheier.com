@@ -375,22 +375,50 @@ footer p {
         display: none;
     }
 
-    .mobile-booking-link {
+    .nav-booking-button {
+        display: none;
+    }
+
+    .mobile-booking-link,
+    .footer-links .mobile-booking-link {
         display: inline-block;
-        background: #5a2d57;
-        color: #ffffff;
+        background: #ffffff;
+        color: #000000;
         text-decoration: none;
         font-family: Arial, sans-serif;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1;
         padding: 16px 32px;
         border-radius: 10px;
+        margin-bottom: 50px;
+    }
+
+    .mobile-booking-link--dark {
+        background: #5a2d57;
+        color: #ffffff;
+    }
+
+    .mobile-booking-link:hover,
+    .mobile-booking-link:focus-visible,
+    .footer-links .mobile-booking-link:hover,
+    .footer-links .mobile-booking-link:focus-visible {
+        color: #000000;
+        text-decoration: none;
+    }
+
+    .mobile-booking-link--dark:hover,
+    .mobile-booking-link--dark:focus-visible {
+        color: #ffffff;
     }
 
     .logo {
         width: 60px;
         height: 60px;
+    }
+
+    header a {
+        font-size: small;
     }
 
     .testimonial-homepage-container {
@@ -408,8 +436,7 @@ footer p {
 
     .footer-links {
         order: 1;
-        align-items: flex-start;
-        text-align: left;
+        align-items: center;
     }
 
     .footer-logo {
