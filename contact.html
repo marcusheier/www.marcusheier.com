@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Marcus Heier</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Google Fonts - Cormorant and Parisienne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="site-shell">
+        <header class="site-header">
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="brand-link" href="index.html" aria-label="Marcus Heier home">
+                    <img class="brand-logo" src="assets/logo/logo white.png" alt="Marcus Heier">
+                </a>
+
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                    aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="course.html">8-Week Course</a></li>
+                    <li><a href="contact.html" aria-current="page">Contact</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="page-hero">
+                <div class="section-inner section-inner--narrow">
+                    <p class="eyebrow">Contact</p>
+                    <h1>Questions, course interest, or a first hello.</h1>
+                    <p>
+                        Reach out directly, follow along on social media, or book a 1:1 session when you feel ready.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section section--contact" aria-labelledby="contact-heading">
+                <div class="contact-options">
+                    <p class="eyebrow">Connect</p>
+                    <h2 id="contact-heading">Choose the easiest way to reach me.</h2>
+
+                    <div class="contact-link-list">
+                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">
+                            <span>Booking</span>
+                            Book a 1:1 session
+                        </a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfXEza16_Vv4qMywzHl6LTDrynu7gKvA-QJC5Rt7Y26I59Ifw/viewform?usp=publish-editor">
+                            <span>Apply</span>
+                            8-week program application
+                        </a>
+                        <a href="mailto:info@marcusheier.com">
+                            <span>Email</span>
+                            info@marcusheier.com
+                        </a>
+
+                        <a href="https://www.instagram.com/marcusheier">
+                            <span>Instagram</span>
+                            @marcusheier
+                        </a>
+                        <a href="https://www.youtube.com/@MarcusHeierMedium">
+                            <span>YouTube</span>
+                            @MarcusHeierMedium
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Marcus Heier home">
+                        <img class="footer-logo" src="assets/logo/logo black and white.png" alt="Marcus Heier">
+                    </a>
+                    <p>© HIGHER Coaching 2026</p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                    <a href="mailto:info@marcusheier.com">info@marcusheier.com</a>
+                    <a href="https://www.instagram.com/marcusheier">Instagram</a>
+                    <a href="https://www.youtube.com/@MarcusHeierMedium">YouTube</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            var navToggle = document.querySelector('.nav-toggle');
+            var navMenu = document.querySelector('#site-navigation');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function () {
+                    var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', String(!isOpen));
+                    navMenu.classList.toggle('is-open', !isOpen);
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>

@@ -4,78 +4,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus Heier</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Marcus Heier | Mediumship & Coaching</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
 
     <!-- Google Calendar styles for the official scheduling button -->
     <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
 
-    <!-- Google Fonts - Cormorant - Parisienne -->
+    <!-- Google Fonts - Cormorant and Parisienne -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div class="grid-container">
-        <header>
-            <nav>
-                <ul>
-                    <li><img class="header-logo" src="logo/logo white.png" alt=""></li>
-                    <!-- <h2><span class="marcus">Marcus</span><span class="heier">HEIER</span><span class="medial-coach">Medial Coach</span></h2> -->
+    <div class="site-shell">
+        <header class="site-header">
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="brand-link" href="index.html" aria-label="Marcus Heier home">
+                    <img class="brand-logo" src="assets/logo/logo white.png" alt="Marcus Heier">
+                </a>
+
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                    aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="site-navigation">
+                    <li><a href="index.html" aria-current="page">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="course.html">8-Week Course</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a></li>
                 </ul>
             </nav>
         </header>
+
         <main>
-            <section class="intro">
-                <h1>Full website coming soon...</h1>
+            <section class="hero-section hero-section--home">
+                <div class="hero-media">
+                    <!-- Change this src to swap the homepage hero image. -->
+                    <img src="assets/images/marcus.jpg" alt="Marcus Heier">
+                </div>
+
+                <div class="hero-content">
+                    <p class="eyebrow">Mediumship & Coaching</p>
+                    <h1>Find clarity, direction, and alignment in your life.</h1>
+                    <p>
+                        As a medium and coach, I offer 1:1 sessions where I share messages from Spirit to give you clear
+                        insights into your life and your next steps.
+                    </p>
+                </div>
             </section>
 
-            <!-- Booking section: place this inside <main> where you want visitors to book -->
-            <section class="booking-section" aria-labelledby="booking-heading">
-                <h2 id="booking-heading">Book a session</h2>
-                <p class="booking-text">
-                    Choose a time that works for you and book directly through Google Calendar.
-                </p>
+            <section class="section section--light" aria-labelledby="booking-heading">
+                <div class="section-inner section-inner--narrow">
+                    <p class="eyebrow">1:1 Sessions</p>
+                    <h2 id="booking-heading">A grounded space for guidance, reflection, and forward movement.</h2>
+                    <p>
+                        Each session is designed to help you understand where you are, what wants your attention, and
+                        how to move forward with confidence.
+                    </p>
 
-                <!-- This wrapper gives the Google button a clear place to appear -->
-                <div class="booking-button-wrap">
-                    <!-- Google Calendar Appointment Scheduling begin -->
-                    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.google.com/calendar/appointments/AcZssZ3eLk21mnVxi3UVbpU0W8_37O5pU6m2ySqQVSo=?gv=true',
-                          color: '#5a2d57',
-                          label: 'Book a session',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                    <!-- end Google Calendar Appointment Scheduling -->
+                    <div class="calendar-button-wrap">
+                        <!-- Google Calendar Appointment Scheduling begin -->
+                        <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                        <script>
+                            (function () {
+                                var target = document.currentScript;
+                                var attempts = 0;
+
+                                function loadCalendarButton() {
+                                    var buttonColor = getComputedStyle(document.documentElement).getPropertyValue('--color-google-button').trim();
+
+                                    if (window.calendar && calendar.schedulingButton) {
+                                        calendar.schedulingButton.load({
+                                            url: 'https://calendar.google.com/calendar/appointments/AcZssZ3eLk21mnVxi3UVbpU0W8_37O5pU6m2ySqQVSo=?gv=true',
+                                            color: buttonColor,
+                                            label: 'Book a session',
+                                            target: target
+                                        });
+                                        return;
+                                    }
+
+                                    attempts += 1;
+
+                                    if (attempts < 20) {
+                                        window.setTimeout(loadCalendarButton, 200);
+                                    }
+                                }
+
+                                window.addEventListener('load', loadCalendarButton);
+                            })();
+                        </script>
+                        <!-- end Google Calendar Appointment Scheduling -->
+                    </div>
                 </div>
-                <a class="mobile-booking-link" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+            </section>
+
+            <section class="section section--split" aria-labelledby="course-preview-heading">
+                <div>
+                    <p class="eyebrow">8-Week Course</p>
+                    <h2 id="course-preview-heading">A deeper path for intuitive development and personal alignment.</h2>
+                </div>
+                <div class="text-panel">
+                    <p>
+                        This 8-week program is designed to help you understand your direction, strengthen your intuitive
+                        awareness, and move forward with clarity and confidence.
+                    </p>
+                    <p>
+                        You will not only receive insight — you will learn how to apply it, trust it, and use it in your
+                        daily life.
+                    </p><br>
+                    <a class="text-link" href="course.html">Learn about the course</a>
+                </div>
+            </section>
+
+            <section class="section section--testimonials" aria-labelledby="testimonials-heading">
+                <div class="section-inner">
+                    <p class="eyebrow">Testimonials</p>
+                    <h2 id="testimonials-heading">Words from clients.</h2>
+                    <script src="https://widget.senja.io/widget/f0fba25d-5f2f-4308-873b-73fd2e00b4fd/platform.js"
+                        type="text/javascript" async></script>
+                    <div class="senja-embed" data-id="f0fba25d-5f2f-4308-873b-73fd2e00b4fd" data-mode="shadow"
+                        data-lazyload="false"></div>
+                </div>
+            </section>
+
+            <section class="section section--about-preview" aria-labelledby="about-preview-heading">
+                <div class="about-preview-media">
+                    <!-- Change this src to swap the homepage About Marcus image. -->
+                    <img src="assets/images/marcus2-web.jpg" alt="Marcus Heier">
+                </div>
+                <div class="about-preview-copy">
+                    <p class="eyebrow">About Marcus</p>
+                    <h2 id="about-preview-heading">A calm, practical approach to spiritual development.</h2>
+                    <p>
+                        My own way of working with spirit rooted in deep curiosity around our experience here on earth.
+                        Through years of exploring my own experiences, I learned to recognize and trust the ways
+                        guidance shows up — and how to move forward with greater clarity and self-trust.
+                    </p>
+                    <a class="text-link" href="about.html">Read more about me</a>
+                </div>
+            </section>
+
+            <section class="section section--links" aria-labelledby="links-heading">
+                <div class="section-inner">
+                    <p class="eyebrow">Connect</p>
+                    <h2 id="links-heading">Start with the path that fits you best.</h2>
+                    <div class="link-grid">
+                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                        <a href="course.html">Explore the course</a>
+                    </div>
+                </div>
             </section>
         </main>
-        <footer>
+
+        <footer class="site-footer">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <a href="https://www.marcusheier.com"><img class="logo" src="logo/logo black and white.png" alt="logo"></a>
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Marcus Heier home">
+                        <img class="footer-logo" src="assets/logo/logo black and white.png" alt="Marcus Heier">
+                    </a>
+                    <p>© HIGHER Coaching 2026</p>
                 </div>
+
                 <div class="footer-links">
-                    <h2>info@marcusheier.com</h2>
-                    <a href="https://www.instagram.com/marcusheier">INSTAGRAM</a>
-                    <a href="https://www.youtube.com/@HeierLearning">YOUTUBE</a>
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                    <a href="mailto:info@marcusheier.com">info@marcusheier.com</a>
+                    <a href="https://www.instagram.com/marcusheier">Instagram</a>
+                    <a href="https://www.youtube.com/@MarcusHeierMedium">YouTube</a>
                 </div>
             </div>
         </footer>
     </div>
+
+    <script>
+        (function () {
+            var navToggle = document.querySelector('.nav-toggle');
+            var navMenu = document.querySelector('#site-navigation');
+
+            if (!navToggle || !navMenu) {
+                return;
+            }
+
+            navToggle.addEventListener('click', function () {
+                var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', String(!isOpen));
+                navMenu.classList.toggle('is-open', !isOpen);
+            });
+        })();
+    </script>
 </body>
+
 </html>
-
-

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Marcus Heier</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Google Fonts - Cormorant and Parisienne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="site-shell">
+        <header class="site-header">
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="brand-link" href="index.html" aria-label="Marcus Heier home">
+                    <img class="brand-logo" src="assets/logo/logo white.png" alt="Marcus Heier">
+                </a>
+
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                    aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" aria-current="page">About</a></li>
+                    <li><a href="course.html">8-Week Course</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="page-hero">
+                <div class="section-inner section-inner--narrow">
+                    <p class="eyebrow">About Marcus</p>
+                    <h1>Spiritual development with clarity, alignment, and actionable steps.</h1>
+                </div>
+            </section>
+
+            <section class="section section--about-detail" aria-labelledby="story-heading">
+                <div class="about-detail-media">
+                    <!-- Change this src to swap the about page image. -->
+                    <img src="assets/images/marcus3.JPG" alt="Marcus Heier">
+                </div>
+                <div class="about-detail-copy">
+                    <p class="eyebrow">My Story</p>
+                    <h2 id="story-heading">A personal path shaped by intuition, curiosity, and service.</h2>
+                    <p>
+                        I’m originally from Sweden, and my path began through music and sports — especially martial
+                        arts, with a focus on judo — alongside a deep connection to music, playing both drums and
+                        piano, as well as composing.
+                    </p>
+                    <p>
+                        Over time, these interests took me around the world, living in different countries and
+                        experiencing a wide range of perspectives on life, discipline, and personal growth.
+                    </p>
+                    <p>
+                        Through these experiences, I began to explore a deeper layer of understanding — one centered
+                        around intuition, self-awareness, and how we find direction from within.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section section--light" aria-labelledby="credibility-heading">
+                <div class="section-inner">
+                    <p class="eyebrow">How I Work</p>
+                    <h2 id="credibility-heading">Mediumship and coaching held in one clear space.</h2>
+                    <div class="card-grid">
+                        <article class="info-card">
+                            <h3>Mediumship</h3>
+                            <p>
+                                I tune into spirit to bring forward insights relevant to your current situation, life
+                                direction, and deeper patterns.
+                            </p>
+                            <p>
+                                These sessions create clarity around what is present for you — both consciously and
+                                beneath the surface — giving you a clearer understanding of where you are and what is
+                                unfolding.
+                            </p>
+                        </article>
+                        <article class="info-card">
+                            <h3>Coaching</h3>
+                            <p>
+                                We focus on applying and integrating what has emerged into your real life.
+                            </p>
+                            <p>
+                                This includes developing your own intuitive abilities, working through resistance, and
+                                building trust in your decisions — so you can move forward with clarity and consistency.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section section--cta" aria-labelledby="about-cta-heading">
+                <div class="section-inner section-inner--narrow">
+                    <p class="eyebrow">Begin Here</p>
+                    <h2 id="about-cta-heading">Ready to receive guidance for your next step?</h2>
+                    <a class="button button--primary button--booking"
+                        href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Marcus Heier home">
+                        <img class="footer-logo" src="assets/logo/logo black and white.png" alt="Marcus Heier">
+                    </a>
+                    <p>© HIGHER Coaching 2026</p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                    <a href="mailto:info@marcusheier.com">info@marcusheier.com</a>
+                    <a href="https://www.instagram.com/marcusheier">Instagram</a>
+                    <a href="https://www.youtube.com/@MarcusHeierMedium">YouTube</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            var navToggle = document.querySelector('.nav-toggle');
+            var navMenu = document.querySelector('#site-navigation');
+
+            if (!navToggle || !navMenu) {
+                return;
+            }
+
+            navToggle.addEventListener('click', function () {
+                var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', String(!isOpen));
+                navMenu.classList.toggle('is-open', !isOpen);
+            });
+        })();
+    </script>
+</body>
+
+</html>
