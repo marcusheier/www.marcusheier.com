@@ -580,10 +580,11 @@ main {
     justify-content: center;
     min-height: 96px;
     padding: 1.25rem;
-    border: 1px solid var(--color-border-light);
+    border: 1px solid var(--color-button-border);
     border-radius: var(--radius-card);
-    background: var(--color-surface);
-    color: var(--color-accent);
+    background: var(--gradient-button);
+    box-shadow: 0 16px 34px var(--color-button-glow);
+    color: var(--color-white);
     font-family: var(--font-sans);
     font-size: 0.9rem;
     font-weight: 700;
@@ -593,23 +594,11 @@ main {
 
 .link-grid a:hover,
 .link-grid a:focus-visible {
-    border-color: var(--color-accent);
-    color: var(--color-accent-hover);
-    transform: translateY(-2px);
-}
-
-.link-grid a[href*="calendar"] {
     border-color: var(--color-button-border);
-    background: var(--gradient-button);
-    box-shadow: 0 16px 34px var(--color-button-glow);
-    color: var(--color-white);
-}
-
-.link-grid a[href*="calendar"]:hover,
-.link-grid a[href*="calendar"]:focus-visible {
     background: var(--gradient-button-hover);
     box-shadow: 0 20px 42px var(--color-button-glow);
     color: var(--color-white);
+    transform: translateY(-2px);
 }
 
 /* About page */
