@@ -528,6 +528,15 @@ main {
     transform: translateY(-1px) !important;
 }
 
+.booking-scheduler-popup-anchor {
+    position: fixed;
+    top: 0;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 .section--testimonials {
     background: var(--color-bg-main);
 }
