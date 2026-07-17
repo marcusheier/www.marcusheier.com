@@ -114,20 +114,7 @@
         </footer>
     </div>
 
-    <script>
-        (function () {
-            var navToggle = document.querySelector('.nav-toggle');
-            var navMenu = document.querySelector('#site-navigation');
-
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', function () {
-                    var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-                    navToggle.setAttribute('aria-expanded', String(!isOpen));
-                    navMenu.classList.toggle('is-open', !isOpen);
-                });
-            }
-        })();
-    </script>
+    <script src="js/site.js"></script>
 </body>
 
 </html>

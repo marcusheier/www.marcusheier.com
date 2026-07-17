@@ -81,37 +81,7 @@
                     </p>
 
                     <div class="calendar-button-wrap">
-                        <!-- Google Calendar Appointment Scheduling begin -->
-                        <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                        <script>
-                            (function () {
-                                var target = document.currentScript;
-                                var attempts = 0;
-
-                                function loadCalendarButton() {
-                                    var buttonColor = getComputedStyle(document.documentElement).getPropertyValue('--color-google-button').trim();
-
-                                    if (window.calendar && calendar.schedulingButton) {
-                                        calendar.schedulingButton.load({
-                                            url: 'https://calendar.google.com/calendar/appointments/AcZssZ3eLk21mnVxi3UVbpU0W8_37O5pU6m2ySqQVSo=?gv=true',
-                                            color: buttonColor,
-                                            label: 'Book a session',
-                                            target: target
-                                        });
-                                        return;
-                                    }
-
-                                    attempts += 1;
-
-                                    if (attempts < 20) {
-                                        window.setTimeout(loadCalendarButton, 200);
-                                    }
-                                }
-
-                                window.addEventListener('load', loadCalendarButton);
-                            })();
-                        </script>
-                        <!-- end Google Calendar Appointment Scheduling -->
+                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
                     </div>
                 </div>
             </section>
@@ -193,22 +163,7 @@
         </footer>
     </div>
 
-    <script>
-        (function () {
-            var navToggle = document.querySelector('.nav-toggle');
-            var navMenu = document.querySelector('#site-navigation');
-
-            if (!navToggle || !navMenu) {
-                return;
-            }
-
-            navToggle.addEventListener('click', function () {
-                var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-                navToggle.setAttribute('aria-expanded', String(!isOpen));
-                navMenu.classList.toggle('is-open', !isOpen);
-            });
-        })();
-    </script>
+    <script src="js/site.js"></script>
 </body>
 
 </html>
