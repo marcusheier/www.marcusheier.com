@@ -30,6 +30,19 @@
     --color-mh-gray6: #E1E0E3;
     --color-mh-gray-light: #F2F1F3;
 
+    /* MH North Star Blue palette */
+    --color-space-black: #0E0C24;
+    --color-deep-navy: #28233F;
+    --color-midnight-blue: #3C3153;
+    --color-royal-indigo: #59466B;
+    --color-electric-blue: #765F87;
+    --color-violet-glow: #A589AA;
+    --color-icy-blue: #E2DCE7;
+    --color-star-white: #FFF9F6;
+    --color-soft-gold: #D8B98E;
+    --color-deep-gold: #9A705B;
+    --color-gold-highlight: #F1D8B7;
+
     /* Main color roles */
     --color-primary: #2B2D36;
     --color-secondary: #5B5A60;
@@ -62,6 +75,18 @@
     --gradient-light-to-dark: linear-gradient(90deg, var(--color-mh-gray2) 0%, var(--color-mh-purple2) 100%);
     --gradient-button: linear-gradient(135deg, var(--color-mh-purple8) 0%, var(--color-mh-purple2) 100%);
     --gradient-button-hover: linear-gradient(135deg, var(--color-mh-purple7) 0%, var(--color-mh-purple1) 100%);
+
+    /* MH North Star Blue gradients */
+    --gradient-north-star-page: linear-gradient(180deg, var(--color-space-black) 0%, var(--color-deep-navy) 48%, var(--color-midnight-blue) 100%);
+    --gradient-north-star-header: linear-gradient(135deg, var(--color-space-black) 0%, var(--color-deep-navy) 60%, var(--color-royal-indigo) 100%);
+    --gradient-north-star-hero: linear-gradient(180deg, rgba(11, 10, 32, 0.28) 0%, rgba(23, 21, 51, 0.4) 100%);
+    --gradient-north-star-path: linear-gradient(180deg, rgba(40, 35, 63, 0.58) 0%, rgba(60, 49, 83, 0.66) 100%);
+    --gradient-north-star-section: linear-gradient(135deg, var(--color-deep-navy) 0%, var(--color-midnight-blue) 100%);
+    --gradient-north-star-section-alt: linear-gradient(135deg, var(--color-midnight-blue) 0%, var(--color-royal-indigo) 100%);
+    --gradient-north-star-card: linear-gradient(145deg, rgba(74, 59, 112, 0.52) 0%, rgba(23, 21, 51, 0.72) 100%);
+    --gradient-north-star-button: linear-gradient(135deg, var(--color-royal-indigo) 0%, var(--color-electric-blue) 58%, var(--color-violet-glow) 100%);
+    --gradient-north-star-button-hover: linear-gradient(135deg, var(--color-electric-blue) 0%, var(--color-violet-glow) 100%);
+    --gradient-north-star-gold: linear-gradient(135deg, var(--color-deep-gold) 0%, var(--color-soft-gold) 55%, var(--color-gold-highlight) 100%);
 
     /* Typography */
     --font-serif: "Cormorant", Georgia, serif;
@@ -159,7 +184,7 @@ main {
     top: 0;
     z-index: 1000;
     width: 100%;
-    background: var(--gradient-primary);
+    background: var(--gradient-north-star-header);
     color: var(--color-text-light);
 }
 
@@ -232,6 +257,52 @@ main {
     box-shadow: 0 18px 38px var(--color-button-glow);
     color: var(--color-accent);
     transform: translateY(-1px);
+}
+
+/* Updated header treatment */
+.nav-menu a {
+    color: var(--color-star-white);
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus-visible {
+    color: var(--color-star-white);
+}
+
+.nav-menu a[aria-current="page"] {
+    color: var(--color-star-white);
+}
+
+.nav-menu a[href="8week.html"] {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(216, 185, 142, 0.72);
+    border-radius: var(--radius-small);
+    background: rgba(216, 185, 142, 0.1);
+    box-shadow: 0 0 18px rgba(216, 185, 142, 0.3), inset 0 0 12px rgba(216, 185, 142, 0.08);
+    color: var(--color-soft-gold);
+}
+
+.nav-menu a[href="8week.html"]:hover,
+.nav-menu a[href="8week.html"]:focus-visible {
+    border-color: var(--color-soft-gold);
+    background: rgba(216, 185, 142, 0.16);
+    box-shadow: 0 0 24px rgba(216, 185, 142, 0.45), inset 0 0 14px rgba(216, 185, 142, 0.1);
+    color: var(--color-soft-gold);
+}
+
+.nav-menu .nav-cta {
+    border-color: var(--color-soft-gold);
+    background: var(--gradient-north-star-gold);
+    box-shadow: 0 10px 28px rgba(154, 112, 91, 0.28);
+    color: var(--color-space-black);
+}
+
+.nav-menu .nav-cta:hover,
+.nav-menu .nav-cta:focus-visible {
+    border-color: var(--color-gold-highlight);
+    background: var(--gradient-north-star-gold);
+    box-shadow: 0 14px 34px rgba(216, 185, 142, 0.42);
+    color: var(--color-space-black);
 }
 
 .nav-toggle {
@@ -381,12 +452,36 @@ main {
     text-align: center;
 }
 
+.page-hero--north-star {
+    background-color: var(--color-space-black);
+    background-image:
+        var(--gradient-north-star-hero),
+        url("../assets/north-star/hero.png");
+    background-position: center;
+    background-size: cover;
+    color: var(--color-star-white);
+}
+
+.page-hero--north-star > * {
+    position: relative;
+    z-index: 1;
+}
+
+.page-hero--north-star h1,
+.page-hero--north-star p {
+    color: var(--color-star-white);
+}
+
+.page-hero--north-star .eyebrow {
+    color: var(--color-soft-gold);
+}
+
 .page-hero p {
     max-width: 58ch;
     margin: 1.25rem auto 0;
 }
 
-.page-hero p + .button {
+.page-hero p+.button {
     margin-top: 2.25rem;
 }
 
@@ -410,7 +505,7 @@ main {
     color: var(--color-mh-purple4);
 }
 
-.section--cta h2 + p {
+.section--cta h2+p {
     max-width: 54ch;
     margin-top: 1rem;
 }
@@ -434,8 +529,8 @@ main {
     border-left: 1px solid var(--color-border-subtle);
 }
 
-.text-panel p + p,
-.text-panel p + .text-link {
+.text-panel p+p,
+.text-panel p+.text-link {
     margin-top: 1.25rem;
 }
 
@@ -649,12 +744,12 @@ main {
 }
 
 /* Course page */
-.section--course-path > .section-inner > .eyebrow,
-.section--course-path > .section-inner > h2 {
+.section--course-path>.section-inner>.eyebrow,
+.section--course-path>.section-inner>h2 {
     text-align: center;
 }
 
-.section--course-path > .section-inner > h2 {
+.section--course-path>.section-inner>h2 {
     max-width: var(--content-width);
     margin-right: auto;
     margin-left: auto;
@@ -664,7 +759,7 @@ main {
     margin-top: 3.5rem;
 }
 
-.phase-block + .phase-block {
+.phase-block+.phase-block {
     margin-top: 4rem;
     padding-top: 3rem;
     border-top: 1px solid var(--color-border-subtle);
@@ -706,6 +801,160 @@ main {
 
 .week-card strong {
     color: var(--color-primary);
+}
+
+/* North Star page theme */
+.page-north-star {
+    background: var(--gradient-north-star-page);
+    color: var(--color-icy-blue);
+}
+
+.page-north-star .site-header {
+    background: var(--gradient-north-star-header);
+}
+
+.page-north-star .nav-menu a {
+    color: var(--color-star-white);
+}
+
+.page-north-star .nav-menu a:hover,
+.page-north-star .nav-menu a:focus-visible {
+    color: var(--color-star-white);
+}
+
+.page-north-star .nav-menu a[href="8week.html"] {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(216, 185, 142, 0.72);
+    border-radius: var(--radius-small);
+    background: rgba(216, 185, 142, 0.1);
+    box-shadow: 0 0 18px rgba(216, 185, 142, 0.3), inset 0 0 12px rgba(216, 185, 142, 0.08);
+    color: var(--color-soft-gold);
+}
+
+.page-north-star .nav-menu a[href="8week.html"]:hover,
+.page-north-star .nav-menu a[href="8week.html"]:focus-visible {
+    border-color: var(--color-soft-gold);
+    background: rgba(216, 185, 142, 0.16);
+    box-shadow: 0 0 24px rgba(216, 185, 142, 0.45), inset 0 0 14px rgba(216, 185, 142, 0.1);
+    color: var(--color-soft-gold);
+}
+
+.page-north-star .nav-menu .nav-cta {
+    border-color: var(--color-soft-gold);
+    background: var(--gradient-north-star-gold);
+    box-shadow: 0 10px 28px rgba(154, 112, 91, 0.28);
+    color: var(--color-space-black);
+}
+
+.page-north-star .nav-menu .nav-cta:hover,
+.page-north-star .nav-menu .nav-cta:focus-visible {
+    border-color: var(--color-gold-highlight);
+    background: var(--gradient-north-star-gold);
+    box-shadow: 0 14px 34px rgba(216, 185, 142, 0.42);
+    color: var(--color-space-black);
+}
+
+.page-north-star .section--split {
+    background: var(--gradient-north-star-section);
+}
+
+.page-north-star .section--light {
+    background: var(--gradient-north-star-section-alt);
+}
+
+.page-north-star .section--course-path {
+    background-color: var(--color-midnight-blue);
+    background-image:
+        var(--gradient-north-star-path),
+        url("../assets/north-star/path.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.page-north-star .section--cta {
+    border-color: rgba(221, 227, 255, 0.2);
+    background: var(--gradient-north-star-section);
+}
+
+.page-north-star h1,
+.page-north-star h2,
+.page-north-star h3,
+.page-north-star .section--cta h2,
+.page-north-star .section--cta p {
+    color: var(--color-star-white);
+}
+
+.page-north-star p {
+    color: var(--color-icy-blue);
+}
+
+.page-north-star .eyebrow,
+.page-north-star .phase-heading span,
+.page-north-star .week-card span {
+    color: var(--color-soft-gold);
+}
+
+.page-north-star .text-panel {
+    border-color: rgba(221, 227, 255, 0.2);
+}
+
+.page-north-star .phase-block + .phase-block {
+    border-color: rgba(221, 227, 255, 0.2);
+}
+
+.page-north-star .info-card,
+.page-north-star .week-card {
+    border-color: rgba(221, 227, 255, 0.24);
+    background: var(--gradient-north-star-card);
+    box-shadow: 0 18px 50px rgba(14, 12, 36, 0.28);
+}
+
+.page-north-star .week-card strong {
+    color: var(--color-star-white);
+}
+
+.page-north-star .button--primary,
+.page-north-star .button--booking {
+    border-color: var(--color-soft-gold);
+    background: var(--gradient-north-star-gold);
+    box-shadow: 0 16px 34px rgba(154, 112, 91, 0.3), 0 0 18px rgba(216, 185, 142, 0.16);
+    color: var(--color-space-black);
+}
+
+.page-north-star .button--primary:hover,
+.page-north-star .button--primary:focus-visible,
+.page-north-star .button--booking:hover,
+.page-north-star .button--booking:focus-visible {
+    border-color: var(--color-gold-highlight);
+    background: var(--gradient-north-star-gold);
+    box-shadow: 0 20px 42px rgba(154, 112, 91, 0.42), 0 0 24px rgba(216, 185, 142, 0.3);
+    color: var(--color-space-black);
+}
+
+.page-north-star .button--ghost {
+    border-color: rgba(221, 227, 255, 0.5);
+    color: var(--color-icy-blue);
+}
+
+.page-north-star .button--ghost:hover,
+.page-north-star .button--ghost:focus-visible {
+    border-color: var(--color-soft-gold);
+    color: var(--color-star-white);
+}
+
+.page-north-star .site-footer {
+    background: var(--gradient-north-star-header);
+}
+
+.page-north-star .footer-brand p,
+.page-north-star .footer-links a {
+    color: var(--color-icy-blue);
+}
+
+.page-north-star .footer-links a:hover,
+.page-north-star .footer-links a:focus-visible {
+    color: var(--color-soft-gold);
+    text-decoration-color: var(--color-soft-gold);
 }
 
 /* Contact page */
@@ -919,6 +1168,11 @@ main {
         margin-top: 0.5rem;
         padding: 1rem 1.25rem;
         text-align: center;
+    }
+
+    .page-north-star .nav-menu a[href="8week.html"] {
+        display: inline-block;
+        width: auto;
     }
 
     .section,
