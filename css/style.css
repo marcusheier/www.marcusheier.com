@@ -1173,6 +1173,19 @@ main {
     .page-north-star .nav-menu a[href="8week.html"] {
         display: inline-block;
         width: auto;
+        padding: 0.85rem 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        color: var(--color-soft-gold);
+    }
+
+    .page-north-star .nav-menu a[href="8week.html"]:hover,
+    .page-north-star .nav-menu a[href="8week.html"]:focus-visible {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        color: var(--color-soft-gold);
     }
 
     .nav-menu a[href="8week.html"] {
