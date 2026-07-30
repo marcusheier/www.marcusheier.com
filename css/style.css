@@ -1175,6 +1175,22 @@ main {
         width: auto;
     }
 
+    .nav-menu a[href="8week.html"] {
+        padding: 0.85rem 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        color: var(--color-soft-gold);
+    }
+
+    .nav-menu a[href="8week.html"]:hover,
+    .nav-menu a[href="8week.html"]:focus-visible {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        color: var(--color-soft-gold);
+    }
+
     .section,
     .page-hero {
         padding: var(--section-padding-mobile) var(--gutter);
