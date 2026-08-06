@@ -13,30 +13,19 @@
     /* MH purple palette */
     --color-mh-purple1: #452843;
     --color-mh-purple2: #533551;
-    --color-mh-purple3: #4A3148;
     --color-mh-purple4: #624760;
     --color-mh-purple5: #7B6078;
-    --color-mh-purple6: #998294;
     --color-mh-purple7: #2D162C;
     --color-mh-purple8: #3A1C38;
 
     /* MH gray palette */
-    --color-mh-gray-dark: #34353A;
-    --color-mh-gray1: #4F5056;
-    --color-mh-gray2: #78777C;
-    --color-mh-gray3: #929197;
     --color-mh-gray4: #ACABB0;
-    --color-mh-gray5: #C7C5C9;
-    --color-mh-gray6: #E1E0E3;
-    --color-mh-gray-light: #F2F1F3;
 
-    /* MH North Star Blue palette */
+    /* MH North Star palette */
     --color-space-black: #0E0C24;
     --color-deep-navy: #28233F;
     --color-midnight-blue: #3C3153;
     --color-royal-indigo: #59466B;
-    --color-electric-blue: #765F87;
-    --color-violet-glow: #A589AA;
     --color-icy-blue: #E2DCE7;
     --color-star-white: #FFF9F6;
     --color-soft-gold: #D8B98E;
@@ -49,14 +38,10 @@
     --color-accent: #2D162C;
     --color-accent-hover: #3A1C38;
     --color-google-button: #3A1C38;
-    --color-google-button-hover: #2D162C;
     --color-button-border: #998294;
     --color-button-glow: rgba(45, 22, 44, 0.26);
     --color-text-light: #EBEBEB;
-    --color-text-dark: #2B2D36;
-    --color-text-muted: #5B5A60;
     --color-white: #FFFFFF;
-    --color-black: #000000;
     --color-transparent: transparent;
 
     /* Borders, shadows, and overlays */
@@ -64,19 +49,15 @@
     --color-border-subtle: #E1E0E3;
     --color-border-dark: rgba(235, 235, 235, 0.34);
     --color-shadow-soft: rgba(45, 22, 44, 0.18);
-    --color-shadow-strong: rgba(43, 45, 54, 0.22);
     --color-image-overlay: rgba(43, 45, 54, 0.16);
-    --color-card-tint: rgba(130, 116, 129, 0.30);
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-mh-purple7) 100%);
-    --gradient-soft: linear-gradient(135deg, var(--color-mh-gray-dark) 0%, var(--color-mh-purple7) 100%);
     --gradient-light: linear-gradient(135deg, var(--color-bg-soft) 0%, var(--color-mh-gray4) 100%);
-    --gradient-light-to-dark: linear-gradient(90deg, var(--color-mh-gray2) 0%, var(--color-mh-purple2) 100%);
     --gradient-button: linear-gradient(135deg, var(--color-mh-purple8) 0%, var(--color-mh-purple2) 100%);
     --gradient-button-hover: linear-gradient(135deg, var(--color-mh-purple7) 0%, var(--color-mh-purple1) 100%);
 
-    /* MH North Star Blue gradients */
+    /* MH North Star gradients */
     --gradient-north-star-page: linear-gradient(180deg, var(--color-space-black) 0%, var(--color-deep-navy) 48%, var(--color-midnight-blue) 100%);
     --gradient-north-star-header: linear-gradient(135deg, var(--color-space-black) 0%, var(--color-deep-navy) 60%, var(--color-royal-indigo) 100%);
     --gradient-north-star-hero: linear-gradient(180deg, rgba(11, 10, 32, 0.28) 0%, rgba(23, 21, 51, 0.4) 100%);
@@ -84,13 +65,10 @@
     --gradient-north-star-section: linear-gradient(135deg, var(--color-deep-navy) 0%, var(--color-midnight-blue) 100%);
     --gradient-north-star-section-alt: linear-gradient(135deg, var(--color-midnight-blue) 0%, var(--color-royal-indigo) 100%);
     --gradient-north-star-card: linear-gradient(145deg, rgba(74, 59, 112, 0.52) 0%, rgba(23, 21, 51, 0.72) 100%);
-    --gradient-north-star-button: linear-gradient(135deg, var(--color-royal-indigo) 0%, var(--color-electric-blue) 58%, var(--color-violet-glow) 100%);
-    --gradient-north-star-button-hover: linear-gradient(135deg, var(--color-electric-blue) 0%, var(--color-violet-glow) 100%);
     --gradient-north-star-gold: linear-gradient(135deg, var(--color-deep-gold) 0%, var(--color-soft-gold) 55%, var(--color-gold-highlight) 100%);
 
     /* Typography */
     --font-serif: "Cormorant", Georgia, serif;
-    --font-script: "Parisienne", cursive;
     --font-sans: Arial, Helvetica, sans-serif;
 
     /* Layout */
@@ -217,7 +195,7 @@ main {
 }
 
 .nav-menu a {
-    color: var(--color-text-light);
+    color: var(--color-star-white);
     font-family: var(--font-sans);
     font-size: 0.78rem;
     font-weight: 700;
@@ -225,12 +203,6 @@ main {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     transition: color 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-menu a:hover,
-.nav-menu a:focus-visible,
-.nav-menu a[aria-current="page"] {
-    color: var(--color-bg-subtle);
 }
 
 .nav-cta {
@@ -260,10 +232,6 @@ main {
 }
 
 /* Updated header treatment */
-.nav-menu a {
-    color: var(--color-star-white);
-}
-
 .nav-menu a:hover,
 .nav-menu a:focus-visible {
     color: var(--color-star-white);
@@ -844,51 +812,6 @@ main {
     color: var(--color-icy-blue);
 }
 
-.page-north-star .site-header {
-    background: var(--gradient-north-star-header);
-}
-
-.page-north-star .nav-menu a {
-    color: var(--color-star-white);
-}
-
-.page-north-star .nav-menu a:hover,
-.page-north-star .nav-menu a:focus-visible {
-    color: var(--color-star-white);
-}
-
-.page-north-star .nav-menu a[href="8week.html"] {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid rgba(216, 185, 142, 0.72);
-    border-radius: var(--radius-small);
-    background: rgba(216, 185, 142, 0.1);
-    box-shadow: 0 0 18px rgba(216, 185, 142, 0.3), inset 0 0 12px rgba(216, 185, 142, 0.08);
-    color: var(--color-soft-gold);
-}
-
-.page-north-star .nav-menu a[href="8week.html"]:hover,
-.page-north-star .nav-menu a[href="8week.html"]:focus-visible {
-    border-color: var(--color-soft-gold);
-    background: rgba(216, 185, 142, 0.16);
-    box-shadow: 0 0 24px rgba(216, 185, 142, 0.45), inset 0 0 14px rgba(216, 185, 142, 0.1);
-    color: var(--color-soft-gold);
-}
-
-.page-north-star .nav-menu .nav-cta {
-    border-color: var(--color-soft-gold);
-    background: var(--gradient-north-star-gold);
-    box-shadow: 0 10px 28px rgba(154, 112, 91, 0.28);
-    color: var(--color-space-black);
-}
-
-.page-north-star .nav-menu .nav-cta:hover,
-.page-north-star .nav-menu .nav-cta:focus-visible {
-    border-color: var(--color-gold-highlight);
-    background: var(--gradient-north-star-gold);
-    box-shadow: 0 14px 34px rgba(216, 185, 142, 0.42);
-    color: var(--color-space-black);
-}
-
 .page-north-star .section--split {
     background: var(--gradient-north-star-section);
 }
@@ -1236,25 +1159,9 @@ main {
         text-align: center;
     }
 
-    .page-north-star .nav-menu a[href="8week.html"] {
+    .nav-menu a[href="8week.html"] {
         display: inline-block;
         width: auto;
-        padding: 0.85rem 0;
-        border: 0;
-        background: transparent;
-        box-shadow: none;
-        color: var(--color-soft-gold);
-    }
-
-    .page-north-star .nav-menu a[href="8week.html"]:hover,
-    .page-north-star .nav-menu a[href="8week.html"]:focus-visible {
-        border: 0;
-        background: transparent;
-        box-shadow: none;
-        color: var(--color-soft-gold);
-    }
-
-    .nav-menu a[href="8week.html"] {
         padding: 0.85rem 0;
         border: 0;
         background: transparent;
