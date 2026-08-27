@@ -85,7 +85,7 @@ async function makeCanvases() {
     const lines = wrapText(measure, getText("#art-quote") || " ", cardW - padding * 2);
     const lineHeight = studioSettings.textSize * scale * 1.45;
     const headerHeight = avatarSize + 70 * scale + (document.querySelector("#show-stars").checked ? 78 * scale : 0);
-    const continuationHeaderHeight = 55 * scale;
+    const continuationHeaderHeight = 100 * scale;
     const textHeight = Math.max(lineHeight, cardH - padding * 2 - headerHeight - 34 * scale);
     const linesPerSlide = Math.max(1, Math.floor(textHeight / lineHeight));
     const continuationTextHeight = Math.max(lineHeight, cardH - padding * 2 - continuationHeaderHeight - 34 * scale);
