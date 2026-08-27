@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="description" content="Share your experience with Marcus Heier.">
+    <title>Share your experience | Marcus Heier</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/testimonials.css">
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap" rel="stylesheet">
+</head>
+
+<body class="testimonial-page">
+    <div class="site-shell">
+        <header class="site-header">
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="brand-link" href="../index.html" aria-label="Marcus Heier home">
+                    <img class="brand-logo" src="../assets/logo/logo white.png" alt="Marcus Heier">
+                </a>
+            </nav>
+        </header>
+
+        <main class="testimonial-main">
+            <section class="testimonial-intro" aria-labelledby="testimonial-heading">
+                <p class="eyebrow">A little reflection</p>
+                <h1 id="testimonial-heading">Would you like to share your experience?</h1>
+                <p>Thank you for taking the time to write a few words about your session with me. Your reflection may help someone else find the support they are looking for.</p>
+            </section>
+
+            <section class="testimonial-form-card" aria-label="Testimonial form">
+                <form id="testimonial-form" novalidate>
+                    <div class="form-field">
+                        <label for="testimonial-name">Name <span>(as you want it to appear on the testimonial)</span></label>
+                        <input id="testimonial-name" name="name" type="text" autocomplete="name" maxlength="80" required>
+                        <small class="field-error" data-error-for="name"></small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="testimonial-text">Testimonial</label>
+                        <textarea id="testimonial-text" name="testimonial" rows="8" maxlength="1800" required></textarea>
+                        <div class="field-meta"><small class="field-error" data-error-for="testimonial"></small><small id="testimonial-count">0 / 1800</small></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="testimonial-image">Image upload <span>(optional)</span></label>
+                        <input id="testimonial-image" name="image" type="file" accept="image/jpeg,image/png,image/webp">
+                        <small class="upload-note">A square portrait works best. Maximum 5 MB.</small>
+                        <small class="field-error" data-error-for="image"></small>
+                        <div class="image-placeholder" id="image-placeholder" aria-hidden="true"></div>
+                        <div class="image-preview" id="image-preview" hidden>
+                            <img id="image-preview-image" alt="Selected portrait preview">
+                            <button type="button" class="preview-remove" id="remove-image">Remove image</button>
+                        </div>
+                    </div>
+
+                    <!-- Spam trap: genuine visitors never see or fill this field. -->
+                    <div class="form-field form-field--trap" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                    <button class="button button--primary form-submit" type="submit">Send testimonial</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" aria-label="Marcus Heier home">
+                        <img class="footer-logo" src="../assets/logo/logo black and white.png" alt="Marcus Heier">
+                    </a>
+                    <p>© HIGHER Coaching 2026</p>
+                </div>
+                <div class="footer-icon-wrap"><img class="footer-icon" src="../assets/logo/logo icon.png" alt="Higher Coaching icon"></div>
+                <div class="footer-links"><a href="mailto:info@marcusheier.com">info@marcusheier.com</a></div>
+            </div>
+        </footer>
+    </div>
+    <script src="../js/testimonials.js"></script>
+</body>
+
+</html>

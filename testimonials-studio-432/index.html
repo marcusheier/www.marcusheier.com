@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Testimonial Studio | Marcus Heier</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/testimonials.css">
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap" rel="stylesheet">
+</head>
+
+<body class="testimonial-studio-page">
+    <div class="studio-shell">
+        <header class="studio-header">
+            <a href="../index.html" aria-label="Marcus Heier home"><img src="../assets/logo/logo white.png" alt="Marcus Heier"></a>
+            <div><p class="eyebrow">Private tool</p><h1>Testimonial Studio</h1></div>
+            <button class="button button--ghost studio-reset" id="reset-settings" type="button">Reset</button>
+        </header>
+
+        <main class="studio-layout">
+            <section class="studio-preview-area" aria-label="Testimonial preview">
+                <div class="studio-preview-frame" id="preview-frame">
+                    <article class="testimonial-art" id="testimonial-art">
+                        <div class="testimonial-art-card">
+                            <div class="testimonial-art-person">
+                                <div class="testimonial-art-avatar"><img id="art-avatar" alt=""></div>
+                                <p id="art-name"></p>
+                            </div>
+                            <div class="testimonial-art-stars" aria-label="Five stars">★★★★★</div>
+                            <p class="testimonial-art-quote" id="art-quote"></p>
+                            <p class="testimonial-art-date" id="art-date"></p>
+                        </div>
+                    </article>
+                </div>
+                <p class="studio-hint">Tip: open a testimonial from the Sheet to load it here, or use the sample above while designing.</p>
+            </section>
+
+            <aside class="studio-controls" aria-label="Studio controls">
+                <div class="control-group">
+                    <p class="control-label">Social size</p>
+                    <div class="preset-grid" id="size-presets">
+                        <button type="button" class="preset-button is-active" data-width="1080" data-height="1350">Instagram portrait <span>1080 × 1350</span></button>
+                        <button type="button" class="preset-button" data-width="1080" data-height="1080">Square <span>1080 × 1080</span></button>
+                        <button type="button" class="preset-button" data-width="1080" data-height="1920">Story <span>1080 × 1920</span></button>
+                        <button type="button" class="preset-button" data-width="1200" data-height="627">LinkedIn landscape <span>1200 × 627</span></button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-heading"><p class="control-label">Gradient</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle colors</button></div>
+                    <div class="color-row">
+                        <label>Color 1 <input id="color-one" type="color" value="#2d162c"></label>
+                        <label>Color 2 <input id="color-two" type="color" value="#59466b"></label>
+                    </div>
+                    <label class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
+                    <input id="gradient-angle" type="range" min="0" max="360" value="135">
+                </div>
+
+                <div class="control-group">
+                    <p class="control-label">Typography</p>
+                    <label class="range-label" for="text-size">Text size <output id="text-size-value">42px</output></label>
+                    <input id="text-size" type="range" min="24" max="72" value="42">
+                    <label class="range-label" for="card-padding">Card padding <output id="card-padding-value">54px</output></label>
+                    <input id="card-padding" type="range" min="28" max="100" value="54">
+                </div>
+
+                <div class="control-group">
+                    <p class="control-label">Preview content</p>
+                    <label class="studio-file-label" for="studio-image">Choose portrait <span>optional</span></label>
+                    <input id="studio-image" type="file" accept="image/jpeg,image/png,image/webp">
+                    <label class="check-label"><input id="show-stars" type="checkbox" checked> Show five stars</label>
+                </div>
+
+                <div class="studio-actions">
+                    <button class="button button--primary" id="download-png" type="button">Download PNG</button>
+                    <button class="button button--ghost" id="save-drive" type="button">Save to Google Drive</button>
+                </div>
+                <p class="studio-status" id="studio-status" role="status" aria-live="polite"></p>
+            </aside>
+        </main>
+    </div>
+    <script src="../js/testimonial-studio.js"></script>
+</body>
+
+</html>
