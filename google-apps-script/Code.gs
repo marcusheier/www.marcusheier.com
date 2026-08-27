@@ -38,6 +38,8 @@ function doPost(e) {
     const studioLink = `${CONFIG.studioUrl}?id=${encodeURIComponent(recordId)}`;
     sheet.appendRow([now, params.name, params.testimonial, imageUrl, '', 'Received', recordId, imageId]);
     const newRow = sheet.getLastRow();
+    sheet.getRange(newRow, 1, 1, 8).setWrapStrategy(SpreadsheetApp.WrapStrategy.CLIP);
+    sheet.setRowHeight(newRow, 42);
     const studioRichText = SpreadsheetApp.newRichTextValue().setText('Open studio').setLinkUrl(studioLink).build();
     sheet.getRange(newRow, 5).setRichTextValue(studioRichText);
     return json_({ ok: true });
