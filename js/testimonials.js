@@ -1,5 +1,5 @@
 /* Testimonial intake. Set the Apps Script URL after deployment. */
-const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzfAoNKZY_sJLKr9WfVsQiFImW95B4uQNS0nVLMHYiYkCW_KevuWSeCo1Q5ONNFq_Zl/exec";
+const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyZ5nR4DtDi-1UY3DjjNW-e67rZ-ks-x4Np7Tt5YyxIbJRShRBJ29efzqkLHzxCfK_g/exec";
 const testimonialForm = document.querySelector("#testimonial-form");
 const testimonialText = document.querySelector("#testimonial-text");
 const testimonialCount = document.querySelector("#testimonial-count");
