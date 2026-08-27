@@ -1,5 +1,5 @@
 /* Testimonial intake. Set the Apps Script URL after deployment. */
-const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDGwS8xoUJIM3jfhtPDRpojHDXM_hVZrJj6pckZdtY_jUVi7ggO8lC1So9wbk0wyJR/exec";
+const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzfAoNKZY_sJLKr9WfVsQiFImW95B4uQNS0nVLMHYiYkCW_KevuWSeCo1Q5ONNFq_Zl/exec";
 const testimonialForm = document.querySelector("#testimonial-form");
 const testimonialText = document.querySelector("#testimonial-text");
 const testimonialCount = document.querySelector("#testimonial-count");
@@ -104,6 +104,8 @@ testimonialForm?.addEventListener("submit", async (event) => {
         const payload = { name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
         if (!response.ok) throw new Error("Submission failed");
+        const result = await response.json();
+        if (!result.ok) throw new Error(result.error || "Submission failed");
         setFormStatus("Thank you — your testimonial has been received.", true);
         testimonialForm.reset();
         imagePreview.hidden = true;

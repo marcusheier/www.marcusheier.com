@@ -1,5 +1,5 @@
 const studioSettings = { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 };
-const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDGwS8xoUJIM3jfhtPDRpojHDXM_hVZrJj6pckZdtY_jUVi7ggO8lC1So9wbk0wyJR/exec";
+const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzfAoNKZY_sJLKr9WfVsQiFImW95B4uQNS0nVLMHYiYkCW_KevuWSeCo1Q5ONNFq_Zl/exec";
 const art = document.querySelector("#testimonial-art");
 const artCard = document.querySelector(".testimonial-art-card");
 const quote = document.querySelector("#art-quote");
@@ -124,7 +124,7 @@ document.querySelector("#save-drive").addEventListener("click", async () => {
     for (let index = 0; index < canvases.length; index += 1) {
         status.textContent = `Saving slide ${index + 1} of ${canvases.length} to Drive…`;
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "saveGraphic", name: getText("#art-name"), imageData: canvases[index].toDataURL("image/png"), slideNumber: index + 1, slideCount: canvases.length }) });
-        if (!response.ok) { status.textContent = "Could not save the PNG to Drive."; return; }
+        if (!response.ok || !(await response.json()).ok) { status.textContent = "Could not save the PNG to Drive."; return; }
     }
     status.textContent = canvases.length > 1 ? `${canvases.length} slides saved to Google Drive.` : "PNG saved to Google Drive.";
 });
