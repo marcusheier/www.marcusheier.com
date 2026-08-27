@@ -47,7 +47,7 @@
 .testimonial-art-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .testimonial-art-person p { color: #30384a; font: 700 clamp(1.15rem, 3vw, 2rem)/1.1 var(--font-sans); }
 .testimonial-art-stars { margin: 2rem 0 1.5rem; color: #ffb51b; font: 2.6rem/1 var(--font-sans); letter-spacing: .08em; }
-.testimonial-art-quote { color: #30384a; font: 700 clamp(1.25rem, 3vw, 2.5rem)/1.28 var(--font-sans); }
+.testimonial-art-quote { color: #30384a; font: 400 clamp(1.05rem, 2.2vw, 1.65rem)/1.45 var(--font-sans); }
 .testimonial-art-date { margin-top: 1.5rem; color: #8791a4; font: 700 clamp(.9rem, 2vw, 1.3rem) var(--font-sans); }
 .studio-hint { max-width: 62ch; color: #a9a3b2; font: .78rem/1.4 var(--font-sans); text-align: center; }
 .studio-controls { padding: 2rem clamp(1.2rem, 3vw, 2.8rem); background: #211d2d; }

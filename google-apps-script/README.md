@@ -7,6 +7,6 @@
 5. Authorize the requested Sheets and Drive permissions.
 6. Copy the deployment URL into `TESTIMONIALS_ENDPOINT` in `js/testimonials.js`.
 
-The Sheet should have a tab named `Testimonials`, or the script will use the first tab. The script writes date, name, testimonial, original image URL, studio link, and status. Uploaded images are stored in the configured Drive folder.
+The Sheet should have a tab named `Testimonials`, or the script will use the first tab. The script writes date, name, testimonial, original image URL, studio link, and status. Uploaded images are stored in the configured Drive folder. The studio uses the Apps Script endpoint to load the private portrait by file ID, so the Drive file does not need to be made public.
 
 The front end includes free built-in spam controls: a honeypot field, minimum completion time, required-field validation, a five-megabyte image limit, and duplicate protection in Apps Script.

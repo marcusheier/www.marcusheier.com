@@ -24,14 +24,17 @@ function doPost(e) {
     cache.put(`testimonial:${fingerprint}`, '1', 86400);
     const folder = DriveApp.getFolderById(CONFIG.driveFolderId);
     let imageUrl = '';
+    let imageId = '';
     if (params.imageData) {
       const imageBytes = Utilities.base64Decode(params.imageData.split(',').pop());
       const firstName = firstName_(params.name);
-      const imageBlob = Utilities.newBlob(imageBytes, params.imageMimeType || 'image/jpeg', `${firstName}-original-${now.getTime()}`);
-      imageUrl = folder.createFile(imageBlob).getUrl();
+      const imageBlob = Utilities.newBlob(imageBytes, params.imageMimeType || 'image/jpeg', `${firstName}-original-${now.getTime()}.jpg`);
+      const imageFile = folder.createFile(imageBlob);
+      imageId = imageFile.getId();
+      imageUrl = imageFile.getUrl();
     }
     const sheet = SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheetByName(CONFIG.sheetName) || SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheets()[0];
-    const studioLink = `${CONFIG.studioUrl}?name=${encodeURIComponent(params.name)}&testimonial=${encodeURIComponent(params.testimonial)}&date=${encodeURIComponent(Utilities.formatDate(now, Session.getScriptTimeZone(), 'MMMM d, yyyy'))}&image=${encodeURIComponent(imageUrl)}`;
+    const studioLink = `${CONFIG.studioUrl}?name=${encodeURIComponent(params.name)}&testimonial=${encodeURIComponent(params.testimonial)}&date=${encodeURIComponent(Utilities.formatDate(now, Session.getScriptTimeZone(), 'MMMM d, yyyy'))}&imageId=${encodeURIComponent(imageId)}`;
     sheet.appendRow([now, params.name, params.testimonial, imageUrl, studioLink, 'Received']);
     return json_({ ok: true });
   } catch (error) {
@@ -39,7 +42,13 @@ function doPost(e) {
   }
 }
 
-function doGet() { return json_({ ok: true, service: 'Marcus Heier testimonials' }); }
+function doGet(e) {
+  if (e && e.parameter && e.parameter.action === 'image' && e.parameter.id) {
+    const file = DriveApp.getFileById(e.parameter.id);
+    return json_({ ok: true, mimeType: file.getMimeType(), imageData: Utilities.base64Encode(file.getBlob().getBytes()) });
+  }
+  return json_({ ok: true, service: 'Marcus Heier testimonials' });
+}
 function saveGraphic_(params) {
   if (!params.imageData) return json_({ ok: false, error: 'Missing image data' });
   const folder = DriveApp.getFolderById(CONFIG.driveFolderId);

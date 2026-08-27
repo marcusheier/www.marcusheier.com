@@ -1,4 +1,4 @@
-const studioSettings = { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 42, padding: 54 };
+const studioSettings = { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 30, padding: 54 };
 const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxLv35YLVFnB-vidkOjwEZcY9oEzjhPlG7H7pKbmwba-SUiGABe-oVyfHVMqL35bJ5v/exec";
 const art = document.querySelector("#testimonial-art");
 const artCard = document.querySelector(".testimonial-art-card");
@@ -86,7 +86,7 @@ async function makePng() {
     if (portrait) { ctx.save(); ctx.beginPath(); ctx.arc(cardX + padding + avatarSize / 2, y + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(portrait, cardX + padding, y, avatarSize, avatarSize); ctx.restore(); }
     ctx.fillStyle = "#30384a"; ctx.font = `700 ${32 * scale}px Arial`; ctx.fillText(getText("#art-name"), cardX + padding + avatarSize + 24 * scale, y + avatarSize * .62); y += avatarSize + 70 * scale;
     if (!document.querySelector("#show-stars").checked) y -= 38 * scale; else { ctx.fillStyle = "#ffb51b"; ctx.font = `${42 * scale}px Arial`; ctx.fillText("★★★★★", cardX + padding, y); y += 78 * scale; }
-    ctx.fillStyle = "#30384a"; ctx.font = `700 ${studioSettings.textSize * scale}px Arial`; const lines = wrapText(ctx, getText("#art-quote"), cardW - padding * 2); const lineHeight = studioSettings.textSize * scale * 1.28; lines.forEach((line) => { ctx.fillText(line, cardX + padding, y); y += lineHeight; });
+    ctx.fillStyle = "#30384a"; ctx.font = `400 ${studioSettings.textSize * scale}px Arial`; const lines = wrapText(ctx, getText("#art-quote"), cardW - padding * 2); const lineHeight = studioSettings.textSize * scale * 1.45; lines.forEach((line) => { ctx.fillText(line, cardX + padding, y); y += lineHeight; });
     ctx.fillStyle = "#8791a4"; ctx.font = `700 ${20 * scale}px Arial`; ctx.fillText(getText("#art-date"), cardX + padding, cardY + cardH - padding);
     return canvas.toDataURL("image/png");
 }
@@ -110,7 +110,7 @@ document.querySelector("#save-drive").addEventListener("click", async () => {
     const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "saveGraphic", name: getText("#art-name"), imageData: dataUrl }) });
     status.textContent = response.ok ? "PNG saved to Google Drive." : "Could not save the PNG to Drive.";
 });
-document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 42, padding: 54 }); document.querySelector("#color-one").value = studioSettings.colorOne; document.querySelector("#color-two").value = studioSettings.colorTwo; document.querySelector("#gradient-angle").value = 135; document.querySelector("#text-size").value = 42; document.querySelector("#card-padding").value = 54; renderStudio(); });
+document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 30, padding: 54 }); document.querySelector("#color-one").value = studioSettings.colorOne; document.querySelector("#color-two").value = studioSettings.colorTwo; document.querySelector("#gradient-angle").value = 135; document.querySelector("#text-size").value = 30; document.querySelector("#card-padding").value = 54; renderStudio(); });
 
 const params = new URLSearchParams(window.location.search);
 if (params.get("name")) document.querySelector("#art-name").textContent = params.get("name");
