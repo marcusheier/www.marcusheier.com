@@ -1,5 +1,5 @@
 const studioSettings = { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 };
-const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxLv35YLVFnB-vidkOjwEZcY9oEzjhPlG7H7pKbmwba-SUiGABe-oVyfHVMqL35bJ5v/exec";
+const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDGwS8xoUJIM3jfhtPDRpojHDXM_hVZrJj6pckZdtY_jUVi7ggO8lC1So9wbk0wyJR/exec";
 const art = document.querySelector("#testimonial-art");
 const artCard = document.querySelector(".testimonial-art-card");
 const quote = document.querySelector("#art-quote");

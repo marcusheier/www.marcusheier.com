@@ -1,5 +1,5 @@
 /* Testimonial intake. Set the Apps Script URL after deployment. */
-const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxLv35YLVFnB-vidkOjwEZcY9oEzjhPlG7H7pKbmwba-SUiGABe-oVyfHVMqL35bJ5v/exec";
+const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzDGwS8xoUJIM3jfhtPDRpojHDXM_hVZrJj6pckZdtY_jUVi7ggO8lC1So9wbk0wyJR/exec";
 const testimonialForm = document.querySelector("#testimonial-form");
 const testimonialText = document.querySelector("#testimonial-text");
 const testimonialCount = document.querySelector("#testimonial-count");
@@ -43,7 +43,7 @@ function prepareImage(file) {
 }
 
 testimonialText?.addEventListener("input", () => {
-    testimonialCount.textContent = `${testimonialText.value.length} / 1800`;
+    testimonialCount.textContent = `${testimonialText.value.length} characters`;
 });
 
 imageInput?.addEventListener("change", () => {
@@ -107,7 +107,7 @@ testimonialForm?.addEventListener("submit", async (event) => {
         setFormStatus("Thank you — your testimonial has been received.", true);
         testimonialForm.reset();
         imagePreview.hidden = true;
-        testimonialCount.textContent = "0 / 1800";
+        testimonialCount.textContent = "0 characters";
     } catch (error) {
         setFormStatus("Something went wrong. Please try again in a moment.");
     } finally {
