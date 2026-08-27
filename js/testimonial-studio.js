@@ -9,10 +9,11 @@ let cachedPortrait = null;
 let cachedPortraitSource = "";
 
 function renderStudio() {
+    const previewScale = art.getBoundingClientRect().width / studioSettings.width;
     art.style.background = `linear-gradient(${studioSettings.angle}deg, ${studioSettings.colorOne}, ${studioSettings.colorTwo})`;
     art.style.aspectRatio = `${studioSettings.width} / ${studioSettings.height}`;
-    artCard.style.padding = `${studioSettings.padding}px`;
-    quote.style.fontSize = `${studioSettings.textSize}px`;
+    artCard.style.padding = `${studioSettings.padding * previewScale}px`;
+    quote.style.fontSize = `${studioSettings.textSize * previewScale}px`;
     document.querySelector("#gradient-angle-value").textContent = `${studioSettings.angle}°`;
     document.querySelector("#text-size-value").textContent = `${studioSettings.textSize}px`;
     document.querySelector("#card-padding-value").textContent = `${studioSettings.padding}px`;
