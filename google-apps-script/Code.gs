@@ -18,6 +18,7 @@ function doPost(e) {
     if (params.action === 'saveGraphic') return saveGraphic_(params);
     if (params.website || !params.name || !params.testimonial) return json_({ ok: true });
     const now = new Date();
+    const recordId = Utilities.getUuid();
     const cache = CacheService.getScriptCache();
     const fingerprint = Utilities.base64EncodeWebSafe(`${params.name}|${params.testimonial}`).slice(0, 80);
     if (cache.get(`testimonial:${fingerprint}`)) return json_({ ok: true });
@@ -34,8 +35,11 @@ function doPost(e) {
       imageUrl = imageFile.getUrl();
     }
     const sheet = SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheetByName(CONFIG.sheetName) || SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheets()[0];
-    const studioLink = `${CONFIG.studioUrl}?name=${encodeURIComponent(params.name)}&testimonial=${encodeURIComponent(params.testimonial)}&date=${encodeURIComponent(Utilities.formatDate(now, Session.getScriptTimeZone(), 'MMMM d, yyyy'))}&imageId=${encodeURIComponent(imageId)}`;
-    sheet.appendRow([now, params.name, params.testimonial, imageUrl, studioLink, 'Received']);
+    const studioLink = `${CONFIG.studioUrl}?id=${encodeURIComponent(recordId)}`;
+    sheet.appendRow([now, params.name, params.testimonial, imageUrl, '', 'Received', recordId, imageId]);
+    const newRow = sheet.getLastRow();
+    const studioRichText = SpreadsheetApp.newRichTextValue().setText('Open studio').setLinkUrl(studioLink).build();
+    sheet.getRange(newRow, 5).setRichTextValue(studioRichText);
     return json_({ ok: true });
   } catch (error) {
     return json_({ ok: false, error: error.message });
@@ -43,6 +47,14 @@ function doPost(e) {
 }
 
 function doGet(e) {
+  if (e && e.parameter && e.parameter.action === 'submission' && e.parameter.id) {
+    const sheet = SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheetByName(CONFIG.sheetName) || SpreadsheetApp.openById(CONFIG.spreadsheetId).getSheets()[0];
+    const rows = sheet.getDataRange().getValues();
+    const row = rows.find((item) => String(item[6]) === String(e.parameter.id));
+    if (!row) return json_({ ok: false, error: 'Submission not found' });
+    const date = row[0] instanceof Date ? Utilities.formatDate(row[0], Session.getScriptTimeZone(), 'MMMM d, yyyy') : String(row[0] || '');
+    return json_({ ok: true, name: row[1] || '', testimonial: row[2] || '', date, imageId: row[7] || '' });
+  }
   if (e && e.parameter && e.parameter.action === 'image' && e.parameter.id) {
     const file = DriveApp.getFileById(e.parameter.id);
     return json_({ ok: true, mimeType: file.getMimeType(), imageData: Utilities.base64Encode(file.getBlob().getBytes()) });
@@ -50,12 +62,18 @@ function doGet(e) {
   return json_({ ok: true, service: 'Marcus Heier testimonials' });
 }
 function saveGraphic_(params) {
-  if (!params.imageData) return json_({ ok: false, error: 'Missing image data' });
+  const images = Array.isArray(params.images) ? params.images : (params.imageData ? [params.imageData] : []);
+  if (!images.length) return json_({ ok: false, error: 'Missing image data' });
   const folder = DriveApp.getFolderById(CONFIG.driveFolderId);
   const safeName = firstName_(params.name);
-  const bytes = Utilities.base64Decode(params.imageData.split(',').pop());
-  const file = folder.createFile(Utilities.newBlob(bytes, 'image/png', `${safeName}-testimonial.png`));
-  return json_({ ok: true, url: file.getUrl() });
+  const urls = images.map((imageData, index) => {
+    const bytes = Utilities.base64Decode(imageData.split(',').pop());
+    const slideNumber = params.slideNumber || (index + 1);
+    const suffix = (params.slideCount > 1 || images.length > 1) ? `-slide-${slideNumber}` : '';
+    const file = folder.createFile(Utilities.newBlob(bytes, 'image/png', `${safeName}-testimonial${suffix}.png`));
+    return file.getUrl();
+  });
+  return json_({ ok: true, urls });
 }
 
 function firstName_(name) {
