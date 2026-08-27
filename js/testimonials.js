@@ -20,6 +20,28 @@ function setFormStatus(message, success = false) {
     formStatus.classList.toggle("is-success", success);
 }
 
+function prepareImage(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.addEventListener("error", reject);
+        reader.addEventListener("load", () => {
+            const image = new Image();
+            image.addEventListener("error", reject);
+            image.addEventListener("load", () => {
+                const maxDimension = 1200;
+                const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+                const canvas = document.createElement("canvas");
+                canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+                canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+                canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+                resolve(canvas.toDataURL("image/jpeg", .82));
+            });
+            image.src = reader.result;
+        });
+        reader.readAsDataURL(file);
+    });
+}
+
 testimonialText?.addEventListener("input", () => {
     testimonialCount.textContent = `${testimonialText.value.length} / 1800`;
 });
@@ -78,13 +100,8 @@ testimonialForm?.addEventListener("submit", async (event) => {
     submitButton.textContent = "Sending…";
     try {
         const image = imageInput.files?.[0];
-        const imageData = image ? await new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.addEventListener("load", () => resolve(reader.result));
-            reader.addEventListener("error", reject);
-            reader.readAsDataURL(image);
-        }) : "";
-        const payload = { name, testimonial, website: "", imageData, imageMimeType: image?.type || "" };
+        const imageData = image ? await prepareImage(image) : "";
+        const payload = { name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
         if (!response.ok) throw new Error("Submission failed");
         setFormStatus("Thank you — your testimonial has been received.", true);

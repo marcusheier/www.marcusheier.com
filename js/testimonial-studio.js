@@ -5,6 +5,8 @@ const artCard = document.querySelector(".testimonial-art-card");
 const quote = document.querySelector("#art-quote");
 const avatar = document.querySelector("#art-avatar");
 const status = document.querySelector("#studio-status");
+let cachedPortrait = null;
+let cachedPortraitSource = "";
 
 function renderStudio() {
     art.style.background = `linear-gradient(${studioSettings.angle}deg, ${studioSettings.colorOne}, ${studioSettings.colorTwo})`;
@@ -50,11 +52,21 @@ document.querySelector("#studio-image").addEventListener("change", (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.addEventListener("load", () => { avatar.src = reader.result; });
+    reader.addEventListener("load", () => { avatar.src = reader.result; cachedPortrait = null; cachedPortraitSource = ""; });
     reader.readAsDataURL(file);
 });
 
 function getText(selector) { return document.querySelector(selector).textContent.trim(); }
+function loadPortrait() {
+    if (!avatar.src) return Promise.resolve(null);
+    if (cachedPortrait && cachedPortraitSource === avatar.src) return Promise.resolve(cachedPortrait);
+    return new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => { cachedPortrait = image; cachedPortraitSource = avatar.src; resolve(image); };
+        image.onerror = () => resolve(null);
+        image.src = avatar.src;
+    });
+}
 function wrapText(context, text, maxWidth) {
     const words = text.split(/\s+/); const lines = []; let line = "";
     words.forEach((word) => { const next = line ? `${line} ${word}` : word; if (context.measureText(next).width > maxWidth && line) { lines.push(line); line = word; } else line = next; });
@@ -70,7 +82,8 @@ async function makePng() {
     const margin = canvas.width * .08; const cardX = margin; const cardY = margin; const cardW = canvas.width - margin * 2; const cardH = canvas.height - margin * 2;
     ctx.fillStyle = "rgba(255,255,255,.96)"; ctx.beginPath(); ctx.roundRect(cardX, cardY, cardW, cardH, 20 * scale); ctx.fill();
     const padding = studioSettings.padding * scale; let y = cardY + padding; const avatarSize = 68 * scale;
-    if (avatar.src) { const image = new Image(); image.src = avatar.src; await new Promise((resolve) => { image.onload = resolve; image.onerror = resolve; }); ctx.save(); ctx.beginPath(); ctx.arc(cardX + padding + avatarSize / 2, y + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(image, cardX + padding, y, avatarSize, avatarSize); ctx.restore(); }
+    const portrait = await loadPortrait();
+    if (portrait) { ctx.save(); ctx.beginPath(); ctx.arc(cardX + padding + avatarSize / 2, y + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(portrait, cardX + padding, y, avatarSize, avatarSize); ctx.restore(); }
     ctx.fillStyle = "#30384a"; ctx.font = `700 ${32 * scale}px Arial`; ctx.fillText(getText("#art-name"), cardX + padding + avatarSize + 24 * scale, y + avatarSize * .62); y += avatarSize + 70 * scale;
     if (!document.querySelector("#show-stars").checked) y -= 38 * scale; else { ctx.fillStyle = "#ffb51b"; ctx.font = `${42 * scale}px Arial`; ctx.fillText("★★★★★", cardX + padding, y); y += 78 * scale; }
     ctx.fillStyle = "#30384a"; ctx.font = `700 ${studioSettings.textSize * scale}px Arial`; const lines = wrapText(ctx, getText("#art-quote"), cardW - padding * 2); const lineHeight = studioSettings.textSize * scale * 1.28; lines.forEach((line) => { ctx.fillText(line, cardX + padding, y); y += lineHeight; });
@@ -78,7 +91,18 @@ async function makePng() {
     return canvas.toDataURL("image/png");
 }
 
-document.querySelector("#download-png").addEventListener("click", async () => { status.textContent = "Preparing PNG…"; const dataUrl = await makePng(); const link = document.createElement("a"); link.download = "marcus-heier-testimonial.png"; link.href = dataUrl; link.click(); status.textContent = "PNG downloaded."; });
+document.querySelector("#download-png").addEventListener("click", async () => {
+    status.textContent = "Preparing PNG…";
+    const dataUrl = await makePng();
+    const response = await fetch(dataUrl);
+    const blob = await response.blob();
+    const link = document.createElement("a");
+    link.download = "marcus-heier-testimonial.png";
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    status.textContent = "PNG downloaded.";
+});
 document.querySelector("#save-drive").addEventListener("click", async () => {
     if (!TESTIMONIALS_ENDPOINT) { status.textContent = "Drive saving will be activated when the Google Apps Script URL is connected."; return; }
     status.textContent = "Saving PNG to Drive…";
@@ -92,7 +116,13 @@ const params = new URLSearchParams(window.location.search);
 if (params.get("name")) document.querySelector("#art-name").textContent = params.get("name");
 if (params.get("testimonial")) document.querySelector("#art-quote").textContent = params.get("testimonial");
 if (params.get("date")) document.querySelector("#art-date").textContent = params.get("date");
-if (params.get("image")) avatar.src = params.get("image");
+const imageId = params.get("imageId") || (params.get("image")?.match(/\/file\/d\/([^/]+)/)?.[1] || "");
+if (imageId) {
+    fetch(`${TESTIMONIALS_ENDPOINT}?action=image&id=${encodeURIComponent(imageId)}`)
+        .then((response) => response.json())
+        .then((payload) => { if (payload.ok && payload.imageData) { avatar.src = `data:${payload.mimeType};base64,${payload.imageData}`; cachedPortrait = null; cachedPortraitSource = ""; } })
+        .catch(() => { status.textContent = "The portrait could not be loaded; you can choose it manually below."; });
+}
 if (!params.get("testimonial")) {
     document.querySelector("#show-stars").checked = false;
     document.querySelector(".testimonial-art-stars").hidden = true;
