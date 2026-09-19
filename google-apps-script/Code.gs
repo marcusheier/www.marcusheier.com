@@ -9,7 +9,8 @@ const CONFIG = {
   spreadsheetId: '1hY_VAKohwLQyVjSy_LIFeAGmyR27fTMyRfo7gh0v5jA',
   sheetName: 'Testimonials',
   driveFolderId: '1u34p69AiW5bQG0qB9grBVoNPCvmVtkO6',
-  studioUrl: 'https://www.marcusheier.com/testimonials-studio-432'
+  studioUrl: 'https://www.marcusheier.com/testimonials-studio-432',
+  notificationEmail: 'info@marcusheier.com'
 };
 
 function doPost(e) {
@@ -38,10 +39,15 @@ function doPost(e) {
     const studioLink = `${CONFIG.studioUrl}?id=${encodeURIComponent(recordId)}`;
     sheet.appendRow([now, params.name, params.testimonial, imageUrl, '', 'Received', recordId, imageId]);
     const newRow = sheet.getLastRow();
-    sheet.getRange(newRow, 1, 1, 8).setWrapStrategy(SpreadsheetApp.WrapStrategy.CLIP);
-    sheet.setRowHeight(newRow, 42);
     const studioRichText = SpreadsheetApp.newRichTextValue().setText('Open studio').setLinkUrl(studioLink).build();
     sheet.getRange(newRow, 5).setRichTextValue(studioRichText);
+    formatSheetRow_(sheet, newRow);
+    SpreadsheetApp.flush();
+    try {
+      sendNotification_(params.name, params.testimonial, now, studioLink, imageUrl);
+    } catch (notificationError) {
+      console.error(`Notification email failed: ${notificationError.message}`);
+    }
     return json_({ ok: true });
   } catch (error) {
     return json_({ ok: false, error: error.message });
@@ -82,4 +88,56 @@ function firstName_(name) {
   const firstName = String(name || 'testimonial').trim().split(/\s+/)[0];
   return firstName.replace(/[^a-z0-9-_]/gi, '').slice(0, 40) || 'testimonial';
 }
+
+function sendNotification_(name, testimonial, date, studioLink, imageUrl) {
+  const safeName = escapeHtml_(name);
+  const safeTestimonial = escapeHtml_(testimonial).replace(/\n/g, '<br>');
+  const formattedDate = Utilities.formatDate(date, Session.getScriptTimeZone(), 'MMMM d, yyyy, h:mm a');
+  const safeDate = escapeHtml_(formattedDate);
+  const safeStudioLink = escapeHtml_(studioLink);
+  const safeImageLink = imageUrl ? `<p><a href="${escapeHtml_(imageUrl)}">View uploaded image</a></p>` : '';
+  MailApp.sendEmail({
+    to: CONFIG.notificationEmail,
+    subject: `New testimonial from ${name}`,
+    body: `New testimonial from ${name}\n\n${testimonial}\n\nReceived: ${formattedDate}\nStudio: ${studioLink}${imageUrl ? `\nImage: ${imageUrl}` : ''}`,
+    htmlBody: `<p><strong>New testimonial from ${safeName}</strong></p><p>${safeTestimonial}</p><p>Received: ${safeDate}</p><p><a href="${safeStudioLink}">Open testimonial studio</a></p>${safeImageLink}`
+  });
+}
+
+function testNotificationEmail() {
+  MailApp.sendEmail({
+    to: CONFIG.notificationEmail,
+    subject: 'Testimonials email notification test',
+    body: 'This is a test email from the Marcus Heier testimonial system.'
+  });
+}
+
+function normalizeTestimonialRows() {
+  const spreadsheet = SpreadsheetApp.openById(CONFIG.spreadsheetId);
+  const sheet = spreadsheet.getSheetByName(CONFIG.sheetName) || spreadsheet.getSheets()[0];
+  formatSheetRows_(sheet);
+}
+
+function formatSheetRows_(sheet) {
+  const rowCount = sheet.getLastRow();
+  if (!rowCount) return;
+  sheet.getRange(1, 1, rowCount, 8).setWrapStrategy(SpreadsheetApp.WrapStrategy.CLIP);
+  sheet.setRowHeights(1, rowCount, 21);
+}
+
+function formatSheetRow_(sheet, rowNumber) {
+  sheet.getRange(rowNumber, 1, 1, 8).setWrapStrategy(SpreadsheetApp.WrapStrategy.CLIP);
+  sheet.setRowHeight(rowNumber, 21);
+}
+
+function escapeHtml_(value) {
+  return String(value || '').replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[character]));
+}
+
 function json_(payload) { return ContentService.createTextOutput(JSON.stringify(payload)).setMimeType(ContentService.MimeType.JSON); }
