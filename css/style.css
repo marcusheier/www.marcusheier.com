@@ -10,6 +10,9 @@
     --color-bg-soft: #F2F1F3;
     --color-surface: #FFFFFF;
 
+    /* Google Calendar scheduling popup */
+    --gm3-sys-color-surface: #FFFFFF;
+
     /* MH purple palette */
     --color-mh-purple1: #452843;
     --color-mh-purple2: #533551;
