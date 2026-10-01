@@ -532,7 +532,8 @@ body.page-event-w45 {
 }
 
 .event-w45-star-mark {
-    position: relative;
+    display: grid;
+    place-items: center;
     width: 66px;
     height: 66px;
     margin-top: 2.3rem;
@@ -540,37 +541,15 @@ body.page-event-w45 {
     border-radius: 50%;
 }
 
-.event-w45-star-mark::before,
-.event-w45-star-mark::after,
-.event-w45-star-mark span::before,
-.event-w45-star-mark span::after {
-    content: "";
-    position: absolute;
-    background: var(--event-w45-violet);
-}
-
-.event-w45-star-mark::before {
-    top: 14px;
-    bottom: 14px;
-    left: 50%;
-    width: 1px;
-}
-
-.event-w45-star-mark::after {
-    top: 50%;
-    right: 14px;
-    left: 14px;
-    height: 1px;
-}
-
-.event-w45-star-mark span::before {
-    top: 21px;
-    left: 21px;
-    width: 24px;
-    height: 24px;
-    background: transparent;
-    border: 1px solid var(--event-w45-violet);
-    transform: rotate(45deg);
+.event-w45-star-mark svg {
+    width: 36px;
+    height: 36px;
+    fill: none;
+    stroke: var(--event-w45-violet);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.35;
+    vector-effect: non-scaling-stroke;
 }
 
 .event-w45-introduction__copy {
