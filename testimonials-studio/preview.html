@@ -444,7 +444,12 @@ document.querySelector("#save-drive").addEventListener("click", async () => {
         status.textContent = `${canvases.length} graphic(s) saved to Drive.`;
     } catch (error) { status.textContent = error.message; }
 });
-document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 }); document.querySelector("#color-one").value = studioSettings.colorOne; document.querySelector("#color-two").value = studioSettings.colorTwo; document.querySelector("#gradient-angle").value = 135; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54; renderStudio(); });
+document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 }); document.querySelector("#color-one").value = studioSettings.colorOne; document.querySelector("#color-two").value = studioSettings.colorTwo; document.querySelector("#gradient-angle").value = 135; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54;
+    document.querySelectorAll(".preset-button").forEach((button) => {
+        button.classList.toggle("is-active", Number(button.dataset.width) === studioSettings.width && Number(button.dataset.height) === studioSettings.height);
+    });
+    renderStudio();
+});
 
 window.applyStudioGraphic = function (review, portrait) {
     document.querySelector("#art-name").textContent = review.displayName || review.name;

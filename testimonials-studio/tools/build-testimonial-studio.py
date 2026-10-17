@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Bundle locally maintained CSS/JS into a self-contained Google HTML file and demo."""
 from pathlib import Path
-root = Path(__file__).resolve().parents[1]
-src = root / 'integrations/testimonials'
+src = Path(__file__).resolve().parents[1]
+root = src.parent
 site = root / 'site' if (root / 'site').is_dir() else root
 shell = (src / 'studio-shell.html').read_text()
 css = '\n'.join(p.read_text() for p in [site/'css/testimonials.css',site/'css/testimonial-carousel.css',src/'studio.css'])

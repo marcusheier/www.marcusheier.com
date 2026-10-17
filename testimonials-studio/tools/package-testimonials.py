@@ -2,7 +2,7 @@
 """Create an explicit public-only upload package; never publish or include demo/admin source."""
 import argparse, re, shutil, json
 from pathlib import Path
-root = Path(__file__).resolve().parents[1]
+root = Path(__file__).resolve().parents[2]
 p = argparse.ArgumentParser()
 p.add_argument('--public-url', required=True)
 p.add_argument('--studio-url', required=True)

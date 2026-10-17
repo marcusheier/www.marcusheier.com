@@ -28,7 +28,7 @@ function app(role='public') {
     HtmlService:{createTemplateFromFile:()=>({evaluate:()=>({setTitle:()=>({page:true})})})},
     DriveApp:{getFolderById:id=>({createFile(blob){files.push({id,blob});return {getId:()=>`image-${files.length}`,getUrl:()=>`https://drive.google.com/file/d/image-${files.length}`};}}),getFileById:()=>({getParents:()=>({hasNext:()=>false}),getMimeType:()=> 'image/jpeg',getSize:()=>10})}
   });
-  vm.runInContext(fs.readFileSync(path.join(root,'integrations/testimonials/core.gs'),'utf8')+'\n'+fs.readFileSync(path.join(root,`integrations/testimonials/${role}.gs`),'utf8'),context);
+  vm.runInContext(fs.readFileSync(path.join(root,'testimonials-studio/core.gs'),'utf8')+'\n'+fs.readFileSync(path.join(root,`testimonials-studio/${role}.gs`),'utf8'),context);
   function call(code){return vm.runInContext(code,context);}
   if(role==='admin') call('setupStudio()');
   else { sheet('Testimonial permissions v1',[['Record ID','Received','Text permission','Portrait permission','Permission version','Notification']]);sheet('Testimonial studio v1',[['Record ID','Settings JSON']]); }
