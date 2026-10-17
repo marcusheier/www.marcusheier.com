@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Testimonial Studio</title>
+<style>
+/* Private testimonial form and studio. Loaded after style.css so the public site remains unchanged. */
+
+.testimonial-page,
+.testimonial-studio-page { background: var(--gradient-light); }
+
+.testimonial-page .site-nav { min-height: 76px; }
+.testimonial-page .site-header { position: relative; }
+.testimonial-main { padding: 6rem var(--gutter) 7rem; }
+.testimonial-intro { width: min(100%, 720px); margin: 0 auto 3rem; text-align: center; }
+.testimonial-intro h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); }
+.testimonial-intro > p:last-child { max-width: 54ch; margin: 1.5rem auto 0; }
+.testimonial-form-card { width: min(100%, 700px); margin: 0 auto; padding: clamp(1.5rem, 4vw, 3.5rem); border: 1px solid var(--color-border-subtle); border-radius: 14px; background: var(--color-surface); box-shadow: 0 22px 60px var(--color-shadow-soft); }
+.form-field { margin-bottom: 1.6rem; }
+.form-field label, .studio-file-label { display: block; margin-bottom: .55rem; color: var(--color-primary); font-family: var(--font-sans); font-size: .78rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.form-field label span, .studio-file-label span { color: var(--color-secondary); font-size: .72rem; font-weight: 400; letter-spacing: .02em; text-transform: none; }
+.form-field input[type="text"], .form-field textarea { width: 100%; border: 1px solid var(--color-border-light); border-radius: var(--radius-card); background: var(--color-bg-soft); color: var(--color-primary); font: 1.08rem/1.45 var(--font-serif); padding: .9rem 1rem; }
+.form-field textarea { min-height: 190px; resize: vertical; }
+.form-field input:focus, .form-field textarea:focus { border-color: var(--color-mh-purple5); outline: 2px solid rgba(123, 96, 120, .2); }
+.form-field input[type="file"] { width: 100%; padding: 1rem; border: 1px dashed var(--color-border-light); border-radius: var(--radius-card); background: var(--color-bg-soft); color: var(--color-secondary); font: .9rem var(--font-sans); }
+.field-meta { display: flex; justify-content: space-between; gap: 1rem; }
+.field-error, .form-status { color: #8d2f36; font: .82rem/1.4 var(--font-sans); }
+.form-status.is-success { color: #2f7a4d; }
+.field-meta > small:last-child, .upload-note { color: var(--color-secondary); font: .74rem var(--font-sans); }
+.image-preview { display: flex; align-items: center; gap: 1rem; margin-top: .9rem; }
+.image-preview[hidden] { display: none; }
+.image-placeholder { width: 68px; height: 68px; margin-top: .9rem; border-radius: 50%; background: #d4d3d8; }
+.image-placeholder[hidden] { display: none; }
+.image-preview img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; }
+.preview-remove, .shuffle-button { border: 0; background: transparent; color: var(--color-accent); cursor: pointer; font: 700 .78rem var(--font-sans); text-decoration: underline; text-underline-offset: .2em; }
+.form-field--trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-submit { width: 100%; margin-top: .75rem; }
+.form-status { min-height: 1.4em; margin-bottom: .65rem; }
+
+.studio-shell { min-height: 100vh; background: #15131c; color: var(--color-star-white); }
+.studio-header { display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 2rem; padding: 1.4rem clamp(1rem, 4vw, 4rem); border-bottom: 1px solid rgba(255,255,255,.1); background: var(--gradient-north-star-header); }
+.studio-header > a img { width: 100px; }
+.studio-header h1 { color: var(--color-star-white); font-size: clamp(1.8rem, 3vw, 2.5rem); }
+.studio-header .eyebrow { margin-bottom: .25rem; color: var(--color-soft-gold); }
+.studio-header .button--ghost { border-color: rgba(255,255,255,.35); color: var(--color-star-white); }
+.studio-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(310px, 420px); min-height: calc(100vh - 110px); }
+.studio-preview-area { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; min-height: 680px; padding: clamp(1.5rem, 5vw, 5rem); background: #2a2930; }
+.studio-preview-frame { display: grid; place-items: center; width: min(100%, 700px); min-height: 560px; padding: 2rem; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: radial-gradient(circle at center, #292136 0%, #16151d 70%); overflow: hidden; }
+.testimonial-art { display: grid; place-items: center; width: min(100%, 600px); aspect-ratio: 1080 / 1350; padding: 8%; border-radius: 6px; background: linear-gradient(135deg, #2d162c, #59466b); box-shadow: 0 24px 80px rgba(0,0,0,.4); overflow: hidden; transition: background .2s ease; }
+.testimonial-art-card { display: flex; flex-direction: column; width: 100%; height: 84%; min-height: 0; padding: 54px; border: 1px solid rgba(45, 22, 44, .12); border-radius: 20px; background: rgba(255,255,255,.96); color: #30384a; box-shadow: 0 12px 28px rgba(0,0,0,.18); overflow: hidden; }
+.testimonial-art-person { display: flex; align-items: center; gap: 1rem; }
+.testimonial-art-avatar { flex: 0 0 68px; width: 68px; height: 68px; overflow: hidden; border-radius: 50%; background: var(--color-bg-subtle); }
+.testimonial-art-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testimonial-art-person p { color: #30384a; font: 700 clamp(1.15rem, 3vw, 2rem)/1.1 var(--font-sans); }
+.testimonial-art-stars { margin: 2rem 0 1.5rem; color: #ffb51b; font: 2.6rem/1 var(--font-sans); letter-spacing: .08em; }
+.testimonial-art-quote { min-height: 0; margin: 0; overflow-y: auto; color: #30384a; font: 400 clamp(1.05rem, 2.2vw, 1.65rem)/1.45 var(--font-sans); }
+.testimonial-art-date { margin-top: 1.5rem; color: #8791a4; font: 700 clamp(.9rem, 2vw, 1.3rem) var(--font-sans); }
+.studio-hint { max-width: 62ch; color: #a9a3b2; font: .78rem/1.4 var(--font-sans); text-align: center; }
+.studio-controls { padding: 2rem clamp(1.2rem, 3vw, 2.8rem); background: #211d2d; }
+.control-group { padding: 0 0 1.7rem; margin-bottom: 1.7rem; border-bottom: 1px solid rgba(255,255,255,.1); }
+.control-label { margin-bottom: .8rem; color: var(--color-star-white); font: 700 .75rem var(--font-sans); letter-spacing: .14em; text-transform: uppercase; }
+.control-heading, .range-label { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.range-label { margin: 1rem 0 .45rem; color: #cfc9d8; font: .83rem var(--font-sans); }
+.range-label output { color: var(--color-soft-gold); }
+.preset-grid { display: grid; gap: .55rem; }
+.preset-button { display: flex; justify-content: space-between; gap: .5rem; padding: .75rem .85rem; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: rgba(255,255,255,.04); color: #ddd6e2; cursor: pointer; font: .78rem var(--font-sans); text-align: left; }
+.preset-button span { color: #9d96a8; font-size: .68rem; }
+.preset-button.is-active, .preset-button:hover { border-color: var(--color-soft-gold); background: rgba(216,185,142,.12); }
+.color-row { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+.color-row label { color: #cfc9d8; font: .78rem var(--font-sans); }
+.color-row input { display: block; width: 100%; height: 42px; margin-top: .35rem; padding: 0; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: transparent; cursor: pointer; }
+.studio-controls input[type="range"] { width: 100%; accent-color: var(--color-soft-gold); }
+.studio-file-label { margin-top: .5rem; color: #cfc9d8; }
+.studio-controls input[type="file"] { width: 100%; color: #aaa2b2; font: .75rem var(--font-sans); }
+.check-label { display: flex; gap: .55rem; align-items: center; margin-top: 1rem; color: #cfc9d8; font: .8rem var(--font-sans); }
+.studio-actions { display: grid; gap: .75rem; }
+.studio-actions .button { width: 100%; }
+.studio-actions .button--ghost { border-color: var(--color-button-border); background: var(--gradient-button); box-shadow: 0 16px 34px var(--color-button-glow); color: var(--color-white); }
+.studio-actions .button--ghost:hover, .studio-actions .button--ghost:focus-visible { border-color: var(--color-button-border); background: var(--gradient-button-hover); box-shadow: 0 20px 42px var(--color-button-glow); color: var(--color-white); }
+.studio-status { min-height: 1.4em; margin-top: 1rem; color: var(--color-soft-gold); font: .78rem/1.4 var(--font-sans); }
+
+@media (max-width: 820px) {
+    .studio-header { grid-template-columns: 70px 1fr auto; gap: 1rem; }
+    .studio-header > a img { width: 68px; }
+    .studio-layout { display: block; }
+    .studio-preview-area { min-height: auto; padding: 2rem 1rem; }
+    .studio-preview-frame { min-height: 0; padding: 1rem; }
+    .studio-controls { padding: 2rem 1.2rem; }
+}
+
+@media (max-width: 520px) {
+    .testimonial-main { padding-top: 4rem; }
+    .testimonial-form-card { padding: 1.25rem; }
+    .studio-header .button { min-height: 42px; padding: .7rem .8rem; font-size: .68rem; }
+    .testimonial-art-card { padding: 28px; }
+    .testimonial-art-stars { margin: 1.2rem 0 1rem; font-size: 1.6rem; }
+}
+
+.testimonial-carousel { max-width: 860px; margin: 2rem auto; touch-action: pan-y; }
+.testimonial-slide { padding: clamp(1.4rem, 4vw, 3rem); border: 1px solid #c9bdc9; border-radius: 18px; background: #fffaf6; color: #362e40; text-align: center; overflow-wrap: anywhere; box-shadow: 0 16px 42px #3024380d; }
+.testimonial-slide blockquote { margin: 1rem 0 1.5rem; font: 400 clamp(1.2rem, 2.6vw, 1.65rem)/1.55 Georgia, serif; white-space: pre-wrap; }
+.testimonial-client { font-weight: 700; margin: .5rem 0; }
+.testimonial-category { color: #655666; font-size: .9rem; }
+.testimonial-portrait { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto; }
+.testimonial-carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+.testimonial-carousel-controls[hidden] { display: none; }
+.testimonial-carousel-controls button { width: 48px; height: 48px; border: 1px solid #918197; border-radius: 50%; background: #fffaf6; color: #362e40; font-size: 1.4rem; cursor: pointer; }
+.testimonial-carousel button:focus-visible { outline: 3px solid #976b36; outline-offset: 4px; }
+
+* { box-sizing: border-box; } [hidden] { display: none !important; }
+body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #17141e; color: #efeaf1; }
+h1,h2,p { margin-top: 0; } h1 { font: 36px/1.15 Georgia,serif; margin-bottom: 0; } h2 { font: 26px/1.2 Georgia,serif; }
+button { border: 1px solid #78667e; border-radius: 8px; background: #302637; color: #f6eff7; padding: 11px 16px; font: inherit; cursor: pointer; min-height: 44px; }
+button:hover,button[aria-pressed=true] { background: #57405c; border-color: #d8b98e; } button:disabled { opacity: .5; cursor: wait; }
+:focus-visible { outline: 3px solid #e1bb82; outline-offset: 3px; }
+a { color: #e2c698; } input, textarea { max-width: 100%; } small { color: #c8bdce; }
+.workspace-header { padding: 28px 4vw; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid #433649; }
+.eyebrow { color: #d8b98e; letter-spacing: .13em; font-size: 11px; }
+.workspace-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 18px 4vw; background: #211b29; }
+#workspace-status { margin: 12px 4vw; min-height: 1.5em; color: #e2c698; }
+.demo-notice { padding: 10px 4vw; margin: 0; background: #453521; color: #ffe0a7; }
+.review-workspace { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: 24px; padding: 12px 4vw 48px; }
+.review-library { border-right: 1px solid #433649; padding-right: 20px; }
+#review-list { display: grid; gap: 10px; } .review-row { display: grid; gap: 6px; text-align: left; width: 100%; overflow-wrap: anywhere; }
+.review-row small { font-size: 12px; } .editor-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.editor-columns { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(260px,1fr); gap: 28px; }
+.website-preview { min-width: 0; padding: 22px; border-radius: 14px; background: #e7dfe9; color: #362e40; align-self: start; }
+.preview-label { font-size: 10px; letter-spacing: .13em; color: #655666; }
+#website-preview.mobile { max-width: 390px; margin: auto; } #website-preview .testimonial-carousel { margin: 15px auto; }
+.review-settings { display: grid; gap: 12px; align-content: start; } label { display: grid; gap: 6px; font-size: 13px; }
+label input:not([type=checkbox]):not([type=file]),label textarea { display: block; width: 100%; border: 1px solid #75647c; background: #261e2d; color: #f7f0f8; padding: 10px 12px; border-radius: 7px; font: 15px/1.5 system-ui; }
+textarea { resize: vertical; } .workspace-check { display: flex; align-items: center; gap: 8px; min-height: 30px; } input[type=checkbox] { width: 18px; height: 18px; }
+.review-settings details,.original-submission { padding: 16px; border: 1px solid #55465c; border-radius: 10px; } summary { cursor: pointer; min-height: 32px; }
+.original-submission { margin-top: 24px; } #original-text { white-space: pre-wrap; overflow-wrap: anywhere; } #original-id { overflow-wrap: anywhere; }
+.moderation-actions { display: flex; flex-wrap: wrap; gap: 8px; } #publish { background: #49604a; } #hide-review { background: #493342; }
+#carousel-panel { padding: 24px 4vw; } .testimonial-carousel-controls { color: inherit; }
+dialog { width: min(94vw,600px); max-height: 90vh; overflow: auto; background: #261e2d; color: #f7f0f8; border: 1px solid #9f89a7; border-radius: 12px; padding: 26px; }
+dialog::backdrop { background: #0009; } #manual-form { display: grid; gap: 16px; }
+.studio-layout { min-height: auto; } .studio-controls { min-width: 0; } .studio-preview-frame { min-height: 0; }
+@media(max-width:1100px) { .editor-columns { grid-template-columns: 1fr; } }
+@media(max-width:700px) { h1 { font-size: 29px; } .workspace-header { align-items: start; flex-direction: column; padding: 22px 18px; } .workspace-tabs { padding: 14px 18px; } .workspace-tabs button { padding: 9px 11px; } .review-workspace { grid-template-columns: minmax(0,1fr); padding: 10px 18px 32px; } .review-library { border-right: 0; border-bottom: 1px solid #433649; padding: 0 0 18px; } #review-list { grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); } .website-preview { padding: 15px; } .editor-toolbar button { padding: 9px; } .studio-layout { display: block; } .studio-preview-area { padding: 16px; min-height: auto; } .studio-preview-frame { padding: 12px; } }
+
+</style>
+</head><body class="testimonial-studio-page"><div class="studio-shell">
+<header class="workspace-header"><div><p class="eyebrow">MARCUS HEIER · PRIVATE WORKSPACE</p><h1>Testimonial Studio</h1></div><div><button id="refresh">Reload</button> <button id="manual-entry">Add testimonial</button></div></header>
+<p id="demo-notice" class="demo-notice" hidden>Local demonstration · fictional examples · changes stay in this browser session · no Google requests or emails</p>
+<nav class="workspace-tabs" aria-label="Studio views"><button data-view="pending" aria-pressed="true">Pending</button><button data-view="published" aria-pressed="false">Published</button><button data-view="hidden" aria-pressed="false">Hidden</button><button data-view="carousel" aria-pressed="false">Carousel</button><button data-view="graphics" aria-pressed="false">Social graphics</button></nav>
+<p id="workspace-status" role="status" aria-live="polite"></p>
+<main>
+<section id="reviews-panel" class="review-workspace">
+<aside class="review-library" aria-label="Testimonials"><p id="review-count"></p><div id="review-list"></div></aside>
+<div id="review-editor" hidden>
+<div class="editor-toolbar"><h2 id="editor-title">Review</h2><div><button id="preview-desktop" aria-pressed="true">Desktop</button><button id="preview-mobile" aria-pressed="false">Mobile</button></div></div>
+<div class="editor-columns"><section class="website-preview" aria-label="Website preview"><p class="preview-label">WEBSITE PREVIEW · UNSAVED SETTINGS</p><div id="website-preview"></div><button id="open-graphics">Create social graphic</button></section>
+<form id="settings-form" class="review-settings">
+<label>Display name<input id="display-name" maxlength="80" required></label>
+<label>Display excerpt (optional)<textarea id="excerpt" rows="5" maxlength="12000"></textarea></label><small>Leave blank to use the complete original. Editing this field never changes the original.</small>
+<label>Service category<input id="category" list="categories" maxlength="80"></label><datalist id="categories"><option>Channeling</option><option>Healing</option><option>Mediumship &amp; Coaching</option><option>North Star Method</option><option>Tech coaching</option><option>Events</option></datalist>
+<label class="workspace-check"><input id="selected" type="checkbox"> Show in carousel</label>
+<label>Carousel order<input id="display-order" type="number" min="0" max="100000" step="1" value="0" required></label><small>Lower numbers appear first. Equal values use a stable record-ID order.</small>
+<label class="workspace-check"><input id="show-portrait" type="checkbox"> Display original portrait</label>
+<p id="permission-status"></p>
+<details><summary>Permission for an existing testimonial</summary><p>Record permission you have already received; these controls do not obtain permission from the client.</p><label class="workspace-check"><input id="verified-permission" type="checkbox"> I have documented permission for text and name</label><label class="workspace-check"><input id="verified-portrait" type="checkbox"> I have documented portrait permission</label><label>Permission source / date<textarea id="permission-note" rows="2" maxlength="1000"></textarea></label></details>
+<div class="moderation-actions"><button type="submit" id="save-settings">Save settings</button><button type="button" id="publish">Publish</button><button type="button" id="hide-review">Hide</button></div>
+</form></div>
+<details class="original-submission"><summary>Original submission</summary><p id="original-name"></p><p id="original-date"></p><p id="original-text"></p><a id="original-image" target="_blank" rel="noopener" hidden>Open original portrait in Drive</a><p><a id="original-sheet" target="_blank" rel="noopener">Open original Google Sheet</a></p><small id="original-id"></small></details>
+</div><p id="choose-review">Choose a testimonial to preview and moderate it.</p>
+</section>
+<section id="carousel-panel" hidden><h2>Website carousel</h2><p>Published, permitted and selected reviews, in display order. Use the arrows or swipe to loop.</p><div id="carousel-preview"></div></section>
+        <section id="graphics-panel" class="studio-layout" hidden>
+            <section class="studio-preview-area" aria-label="Testimonial preview">
+                <div class="studio-preview-frame" id="preview-frame">
+                    <article class="testimonial-art" id="testimonial-art">
+                        <div class="testimonial-art-card">
+                            <div class="testimonial-art-person">
+                                <div class="testimonial-art-avatar"><img id="art-avatar" alt=""></div>
+                                <p id="art-name"></p>
+                            </div>
+
+                            <p class="testimonial-art-quote" id="art-quote"></p>
+                            <p class="testimonial-art-date" id="art-date"></p>
+                        </div>
+                    </article>
+                </div>
+                <p class="studio-hint">Graphics use the selected review’s display text. The original submission remains unchanged.</p>
+            </section>
+
+            <aside class="studio-controls" aria-label="Studio controls">
+                <div class="control-group">
+                    <div class="control-heading"><p class="control-label">Social size</p><button id="reset-settings" type="button">Reset design</button></div>
+                    <div class="preset-grid" id="size-presets">
+                        <button type="button" class="preset-button is-active" data-width="1080" data-height="1350">Instagram portrait <span>1080 × 1350</span></button>
+                        <button type="button" class="preset-button" data-width="1080" data-height="1080">Square <span>1080 × 1080</span></button>
+                        <button type="button" class="preset-button" data-width="1080" data-height="1920">Story <span>1080 × 1920</span></button>
+                        <button type="button" class="preset-button" data-width="1200" data-height="627">LinkedIn landscape <span>1200 × 627</span></button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-heading"><p class="control-label">Gradient</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle colors</button></div>
+                    <div class="color-row">
+                        <label>Color 1 <input id="color-one" type="color" value="#2d162c"></label>
+                        <label>Color 2 <input id="color-two" type="color" value="#59466b"></label>
+                    </div>
+                    <label class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
+                    <input id="gradient-angle" type="range" min="0" max="360" value="135">
+                </div>
+
+                <div class="control-group">
+                    <p class="control-label">Typography</p>
+                    <label class="range-label" for="text-size">Text size <output id="text-size-value">24px</output></label>
+                    <input id="text-size" type="range" min="12" max="42" value="24">
+                    <label class="range-label" for="card-padding">Card padding <output id="card-padding-value">54px</output></label>
+                    <input id="card-padding" type="range" min="28" max="100" value="54">
+                </div>
+
+                <div class="control-group">
+                    <p class="control-label">Preview content</p>
+                    <label class="studio-file-label" for="studio-image">Choose portrait <span>optional</span></label>
+                    <input id="studio-image" type="file" accept="image/jpeg,image/png,image/webp">
+
+                </div>
+
+                <div class="studio-actions">
+                    <button class="button button--primary" id="download-png" type="button">Download PNG</button>
+                    <button class="button button--primary" id="download-carousel" type="button">Download carousel</button>
+                    <button class="button button--ghost" id="save-drive" type="button">Save to Google Drive</button>
+                </div>
+                <p class="studio-status" id="studio-status" role="status" aria-live="polite"></p>
+            </aside>
+        </section>
+
+</main>
+<dialog id="manual-dialog"><form id="manual-form"><h2>Add an existing testimonial</h2><label>Original name<input name="name" maxlength="80" required></label><label>Original testimonial<textarea name="testimonial" rows="7" maxlength="12000" required></textarea></label><label>Original portrait (optional)<input name="portrait" type="file" accept="image/jpeg,image/png,image/webp"></label><p>Saved as pending. Record existing permission in the review settings before publishing.</p><button type="submit">Save as pending</button> <button type="button" id="cancel-manual">Cancel</button><p id="manual-status" role="status"></p></form></dialog>
+</div>
+<script>
+/* Fictional local fixtures only. Never included in the Google bundle or upload package. */
+window.STUDIO_REVIEW_ID = new URLSearchParams(location.search).get('id') || '';
+const demoCount = new URLSearchParams(location.search).get('count');
+let demoReviews = demoCount === '0' ? [] : [
+ { id:'demo-pending', name:'Example client A', testimonial:'DEMONSTRATION ONLY. A thoughtful session that gave me space to reflect and find a clearer direction.', state:'pending', selected:false, permission:true, portraitPermission:false, order:0, category:'Channeling',date:'2026-10-18', revision:'0' },
+ { id:'demo-published-1', name:'Example client B', testimonial:'DEMONSTRATION ONLY. I left feeling grounded, with practical ideas to take into everyday life.', state:'published', selected:true, permission:true, order:1, category:'Healing',date:'2026-10-18', revision:'0' },
+ { id:'demo-published-2', name:'Example client C', testimonial:'DEMONSTRATION ONLY. There was time to ask questions, explore what mattered, and discover my next step.', state:'published', selected:true, permission:true, order:2, category:'Mediumship & Coaching',date:'2026-10-18', revision:'0' },
+ { id:'demo-hidden', name:'Example client D', testimonial:'DEMONSTRATION ONLY. This hidden example must never appear in the website carousel.', state:'hidden', selected:true, permission:true, order:0,date:'2026-10-18', revision:'0' }
+];
+if (demoCount === '1') demoReviews = demoReviews.slice(1,2);
+window.studioRpc = async (action,p = {}) => {
+ if (action === 'list') return { reviews: JSON.parse(JSON.stringify(demoReviews)) };
+ if (action === 'portrait') return { portrait:'' };
+ if (action === 'graphic') throw new Error('Local demo: use Download PNG. Google Drive saving requires the protected deployment.');
+ if (action === 'create') { const id = 'demo-' + Date.now(); demoReviews.push({...p,id,state:'pending',selected:false,order:0,displayName:p.name,revision:'0'}); return {id}; }
+ if (action === 'save') {
+  const r = demoReviews.find(r => r.id === p.id); if (!r) throw new Error('Review not found');
+  if ((p.verifiedPermission || p.verifiedPortraitPermission) && !p.permissionNote) throw new Error('Record the permission source.');
+  if (p.state === 'published' && !(r.permission || p.verifiedPermission)) throw new Error('Publication permission is required.');
+  Object.assign(r,p,{ permission:r.permission || p.verifiedPermission,portraitPermission:r.portraitPermission || p.verifiedPortraitPermission,revision:String(Date.now()) }); return {ok:true};
+ }
+ throw new Error('Unsupported action');
+};
+document.getElementById('demo-notice').hidden = false;
+
+/* Shared by website and Studio. Manual navigation; fresh public data every 60s. */
+(function () {
+  'use strict';
+  function eligible(reviews) {
+    return reviews.filter(r => r.state === undefined || (r.state === 'published' && r.selected && r.permission))
+      .slice().sort((a,b) => (a.order || 0) - (b.order || 0));
+  }
+  function mount(root, input) {
+    const reviews = eligible(input); let index = 0, start;
+    root.replaceChildren(); root.classList.add('testimonial-carousel');
+    root.setAttribute('role', 'region'); root.setAttribute('aria-roledescription', 'carousel'); root.setAttribute('aria-label', 'Client testimonials');
+    const card = document.createElement('article'); card.className = 'testimonial-slide'; card.setAttribute('aria-live','polite'); card.setAttribute('aria-atomic','true');
+    const controls = document.createElement('div'); controls.className = 'testimonial-carousel-controls';
+    const previous = document.createElement('button'), next = document.createElement('button'), count = document.createElement('span');
+    previous.type = next.type = 'button'; previous.textContent = '←'; next.textContent = '→';
+    previous.setAttribute('aria-label','Previous testimonial'); next.setAttribute('aria-label','Next testimonial');
+    function render() {
+      card.replaceChildren(); const r = reviews[index];
+      if (!r) { const empty = document.createElement('p'); empty.textContent = 'Client reflections will appear here when available.'; card.append(empty); return; }
+      card.setAttribute('aria-label', `${index + 1} of ${reviews.length}`);
+      const image = r.portrait;
+      if (image && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(image)) { const img = document.createElement('img'); img.src = image; img.alt = ''; img.className = 'testimonial-portrait'; card.append(img); }
+      const quote = document.createElement('blockquote'), name = document.createElement('p'), category = document.createElement('p');
+      quote.textContent = r.excerpt || r.testimonial; name.textContent = r.displayName || r.name; name.className = 'testimonial-client'; category.textContent = r.category || ''; category.className = 'testimonial-category';
+      card.append(quote, name, category); count.textContent = `${index + 1} / ${reviews.length}`;
+    }
+    function move(delta) { if (reviews.length) { index = (index + delta + reviews.length) % reviews.length; render(); } }
+    previous.onclick = () => move(-1); next.onclick = () => move(1);
+    root.onkeydown = e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); move(e.key === 'ArrowLeft' ? -1 : 1); } };
+    root.onpointerdown = e => { start = { x: e.clientX, y: e.clientY }; };
+    root.onpointerup = e => { if (start && Math.abs(e.clientX - start.x) > 45 && Math.abs(e.clientX-start.x) > Math.abs(e.clientY-start.y)) move(e.clientX < start.x ? 1 : -1); start = null; };
+    root.onpointercancel = () => { start = null; };
+    controls.append(previous, count, next); controls.hidden = reviews.length < 2; root.append(card, controls); render();
+    return { move, count: reviews.length, get index() { return index; } };
+  }
+  window.TestimonialCarousel = { mount, eligible };
+  document.querySelectorAll('[data-testimonial-feed]').forEach(root => {
+    const endpoint = window.TESTIMONIAL_CONFIG?.publicUrl;
+    if (!endpoint) { root.hidden = true; return; }
+    let refreshVersion = 0;
+    async function refresh() {
+      const version = ++refreshVersion;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 20000);
+      try {
+        const response = await fetch(endpoint + '?action=published&t=' + Date.now(), { cache: 'no-store', credentials: 'omit', signal: controller.signal });
+        const result = await response.json();
+        if (!response.ok || !result.ok || !Array.isArray(result.reviews)) throw new Error('Unavailable');
+        if (version === refreshVersion) { root.hidden = false; mount(root, result.reviews); }
+      } catch { if (version === refreshVersion) { root.hidden = false; mount(root, []); } }
+      finally { clearTimeout(timeout); }
+    }
+    refresh(); setInterval(refresh, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+  });
+})();
+
+const studioSettings = { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 };
+
+const art = document.querySelector("#testimonial-art");
+const artCard = document.querySelector(".testimonial-art-card");
+const quote = document.querySelector("#art-quote");
+const avatar = document.querySelector("#art-avatar");
+const status = document.querySelector("#studio-status");
+let cachedPortrait = null;
+let cachedPortraitSource = "";
+
+function renderStudio() {
+    const previewScale = art.getBoundingClientRect().width / studioSettings.width;
+    art.style.background = `linear-gradient(${studioSettings.angle}deg, ${studioSettings.colorOne}, ${studioSettings.colorTwo})`;
+    art.style.aspectRatio = `${studioSettings.width} / ${studioSettings.height}`;
+    artCard.style.padding = `${studioSettings.padding * previewScale}px`;
+    quote.style.fontSize = `${studioSettings.textSize * previewScale}px`;
+    document.querySelector("#gradient-angle-value").textContent = `${studioSettings.angle}°`;
+    document.querySelector("#text-size-value").textContent = `${studioSettings.textSize}px`;
+    document.querySelector("#card-padding-value").textContent = `${studioSettings.padding}px`;
+}
+
+function bindRange(id, key) {
+    document.querySelector(`#${id}`).addEventListener("input", (event) => {
+        studioSettings[key] = Number(event.target.value);
+        renderStudio();
+    });
+}
+
+document.querySelectorAll(".preset-button").forEach((button) => button.addEventListener("click", () => {
+    document.querySelectorAll(".preset-button").forEach((item) => item.classList.remove("is-active"));
+    button.classList.add("is-active");
+    studioSettings.width = Number(button.dataset.width);
+    studioSettings.height = Number(button.dataset.height);
+    renderStudio();
+}));
+document.querySelector("#color-one").addEventListener("input", (event) => { studioSettings.colorOne = event.target.value; renderStudio(); });
+document.querySelector("#color-two").addEventListener("input", (event) => { studioSettings.colorTwo = event.target.value; renderStudio(); });
+bindRange("gradient-angle", "angle");
+bindRange("text-size", "textSize");
+bindRange("card-padding", "padding");
+
+
+document.querySelector("#shuffle-gradient").addEventListener("click", () => {
+    const palettes = [["#2d162c", "#59466b"], ["#0e0c24", "#59466b"], ["#452843", "#d8b98e"], ["#28233f", "#3c3153"], ["#533551", "#acabb0"], ["#1f2638", "#806b8e"]];
+    const palette = palettes[Math.floor(Math.random() * palettes.length)];
+    [studioSettings.colorOne, studioSettings.colorTwo] = palette;
+    document.querySelector("#color-one").value = palette[0];
+    document.querySelector("#color-two").value = palette[1];
+    renderStudio();
+});
+
+document.querySelector("#studio-image").addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.addEventListener("load", () => { avatar.src = reader.result; cachedPortrait = null; cachedPortraitSource = ""; });
+    reader.readAsDataURL(file);
+});
+
+function getText(selector) { return document.querySelector(selector).textContent.trim(); }
+function loadPortrait() {
+    if (!avatar.src) return Promise.resolve(null);
+    if (cachedPortrait && cachedPortraitSource === avatar.src) return Promise.resolve(cachedPortrait);
+    return new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => { cachedPortrait = image; cachedPortraitSource = avatar.src; resolve(image); };
+        image.onerror = () => resolve(null);
+        image.src = avatar.src;
+    });
+}
+function wrapText(context, text, maxWidth) {
+    const words = text.split(/\s+/); const lines = []; let line = "";
+    words.forEach((word) => { const next = line ? `${line} ${word}` : word; if (context.measureText(next).width > maxWidth && line) { lines.push(line); line = word; } else line = next; });
+    if (line) lines.push(line); return lines;
+}
+
+async function makeCanvases() {
+    const scale = studioSettings.width / 1080;
+    const portrait = await loadPortrait();
+    const margin = studioSettings.width * .08;
+    const cardX = margin; const cardY = margin; const cardW = studioSettings.width - margin * 2; const cardH = studioSettings.height - margin * 2;
+    const padding = studioSettings.padding * scale; const avatarSize = 68 * scale;
+    const measureCanvas = document.createElement("canvas"); const measure = measureCanvas.getContext("2d");
+    measure.font = `400 ${studioSettings.textSize * scale}px Arial`;
+    const lines = wrapText(measure, getText("#art-quote") || " ", cardW - padding * 2);
+    const lineHeight = studioSettings.textSize * scale * 1.45;
+    const headerHeight = avatarSize + 70 * scale;
+    const continuationHeaderHeight = 100 * scale;
+    const textHeight = Math.max(lineHeight, cardH - padding * 2 - headerHeight - 34 * scale);
+    const linesPerSlide = Math.max(1, Math.floor(textHeight / lineHeight));
+    const continuationTextHeight = Math.max(lineHeight, cardH - padding * 2 - continuationHeaderHeight - 34 * scale);
+    const continuationLinesPerSlide = Math.max(1, Math.floor(continuationTextHeight / lineHeight));
+    const chunks = [];
+    chunks.push(lines.slice(0, linesPerSlide));
+    for (let index = linesPerSlide; index < lines.length; index += continuationLinesPerSlide) chunks.push(lines.slice(index, index + continuationLinesPerSlide));
+    const canvases = [];
+    for (let page = 0; page < chunks.length; page += 1) {
+        const canvas = document.createElement("canvas"); canvas.width = studioSettings.width; canvas.height = studioSettings.height;
+        const ctx = canvas.getContext("2d");
+        const radians = (studioSettings.angle - 90) * Math.PI / 180;
+        const dx = Math.cos(radians), dy = Math.sin(radians);
+        const extent = (Math.abs(dx) * canvas.width + Math.abs(dy) * canvas.height) / 2;
+        const gradient = ctx.createLinearGradient(canvas.width/2-dx*extent, canvas.height/2-dy*extent, canvas.width/2+dx*extent, canvas.height/2+dy*extent);
+        gradient.addColorStop(0, studioSettings.colorOne); gradient.addColorStop(1, studioSettings.colorTwo); ctx.fillStyle = gradient; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(255,255,255,.96)"; ctx.beginPath(); ctx.roundRect(cardX, cardY, cardW, cardH, 20 * scale); ctx.fill();
+        let y = cardY + padding;
+        const isFirstSlide = page === 0;
+        if (isFirstSlide && portrait) { ctx.save(); ctx.beginPath(); ctx.arc(cardX + padding + avatarSize / 2, y + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(portrait, cardX + padding, y, avatarSize, avatarSize); ctx.restore(); }
+        ctx.fillStyle = "#30384a"; ctx.font = `700 ${32 * scale}px Arial`; ctx.fillText(getText("#art-name"), isFirstSlide ? cardX + padding + avatarSize + 24 * scale : cardX + padding, y + (isFirstSlide ? avatarSize * .62 : 32 * scale)); y += isFirstSlide ? avatarSize + 70 * scale : continuationHeaderHeight;
+
+        ctx.fillStyle = "#30384a"; ctx.font = `400 ${studioSettings.textSize * scale}px Arial`; chunks[page].forEach((line) => { ctx.fillText(line, cardX + padding, y); y += lineHeight; });
+        ctx.fillStyle = "#8791a4"; ctx.font = `700 ${20 * scale}px Arial`; ctx.fillText(getText("#art-date"), cardX + padding, cardY + cardH - padding);
+        if (chunks.length > 1) { ctx.textAlign = "right"; ctx.font = `600 ${16 * scale}px Arial`; ctx.fillText(`${page + 1} / ${chunks.length}`, cardX + cardW - padding, cardY + cardH - padding); ctx.textAlign = "left"; }
+        canvases.push(canvas);
+    }
+    return canvases;
+}
+
+function canvasToBlob(canvas) { return new Promise((resolve) => canvas.toBlob(resolve, "image/png")); }
+async function downloadCanvas(canvas, filename) { const blob = await canvasToBlob(canvas); const link = document.createElement("a"); link.download = filename; link.href = URL.createObjectURL(blob); link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 1000); }
+
+document.querySelector("#download-png").addEventListener("click", async () => { status.textContent = "Preparing PNG…"; const canvases = await makeCanvases(); await downloadCanvas(canvases[0], "marcus-heier-testimonial.png"); status.textContent = canvases.length > 1 ? "First slide downloaded. Use Download carousel for the full testimonial." : "PNG downloaded."; });
+document.querySelector("#download-carousel").addEventListener("click", async () => { status.textContent = "Preparing carousel…"; const canvases = await makeCanvases(); for (let index = 0; index < canvases.length; index += 1) await downloadCanvas(canvases[index], `marcus-heier-testimonial-slide-${index + 1}.png`); status.textContent = `${canvases.length}-slide carousel downloaded.`; });
+document.querySelector("#save-drive").addEventListener("click", async () => {
+    try {
+        status.textContent = "Saving graphics…";
+        const canvases = await makeCanvases();
+        for (const canvas of canvases) await window.studioRpc("graphic", { imageData: canvas.toDataURL("image/png") });
+        status.textContent = `${canvases.length} graphic(s) saved to Drive.`;
+    } catch (error) { status.textContent = error.message; }
+});
+document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 }); document.querySelector("#color-one").value = studioSettings.colorOne; document.querySelector("#color-two").value = studioSettings.colorTwo; document.querySelector("#gradient-angle").value = 135; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54; renderStudio(); });
+
+window.applyStudioGraphic = function (review, portrait) {
+    document.querySelector("#art-name").textContent = review.displayName || review.name;
+    document.querySelector("#art-quote").textContent = review.excerpt || review.testimonial;
+    document.querySelector("#art-date").textContent = review.date ? new Date(review.date).toLocaleDateString() : "";
+    if (portrait) avatar.src = portrait; else avatar.removeAttribute("src");
+    cachedPortrait = null; cachedPortraitSource = "";
+    renderStudio();
+};
+window.addEventListener("resize", renderStudio);
+renderStudio();
+
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const fields = ['display-name','excerpt','category','selected','display-order','show-portrait','verified-permission','verified-portrait','permission-note'];
+  let reviews = [], active = null, view = 'pending', sheetUrl = '', portrait = '', busy = false, dirty = false, loadVersion = 0;
+  window.studioRpc = window.studioRpc || ((action, payload = {}) => new Promise((resolve,reject) => {
+    if (!window.google?.script?.run) { reject(new Error('Open the protected Google Studio URL.')); return; }
+    google.script.run.withSuccessHandler(resolve).withFailureHandler(e => reject(new Error(e.message || 'Google request failed'))).studioApi({ action, payload });
+  }));
+  function message(s) { $('workspace-status').textContent = s; }
+  function values() {
+    return { id: active.id, revision: active.revision, state: active.state,
+      displayName: $('display-name').value, excerpt: $('excerpt').value, category: $('category').value,
+      selected: $('selected').checked, order: Number($('display-order').value), showPortrait: $('show-portrait').checked,
+      verifiedPermission: $('verified-permission').checked, verifiedPortraitPermission: $('verified-portrait').checked, permissionNote: $('permission-note').value };
+  }
+  function paintPreview() {
+    if (!active) return;
+    const draft = { ...active, ...values(), portrait: $('show-portrait').checked ? portrait : '' };
+    TestimonialCarousel.mount($('website-preview'), [{ name: draft.displayName, testimonial: draft.excerpt || draft.testimonial, category: draft.category, portrait: draft.portrait }]);
+  }
+  function canLeave() { return !dirty || window.confirm('Discard unsaved settings?'); }
+  async function openReview(id) {
+    const r = reviews.find(x => x.id === id); if (!r) { message('This testimonial was not found. It has not been published.'); return; }
+    const version = ++loadVersion;
+    active = r; portrait = ''; dirty = false;
+    $('review-editor').hidden = false; $('choose-review').hidden = true;
+    $('editor-title').textContent = r.displayName || r.name;
+    $('display-name').value = r.displayName || r.name; $('excerpt').value = r.excerpt || ''; $('category').value = r.category || '';
+    $('selected').checked = !!r.selected; $('display-order').value = r.order || 0; $('show-portrait').checked = !!r.showPortrait;
+    $('show-portrait').disabled = !r.imageId;
+    $('verified-permission').checked = !!r.verifiedPermission; $('verified-portrait').checked = !!r.verifiedPortraitPermission; $('permission-note').value = r.permissionNote || '';
+    $('permission-status').textContent = `Text permission: ${r.permission ? 'recorded' : 'not recorded'} · Portrait: ${r.portraitPermission ? 'recorded' : 'not recorded'} · ${r.state}`;
+    $('original-name').textContent = r.name; $('original-text').textContent = r.testimonial; $('original-date').textContent = r.date; $('original-id').textContent = 'Record ID: ' + r.id;
+    $('original-image').hidden = !r.imageUrl; $('original-image').removeAttribute('href');
+    if (/^https:\/\drive\.google\.com\//.test(r.imageUrl || '')) $('original-image').href = r.imageUrl;
+    $('original-sheet').hidden = !sheetUrl; if (sheetUrl) $('original-sheet').href = sheetUrl;
+    paintPreview(); renderList();
+    if (r.imageId) {
+      try { const result = await studioRpc('portrait',{ id }); if (version === loadVersion) { portrait = result.portrait || ''; paintPreview(); } }
+      catch (e) { if (version === loadVersion) message(e.message); }
+    }
+  }
+  function renderList() {
+    const list = $('review-list'); list.replaceChildren(); const filtered = reviews.filter(r => r.state === view);
+    $('review-count').textContent = `${filtered.length} ${view}`;
+    for (const r of filtered) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'review-row'; b.setAttribute('aria-pressed', String(active?.id === r.id));
+      const title = document.createElement('strong'), excerpt = document.createElement('span'), meta = document.createElement('small');
+      title.textContent = r.displayName || r.name; excerpt.textContent = (r.excerpt || r.testimonial).slice(0,100); meta.textContent = [r.category || 'Uncategorized', r.selected ? 'Carousel selected' : 'Not selected', 'Order ' + r.order].join(' · ');
+      b.append(title,excerpt,meta); b.onclick = () => { if (!busy && canLeave()) openReview(r.id); }; list.append(b);
+    }
+    if (!filtered.length) { const p = document.createElement('p'); p.textContent = 'No testimonials in this view.'; list.append(p); }
+  }
+  async function showView(next, guard = true) {
+    if (busy || (guard && !canLeave())) return;
+    view = next;
+    document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.view === view)));
+    $('reviews-panel').hidden = !['pending','published','hidden'].includes(view); $('carousel-panel').hidden = view !== 'carousel'; $('graphics-panel').hidden = view !== 'graphics';
+    if (view === 'carousel') {
+      const selected = TestimonialCarousel.eligible(reviews); const display = [];
+      for (const r of selected) {
+        let img = '';
+        if (r.imageId && r.showPortrait && r.portraitPermission) { try { img = (await studioRpc('portrait',{id:r.id})).portrait; } catch (e) { message(e.message); } }
+        display.push({...r, portrait:img});
+      }
+      TestimonialCarousel.mount($('carousel-preview'),display);
+    } else if (view === 'graphics') {
+      if (active) applyStudioGraphic({...active,...values()}, $('show-portrait').checked ? portrait : '');
+      requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+    } else {
+      renderList(); const r = reviews.find(r => r.state === view);
+      if (!active || active.state !== view) { $('review-editor').hidden = true; $('choose-review').hidden = false; if (r) await openReview(r.id); }
+    }
+  }
+  async function reload(id) {
+    const result = await studioRpc('list'); reviews = result.reviews; sheetUrl = result.sheetUrl || '';
+    if (id) { const found = reviews.find(r => r.id === id); if (found) { view = found.state; await showView(view,false); await openReview(id); } else message('This review was not found.'); }
+    else await showView(view,false);
+  }
+  async function save(state) {
+    if (busy || !active || !$('settings-form').reportValidity()) return;
+    const p = values(); p.state = state || active.state;
+    busy = true; document.querySelectorAll('.moderation-actions button').forEach(b => b.disabled = true);
+    try { await studioRpc('save',p); dirty = false; busy = false; await reload(p.id); message(`Saved · ${p.state}. Carousel inclusion is ${p.selected ? 'selected' : 'off'}. Website refreshes every 60 seconds.`); }
+    catch(e) { message(e.message); }
+    finally { busy = false; document.querySelectorAll('.moderation-actions button').forEach(b => b.disabled = false); }
+  }
+  fields.forEach(id => $(id).addEventListener('input', () => { dirty = true; paintPreview(); }));
+  document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => showView(b.dataset.view));
+  $('settings-form').onsubmit = e => { e.preventDefault(); save(); }; $('publish').onclick = () => save('published'); $('hide-review').onclick = () => save('hidden');
+  $('refresh').onclick = () => { if (!busy && canLeave()) { dirty = false; active = null; reload().catch(e => message(e.message)); } };
+  $('open-graphics').onclick = () => showView('graphics',false);
+  $('preview-mobile').onclick = () => { $('website-preview').classList.add('mobile'); $('preview-mobile').setAttribute('aria-pressed','true'); $('preview-desktop').setAttribute('aria-pressed','false'); };
+  $('preview-desktop').onclick = () => { $('website-preview').classList.remove('mobile'); $('preview-mobile').setAttribute('aria-pressed','false'); $('preview-desktop').setAttribute('aria-pressed','true'); };
+  $('manual-entry').onclick = () => { if (canLeave()) $('manual-dialog').showModal(); }; $('cancel-manual').onclick = () => $('manual-dialog').close();
+  $('manual-form').onsubmit = async e => {
+    e.preventDefault(); const form = e.target, b = form.querySelector('[type=submit]'); b.disabled = true;
+    try {
+      const file = form.elements.portrait.files[0]; let imageData = '';
+      if (file) {
+        if (file.size > 5*1024*1024 || !['image/jpeg','image/png','image/webp'].includes(file.type)) throw new Error('Choose a JPEG, PNG or WebP up to 5 MB.');
+        imageData = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+      }
+      const result = await studioRpc('create', {name:form.elements.name.value,testimonial:form.elements.testimonial.value,permission:false,portraitPermission:false,imageData});
+      form.reset(); $('manual-dialog').close(); dirty = false; await reload(result.id); message('Saved as pending. Record existing permission before publishing.');
+    } catch(e) { $('manual-status').textContent = e.message; } finally { b.disabled = false; }
+  };
+  window.addEventListener('beforeunload',e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+  reload(window.STUDIO_REVIEW_ID || '').catch(e => message(e.message));
+})();
+
+</script>
+</body></html>
