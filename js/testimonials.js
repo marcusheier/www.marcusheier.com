@@ -1,5 +1,5 @@
 /* Testimonial intake. Set the Apps Script URL after deployment. */
-const TESTIMONIALS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyZ5nR4DtDi-1UY3DjjNW-e67rZ-ks-x4Np7Tt5YyxIbJRShRBJ29efzqkLHzxCfK_g/exec";
+const TESTIMONIALS_ENDPOINT = window.TESTIMONIAL_CONFIG?.publicUrl || '';
 const testimonialForm = document.querySelector("#testimonial-form");
 const testimonialText = document.querySelector("#testimonial-text");
 const testimonialCount = document.querySelector("#testimonial-count");
@@ -15,7 +15,7 @@ function setError(field, message = "") {
     if (target) target.textContent = message;
 }
 
-function setFormStatus(message, success = false) {
+function setFormStatus(message = "", success = false) {
     formStatus.textContent = message;
     formStatus.classList.toggle("is-success", success);
 }
@@ -101,7 +101,7 @@ testimonialForm?.addEventListener("submit", async (event) => {
     try {
         const image = imageInput.files?.[0];
         const imageData = image ? await prepareImage(image) : "";
-        const payload = { name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
+        const payload = { action: "submit", permission: document.querySelector("#publication-permission").checked, portraitPermission: document.querySelector("#portrait-permission").checked, name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
         if (!response.ok) throw new Error("Submission failed");
         const result = await response.json();
@@ -109,6 +109,7 @@ testimonialForm?.addEventListener("submit", async (event) => {
         setFormStatus("Thank you — your testimonial has been received.", true);
         testimonialForm.reset();
         imagePreview.hidden = true;
+        imagePlaceholder.hidden = false;
         testimonialCount.textContent = "0 characters";
     } catch (error) {
         setFormStatus("Something went wrong. Please try again in a moment.");
