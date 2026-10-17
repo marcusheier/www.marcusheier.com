@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Testimonial Studio</title>
+<!-- STYLES -->
+</head><body class="testimonial-studio-page"><div class="studio-shell">
+<header class="workspace-header"><div><p class="eyebrow">MARCUS HEIER · PRIVATE WORKSPACE</p><h1>Testimonial Studio</h1></div><div><button id="refresh">Reload</button> <button id="manual-entry">Add testimonial</button></div></header>
+<p id="demo-notice" class="demo-notice" hidden>Local demonstration · fictional examples · changes stay in this browser session · no Google requests or emails</p>
+<nav class="workspace-tabs" aria-label="Studio views"><button data-view="pending" aria-pressed="true">Pending</button><button data-view="published" aria-pressed="false">Published</button><button data-view="hidden" aria-pressed="false">Hidden</button><button data-view="carousel" aria-pressed="false">Carousel</button><button data-view="graphics" aria-pressed="false">Social graphics</button></nav>
+<p id="workspace-status" role="status" aria-live="polite"></p>
+<main>
+<section id="reviews-panel" class="review-workspace">
+<aside class="review-library" aria-label="Testimonials"><p id="review-count"></p><div id="review-list"></div></aside>
+<div id="review-editor" hidden>
+<div class="editor-toolbar"><h2 id="editor-title">Review</h2><div><button id="preview-desktop" aria-pressed="true">Desktop</button><button id="preview-mobile" aria-pressed="false">Mobile</button></div></div>
+<div class="editor-columns"><section class="website-preview" aria-label="Website preview"><p class="preview-label">WEBSITE PREVIEW · UNSAVED SETTINGS</p><div id="website-preview"></div><button id="open-graphics">Create social graphic</button></section>
+<form id="settings-form" class="review-settings">
+<label>Display name<input id="display-name" maxlength="80" required></label>
+<label>Display excerpt (optional)<textarea id="excerpt" rows="5" maxlength="12000"></textarea></label><small>Leave blank to use the complete original. Editing this field never changes the original.</small>
+<label>Service category<input id="category" list="categories" maxlength="80"></label><datalist id="categories"><option>Channeling</option><option>Healing</option><option>Mediumship &amp; Coaching</option><option>North Star Method</option><option>Tech coaching</option><option>Events</option></datalist>
+<label class="workspace-check"><input id="selected" type="checkbox"> Show in carousel</label>
+<label>Carousel order<input id="display-order" type="number" min="0" max="100000" step="1" value="0" required></label><small>Lower numbers appear first. Equal values use a stable record-ID order.</small>
+<label class="workspace-check"><input id="show-portrait" type="checkbox"> Display original portrait</label>
+<p id="permission-status"></p>
+<details><summary>Permission for an existing testimonial</summary><p>Record permission you have already received; these controls do not obtain permission from the client.</p><label class="workspace-check"><input id="verified-permission" type="checkbox"> I have documented permission for text and name</label><label class="workspace-check"><input id="verified-portrait" type="checkbox"> I have documented portrait permission</label><label>Permission source / date<textarea id="permission-note" rows="2" maxlength="1000"></textarea></label></details>
+<div class="moderation-actions"><button type="submit" id="save-settings">Save settings</button><button type="button" id="publish">Publish</button><button type="button" id="hide-review">Hide</button></div>
+</form></div>
+<details class="original-submission"><summary>Original submission</summary><p id="original-name"></p><p id="original-date"></p><p id="original-text"></p><a id="original-image" target="_blank" rel="noopener" hidden>Open original portrait in Drive</a><p><a id="original-sheet" target="_blank" rel="noopener">Open original Google Sheet</a></p><small id="original-id"></small></details>
+</div><p id="choose-review">Choose a testimonial to preview and moderate it.</p>
+</section>
+<section id="carousel-panel" hidden><h2>Website carousel</h2><p>Published, permitted and selected reviews, in display order. Use the arrows or swipe to loop.</p><div id="carousel-preview"></div></section>
+        <section id="graphics-panel" class="studio-layout" hidden>
+            <section class="studio-preview-area" aria-label="Testimonial preview">
+                <div class="studio-preview-frame" id="preview-frame">
+                    <article class="testimonial-art" id="testimonial-art">
+                        <div class="testimonial-art-card">
+                            <div class="testimonial-art-person">
+                                <div class="testimonial-art-avatar"><img id="art-avatar" alt=""></div>
+                                <p id="art-name"></p>
+                            </div>
+
+                            <p class="testimonial-art-quote" id="art-quote"></p>
+                            <p class="testimonial-art-date" id="art-date"></p>
+                        </div>
+                    </article>
+                </div>
+                <p class="studio-hint">Graphics use the selected review’s display text. The original submission remains unchanged.</p>
+            </section>
+
+            <aside class="studio-controls" aria-label="Studio controls">
+                <div class="control-group">
+                    <div class="control-heading"><p class="control-label">Social size</p><button id="reset-settings" type="button">Reset design</button></div>
+                    <div class="preset-grid" id="size-presets">
+                        <button type="button" class="preset-button is-active" data-width="1080" data-height="1350">Instagram portrait <span>1080 × 1350</span></button>
+                        <button type="button" class="preset-button" data-width="1080" data-height="1080">Square <span>1080 × 1080</span></button>
+                        <button type="button" class="preset-button" data-width="1080" data-height="1920">Story <span>1080 × 1920</span></button>
+                        <button type="button" class="preset-button" data-width="1200" data-height="627">LinkedIn landscape <span>1200 × 627</span></button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-heading"><p class="control-label">Gradient</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle colors</button></div>
+                    <div class="color-row">
+                        <label>Color 1 <input id="color-one" type="color" value="#2d162c"></label>
+                        <label>Color 2 <input id="color-two" type="color" value="#59466b"></label>
+                    </div>
+                    <label class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
+                    <input id="gradient-angle" type="range" min="0" max="360" value="135">
+                </div>
+
+                <div class="control-group">
+                    <p class="control-label">Typography</p>
+                    <label class="range-label" for="text-size">Text size <output id="text-size-value">24px</output></label>
+                    <input id="text-size" type="range" min="12" max="42" value="24">
+                    <label class="range-label" for="card-padding">Card padding <output id="card-padding-value">54px</output></label>
+                    <input id="card-padding" type="range" min="28" max="100" value="54">
+                </div>
+
+                <div class="control-group">
+                    <p class="control-label">Preview content</p>
+                    <label class="studio-file-label" for="studio-image">Choose portrait <span>optional</span></label>
+                    <input id="studio-image" type="file" accept="image/jpeg,image/png,image/webp">
+
+                </div>
+
+                <div class="studio-actions">
+                    <button class="button button--primary" id="download-png" type="button">Download PNG</button>
+                    <button class="button button--primary" id="download-carousel" type="button">Download carousel</button>
+                    <button class="button button--ghost" id="save-drive" type="button">Save to Google Drive</button>
+                </div>
+                <p class="studio-status" id="studio-status" role="status" aria-live="polite"></p>
+            </aside>
+        </section>
+
+</main>
+<dialog id="manual-dialog"><form id="manual-form"><h2>Add an existing testimonial</h2><label>Original name<input name="name" maxlength="80" required></label><label>Original testimonial<textarea name="testimonial" rows="7" maxlength="12000" required></textarea></label><label>Original portrait (optional)<input name="portrait" type="file" accept="image/jpeg,image/png,image/webp"></label><p>Saved as pending. Record existing permission in the review settings before publishing.</p><button type="submit">Save as pending</button> <button type="button" id="cancel-manual">Cancel</button><p id="manual-status" role="status"></p></form></dialog>
+</div>
+<!-- SCRIPTS -->
+</body></html>
