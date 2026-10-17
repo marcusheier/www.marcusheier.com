@@ -1,0 +1,10 @@
+.testimonial-carousel { max-width: 860px; margin: 2rem auto; touch-action: pan-y; }
+.testimonial-slide { padding: clamp(1.4rem, 4vw, 3rem); border: 1px solid #c9bdc9; border-radius: 18px; background: #fffaf6; color: #362e40; text-align: center; overflow-wrap: anywhere; box-shadow: 0 16px 42px #3024380d; }
+.testimonial-slide blockquote { margin: 1rem 0 1.5rem; font: 400 clamp(1.2rem, 2.6vw, 1.65rem)/1.55 Georgia, serif; white-space: pre-wrap; }
+.testimonial-client { font-weight: 700; margin: .5rem 0; }
+.testimonial-category { color: #655666; font-size: .9rem; }
+.testimonial-portrait { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto; }
+.testimonial-carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+.testimonial-carousel-controls[hidden] { display: none; }
+.testimonial-carousel-controls button { width: 48px; height: 48px; border: 1px solid #918197; border-radius: 50%; background: #fffaf6; color: #362e40; font-size: 1.4rem; cursor: pointer; }
+.testimonial-carousel button:focus-visible { outline: 3px solid #976b36; outline-offset: 4px; }
