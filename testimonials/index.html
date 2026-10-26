@@ -42,7 +42,7 @@
 
                     <div class="form-field">
                         <label for="testimonial-text">Testimonial</label>
-                        <textarea id="testimonial-text" name="testimonial" rows="8" required></textarea>
+                        <textarea id="testimonial-text" name="testimonial" rows="8" maxlength="12000" required></textarea>
                         <div class="field-meta"><small class="field-error" data-error-for="testimonial"></small><small id="testimonial-count">0 characters</small></div>
                     </div>
 
@@ -57,6 +57,13 @@
                             <button type="button" class="preview-remove" id="remove-image">Remove image</button>
                         </div>
                     </div>
+
+                    <fieldset class="form-field publication-permissions" aria-describedby="publication-note">
+                        <legend>Publication permission</legend>
+                        <label><input id="publication-permission" type="checkbox"><span>I give Marcus permission to publish my name and testimonial on his website and in social graphics. (Optional)</span></label>
+                        <label><input id="portrait-permission" type="checkbox"><span>I also give permission to publish my uploaded portrait. (Optional)</span></label>
+                        <p id="publication-note">You can submit privately without granting publication permission. New submissions are reviewed before publication. Contact info@marcusheier.com to change your permission.</p>
+                    </fieldset>
 
                     <!-- Spam trap: genuine visitors never see or fill this field. -->
                     <div class="form-field form-field--trap" aria-hidden="true">
@@ -83,6 +90,7 @@
             </div>
         </footer>
     </div>
+    <script src="../js/testimonial-config.js"></script>
     <script src="../js/testimonials.js"></script>
 </body>
 
