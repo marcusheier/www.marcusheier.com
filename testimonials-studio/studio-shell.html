@@ -57,13 +57,29 @@
                 </div>
 
                 <div class="control-group">
-                    <div class="control-heading"><p class="control-label">Gradient</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle colors</button></div>
-                    <div class="color-row">
-                        <label>Color 1 <input id="color-one" type="color" value="#2d162c"></label>
-                        <label>Color 2 <input id="color-two" type="color" value="#59466b"></label>
+                    <div class="control-heading"><p class="control-label">Background</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle variation</button></div>
+                    <label class="range-label" for="background-style">Style</label>
+                    <select id="background-style" class="studio-select">
+                        <option value="prism">Prism glow</option>
+                        <option value="aurora">Aurora wash</option>
+                        <option value="classic">Classic gradient</option>
+                    </select>
+                    <div class="color-row color-row--eight">
+                        <label>Stop 1 <input id="color-one" type="color" value="#28496b"></label>
+                        <label>Stop 2 <input id="color-two" type="color" value="#75dbe8"></label>
+                        <label>Stop 3 <input id="color-three" type="color" value="#f5f2ff"></label>
+                        <label>Stop 4 <input id="color-four" type="color" value="#f255cf"></label>
+                        <label>Stop 5 <input id="color-five" type="color" value="#4979bd"></label>
+                        <label>Stop 6 <input id="color-six" type="color" value="#4c7eb8"></label>
+                        <label>Stop 7 <input id="color-seven" type="color" value="#7bd6d5"></label>
+                        <label>Stop 8 <input id="color-eight" type="color" value="#263b63"></label>
                     </div>
                     <label class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
                     <input id="gradient-angle" type="range" min="0" max="360" value="135">
+                    <label class="range-label" for="background-softness">Softness <output id="background-softness-value">72</output></label>
+                    <input id="background-softness" type="range" min="20" max="140" value="72">
+                    <label class="range-label" for="background-glow">Glow intensity <output id="background-glow-value">100%</output></label>
+                    <input id="background-glow" type="range" min="40" max="160" value="100">
                 </div>
 
                 <div class="control-group">

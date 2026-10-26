@@ -1,4 +1,10 @@
-const studioSettings = { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 };
+const prismPalettes = [
+    ["#28496b", "#75dbe8", "#f5f2ff", "#f255cf", "#4979bd", "#4c7eb8", "#7bd6d5", "#263b63"],
+    ["#1f304f", "#56d7cf", "#fff5df", "#ff7dbb", "#6958d9", "#557dc4", "#8fe5d2", "#202e4c"],
+    ["#25344d", "#8ce7f2", "#e5d8ff", "#e95fca", "#3c6db2", "#5969c9", "#82d5c5", "#263a64"],
+    ["#263d5d", "#72c9ed", "#fff1f4", "#e76cff", "#4e8d9e", "#6c82d8", "#89d5b1", "#263b63"]
+];
+const studioSettings = { width: 1080, height: 1350, angle: 135, backgroundMode: "prism", colors: [...prismPalettes[0]], softness: 72, glow: 100, textSize: 24, padding: 54 };
 
 const art = document.querySelector("#testimonial-art");
 const artCard = document.querySelector(".testimonial-art-card");
@@ -10,13 +16,34 @@ let cachedPortraitSource = "";
 
 function renderStudio() {
     const previewScale = art.getBoundingClientRect().width / studioSettings.width;
-    art.style.background = `linear-gradient(${studioSettings.angle}deg, ${studioSettings.colorOne}, ${studioSettings.colorTwo})`;
+    art.style.background = previewBackground();
     art.style.aspectRatio = `${studioSettings.width} / ${studioSettings.height}`;
     artCard.style.padding = `${studioSettings.padding * previewScale}px`;
     quote.style.fontSize = `${studioSettings.textSize * previewScale}px`;
     document.querySelector("#gradient-angle-value").textContent = `${studioSettings.angle}°`;
+    document.querySelector("#background-softness-value").textContent = `${studioSettings.softness}`;
+    document.querySelector("#background-glow-value").textContent = `${studioSettings.glow}%`;
     document.querySelector("#text-size-value").textContent = `${studioSettings.textSize}px`;
     document.querySelector("#card-padding-value").textContent = `${studioSettings.padding}px`;
+}
+
+function colorWithAlpha(hex, alpha) {
+    const value = String(hex).replace("#", "");
+    const r = parseInt(value.slice(0, 2), 16), g = parseInt(value.slice(2, 4), 16), b = parseInt(value.slice(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${Math.max(0, Math.min(1, alpha))})`;
+}
+
+function previewBackground() {
+    const colors = studioSettings.colors;
+    const base = colors[0], edge = colors[colors.length - 1];
+    const alpha = studioSettings.glow / 100;
+    if (studioSettings.backgroundMode === "classic") return `linear-gradient(${studioSettings.angle}deg, ${base}, ${edge})`;
+    const softness = Math.round(25 + studioSettings.softness * .12);
+    const spread = `${softness}%`;
+    const positions = studioSettings.backgroundMode === "aurora"
+        ? [["12%", "10%"], ["30%", "30%"], ["54%", "12%"], ["78%", "18%"], ["38%", "55%"], ["66%", "62%"], ["82%", "88%"]]
+        : [["50%", "-8%"], ["22%", "18%"], ["42%", "38%"], ["56%", "56%"], ["75%", "36%"], ["28%", "78%"], ["76%", "88%"]];
+    return colors.slice(1).map((color, index) => `radial-gradient(circle at ${positions[index][0]} ${positions[index][1]}, ${colorWithAlpha(color, (.48 + (index % 3) * .12) * alpha)} 0%, ${colorWithAlpha(color, .04 * alpha)} ${spread}, transparent ${Math.min(100, softness + 28)}%)`).concat(`linear-gradient(${studioSettings.angle}deg, ${base}, ${edge})`).join(", ");
 }
 
 function bindRange(id, key) {
@@ -33,19 +60,22 @@ document.querySelectorAll(".preset-button").forEach((button) => button.addEventL
     studioSettings.height = Number(button.dataset.height);
     renderStudio();
 }));
-document.querySelector("#color-one").addEventListener("input", (event) => { studioSettings.colorOne = event.target.value; renderStudio(); });
-document.querySelector("#color-two").addEventListener("input", (event) => { studioSettings.colorTwo = event.target.value; renderStudio(); });
 bindRange("gradient-angle", "angle");
+bindRange("background-softness", "softness");
+bindRange("background-glow", "glow");
 bindRange("text-size", "textSize");
 bindRange("card-padding", "padding");
 
-
+document.querySelector("#background-style").addEventListener("change", (event) => { studioSettings.backgroundMode = event.target.value; renderStudio(); });
+["one", "two", "three", "four", "five", "six", "seven", "eight"].forEach((name, index) => document.querySelector(`#color-${name}`).addEventListener("input", (event) => { studioSettings.colors[index] = event.target.value; renderStudio(); }));
 document.querySelector("#shuffle-gradient").addEventListener("click", () => {
-    const palettes = [["#2d162c", "#59466b"], ["#0e0c24", "#59466b"], ["#452843", "#d8b98e"], ["#28233f", "#3c3153"], ["#533551", "#acabb0"], ["#1f2638", "#806b8e"]];
-    const palette = palettes[Math.floor(Math.random() * palettes.length)];
-    [studioSettings.colorOne, studioSettings.colorTwo] = palette;
-    document.querySelector("#color-one").value = palette[0];
-    document.querySelector("#color-two").value = palette[1];
+    const palette = prismPalettes[Math.floor(Math.random() * prismPalettes.length)].map(color => color);
+    studioSettings.colors = palette;
+    studioSettings.backgroundMode = Math.random() > .5 ? "prism" : "aurora";
+    document.querySelector("#background-style").value = studioSettings.backgroundMode;
+    ["one", "two", "three", "four", "five", "six", "seven", "eight"].forEach((name, index) => { document.querySelector(`#color-${name}`).value = palette[index]; });
+    studioSettings.angle = Math.floor(Math.random() * 361);
+    document.querySelector("#gradient-angle").value = studioSettings.angle;
     renderStudio();
 });
 
@@ -74,6 +104,37 @@ function wrapText(context, text, maxWidth) {
     if (line) lines.push(line); return lines;
 }
 
+function drawBackground(ctx, width, height) {
+    const colors = studioSettings.colors;
+    const base = colors[0], edge = colors[colors.length - 1];
+    if (studioSettings.backgroundMode === "classic") {
+        const radians = (studioSettings.angle - 90) * Math.PI / 180;
+        const dx = Math.cos(radians), dy = Math.sin(radians);
+        const extent = (Math.abs(dx) * width + Math.abs(dy) * height) / 2;
+        const gradient = ctx.createLinearGradient(width / 2 - dx * extent, height / 2 - dy * extent, width / 2 + dx * extent, height / 2 + dy * extent);
+        gradient.addColorStop(0, base); gradient.addColorStop(1, edge);
+        ctx.fillStyle = gradient; ctx.fillRect(0, 0, width, height); return;
+    }
+    ctx.fillStyle = base; ctx.fillRect(0, 0, width, height);
+    const aurora = studioSettings.backgroundMode === "aurora";
+    const positions = aurora
+        ? [[.12, .10], [.30, .30], [.54, .12], [.78, .18], [.38, .55], [.66, .62], [.82, .88]]
+        : [[.50, -.08], [.22, .18], [.42, .38], [.56, .56], [.75, .36], [.28, .78], [.76, .88]];
+    const points = colors.slice(1).map((color, index) => [positions[index][0], positions[index][1], color]);
+    const radius = (0.28 + studioSettings.softness / 260) * Math.max(width, height);
+    const intensity = studioSettings.glow / 100;
+    ctx.globalCompositeOperation = "screen";
+    points.forEach(([x, y, color]) => {
+        const gradient = ctx.createRadialGradient(x * width, y * height, 0, x * width, y * height, radius);
+        gradient.addColorStop(0, colorWithAlpha(color, .82 * intensity));
+        gradient.addColorStop(.3, colorWithAlpha(color, .42 * intensity));
+        gradient.addColorStop(.7, colorWithAlpha(color, .12 * intensity));
+        gradient.addColorStop(1, colorWithAlpha(color, 0));
+        ctx.fillStyle = gradient; ctx.fillRect(0, 0, width, height);
+    });
+    ctx.globalCompositeOperation = "source-over";
+}
+
 async function makeCanvases() {
     const scale = studioSettings.width / 1080;
     const portrait = await loadPortrait();
@@ -97,11 +158,7 @@ async function makeCanvases() {
     for (let page = 0; page < chunks.length; page += 1) {
         const canvas = document.createElement("canvas"); canvas.width = studioSettings.width; canvas.height = studioSettings.height;
         const ctx = canvas.getContext("2d");
-        const radians = (studioSettings.angle - 90) * Math.PI / 180;
-        const dx = Math.cos(radians), dy = Math.sin(radians);
-        const extent = (Math.abs(dx) * canvas.width + Math.abs(dy) * canvas.height) / 2;
-        const gradient = ctx.createLinearGradient(canvas.width/2-dx*extent, canvas.height/2-dy*extent, canvas.width/2+dx*extent, canvas.height/2+dy*extent);
-        gradient.addColorStop(0, studioSettings.colorOne); gradient.addColorStop(1, studioSettings.colorTwo); ctx.fillStyle = gradient; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        drawBackground(ctx, canvas.width, canvas.height);
         ctx.fillStyle = "rgba(255,255,255,.96)"; ctx.beginPath(); ctx.roundRect(cardX, cardY, cardW, cardH, 20 * scale); ctx.fill();
         let y = cardY + padding;
         const isFirstSlide = page === 0;
@@ -129,7 +186,7 @@ document.querySelector("#save-drive").addEventListener("click", async () => {
         status.textContent = `${canvases.length} graphic(s) saved to Drive.`;
     } catch (error) { status.textContent = error.message; }
 });
-document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, colorOne: "#2d162c", colorTwo: "#59466b", textSize: 24, padding: 54 }); document.querySelector("#color-one").value = studioSettings.colorOne; document.querySelector("#color-two").value = studioSettings.colorTwo; document.querySelector("#gradient-angle").value = 135; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54;
+document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, backgroundMode: "prism", colors: [...prismPalettes[0]], softness: 72, glow: 100, textSize: 24, padding: 54 }); document.querySelector("#background-style").value = studioSettings.backgroundMode; ["one", "two", "three", "four", "five", "six", "seven", "eight"].forEach((name, index) => { document.querySelector(`#color-${name}`).value = studioSettings.colors[index]; }); document.querySelector("#gradient-angle").value = 135; document.querySelector("#background-softness").value = 72; document.querySelector("#background-glow").value = 100; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54;
     document.querySelectorAll(".preset-button").forEach((button) => {
         button.classList.toggle("is-active", Number(button.dataset.width) === studioSettings.width && Number(button.dataset.height) === studioSettings.height);
     });
