@@ -44,7 +44,7 @@
 .studio-preview-area { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem; min-height: 680px; padding: clamp(1.5rem, 5vw, 5rem); background: #2a2930; }
 .studio-preview-frame { display: grid; place-items: center; width: min(100%, 700px); min-height: 560px; padding: 2rem; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: radial-gradient(circle at center, #292136 0%, #16151d 70%); overflow: hidden; }
 .testimonial-art { display: grid; place-items: center; width: min(100%, 600px); aspect-ratio: 1080 / 1350; padding: 8%; border-radius: 6px; background: linear-gradient(135deg, #2d162c, #59466b); box-shadow: 0 24px 80px rgba(0,0,0,.4); overflow: hidden; transition: background .2s ease; }
-.testimonial-art-card { display: flex; flex-direction: column; width: 100%; height: 84%; min-height: 0; padding: 54px; border: 1px solid rgba(45, 22, 44, .12); border-radius: 20px; background: rgba(255,255,255,.96); color: #30384a; box-shadow: 0 12px 28px rgba(0,0,0,.18); overflow: hidden; }
+.testimonial-art-card { display: flex; flex-direction: column; width: 100%; height: auto; max-height: 84%; min-height: 0; padding: 54px; border: 1px solid rgba(45, 22, 44, .12); border-radius: 20px; background: rgba(255,255,255,.96); color: #30384a; box-shadow: 0 12px 28px rgba(0,0,0,.18); overflow: hidden; }
 .testimonial-art-person { display: flex; align-items: center; gap: 1rem; }
 .testimonial-art-avatar { flex: 0 0 68px; width: 68px; height: 68px; overflow: hidden; border-radius: 50%; background: var(--color-bg-subtle); }
 .testimonial-art-avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -451,7 +451,7 @@ async function makeCanvases() {
     const scale = studioSettings.width / 1080;
     const portrait = await loadPortrait();
     const margin = studioSettings.width * .08;
-    const cardX = margin; const cardY = margin; const cardW = studioSettings.width - margin * 2; const cardH = studioSettings.height - margin * 2;
+    const cardX = margin; const cardW = studioSettings.width - margin * 2;
     const padding = studioSettings.padding * scale; const avatarSize = 68 * scale;
     const measureCanvas = document.createElement("canvas"); const measure = measureCanvas.getContext("2d");
     measure.font = `400 ${studioSettings.textSize * scale}px Arial`;
@@ -459,6 +459,10 @@ async function makeCanvases() {
     const lineHeight = studioSettings.textSize * scale * 1.45;
     const headerHeight = avatarSize + 70 * scale;
     const continuationHeaderHeight = 100 * scale;
+    const maxCardH = studioSettings.height - margin * 2;
+    const contentCardH = padding * 2 + headerHeight + lines.length * lineHeight + 34 * scale;
+    const cardH = Math.min(maxCardH, Math.max(220 * scale, contentCardH));
+    const cardY = (studioSettings.height - cardH) / 2;
     const textHeight = Math.max(lineHeight, cardH - padding * 2 - headerHeight - 34 * scale);
     const linesPerSlide = Math.max(1, Math.floor(textHeight / lineHeight));
     const continuationTextHeight = Math.max(lineHeight, cardH - padding * 2 - continuationHeaderHeight - 34 * scale);
@@ -508,7 +512,7 @@ document.querySelector("#reset-settings").addEventListener("click", () => { Obje
 window.applyStudioGraphic = function (review, portrait) {
     document.querySelector("#art-name").textContent = review.displayName || review.name;
     document.querySelector("#art-quote").textContent = review.excerpt || review.testimonial;
-    document.querySelector("#art-date").textContent = review.date ? new Date(review.date).toLocaleDateString() : "";
+    document.querySelector("#art-date").textContent = review.date ? String(new Date(review.date).getFullYear()) : "";
     if (portrait) avatar.src = portrait; else avatar.removeAttribute("src");
     cachedPortrait = null; cachedPortraitSource = "";
     renderStudio();
