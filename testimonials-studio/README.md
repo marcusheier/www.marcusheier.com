@@ -2,6 +2,10 @@
 
 Status: local implementation, simulated backend tests and browser preview. **Not deployed to Google or production.** Never upload the project root. No real review was published, no notification was sent, and no Google data was changed during this build.
 
+## Simplicity rule
+
+Keep the simplest working architecture. Before adding a new service, deployment, project, or integration, ask: “What is the easiest way to achieve this?” Do not introduce parallel systems or extra Apps Script projects unless the existing working setup cannot meet the requirement and the trade-off is explicitly agreed first. The working production path is the original testimonial submission Apps Script, Google Sheet, Drive folder and notification flow; `Testimonials Public` and the newer `Testimonials Studio` projects are not required for that path and must not be activated or substituted without explicit agreement.
+
 ## Try the workspace
 
 From the project root:
