@@ -149,7 +149,7 @@ dialog::backdrop { background: #0009; } #manual-form { display: grid; gap: 16px;
 @media(max-width:700px) { h1 { font-size: 29px; } .workspace-header { align-items: start; flex-direction: column; padding: 22px 18px; } .workspace-tabs { padding: 14px 18px; } .workspace-tabs button { padding: 9px 11px; } .review-workspace { grid-template-columns: minmax(0,1fr); padding: 10px 18px 32px; } .review-library { border-right: 0; border-bottom: 1px solid #433649; padding: 0 0 18px; } #review-list { grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); } .website-preview { padding: 15px; } .editor-toolbar button { padding: 9px; } .studio-layout { display: block; } .studio-preview-area { padding: 16px; min-height: auto; } .studio-preview-frame { padding: 12px; } .color-row--eight { grid-template-columns: repeat(4, minmax(48px, 1fr)); } }
 
 </style>
-</head><body class="testimonial-studio-page"><div class="studio-shell">
+</head><body class="testimonial-studio-page" data-review-id="<?!= reviewId ?>"><div class="studio-shell">
 <header class="workspace-header"><div><p class="eyebrow">MARCUS HEIER · PRIVATE WORKSPACE</p><h1>Testimonial Studio</h1></div><div><button id="refresh">Reload</button> <button id="manual-entry">Add testimonial</button></div></header>
 <p id="demo-notice" class="demo-notice" hidden>Local demonstration · fictional examples · changes stay in this browser session · no Google requests or emails</p>
 <nav class="workspace-tabs" aria-label="Studio views"><button data-view="reviews" aria-pressed="true">Testimonials</button><button data-view="graphics" aria-pressed="false">Social graphics</button></nav>
@@ -257,7 +257,7 @@ dialog::backdrop { background: #0009; } #manual-form { display: grid; gap: 16px;
 </main>
 <dialog id="manual-dialog"><form id="manual-form"><h2>Add an existing testimonial</h2><label>Original name<input name="name" maxlength="80" required></label><label>Original testimonial<textarea name="testimonial" rows="7" maxlength="12000" required></textarea></label><label>Original portrait (optional)<input name="portrait" type="file" accept="image/jpeg,image/png,image/webp"></label><p>Saved as pending. Record existing permission in the review settings before publishing.</p><button type="submit">Save as pending</button> <button type="button" id="cancel-manual">Cancel</button><p id="manual-status" role="status"></p></form></dialog>
 </div>
-<script>window.STUDIO_REVIEW_ID = <?!= reviewId ?>;</script>
+<script>window.STUDIO_REVIEW_ID = document.body.dataset.reviewId || '';</script>
 <script>
 /* Shared by website and Studio. Manual navigation; fresh public data every 60s. */
 (function () {
@@ -531,10 +531,35 @@ renderStudio();
   const $ = id => document.getElementById(id);
   const fields = ['display-name','excerpt','category','selected','display-order','show-portrait','verified-permission','permission-note'];
   let reviews = [], active = null, view = 'reviews', sheetUrl = '', portrait = '', busy = false, dirty = false, loadVersion = 0;
-  window.studioRpc = window.studioRpc || ((action, payload = {}) => new Promise((resolve,reject) => {
-    if (!window.google?.script?.run) { reject(new Error('Open the protected Google Studio URL.')); return; }
-    google.script.run.withSuccessHandler(resolve).withFailureHandler(e => reject(new Error(e.message || 'Google request failed'))).studioApi({ action, payload });
-  }));
+  const demoMode = new URLSearchParams(window.location.search).get('demo') === '1' || !window.google?.script?.run;
+  const demoReviews = [
+    { id: 'demo-sarah', name: 'Sarah', displayName: 'Sarah', testimonial: 'My experience working with Marcus was calm, grounded and deeply meaningful. I felt supported, seen and encouraged to move forward with confidence.', excerpt: '', category: 'Mediumship & Coaching', imageUrl: '', imageId: '', date: '2026-10-26T00:00:00.000Z', permission: true, portraitPermission: true, state: 'pending', selected: false, order: 0, showPortrait: false, verifiedPermission: true, verifiedPortraitPermission: true, permissionNote: 'Local demo', revision: 'demo-1' },
+    { id: 'demo-patricia', name: 'Patricia', displayName: 'Patricia', testimonial: 'The session was warm, insightful and exactly what I needed at that moment. Marcus created a safe space for a beautiful conversation.', excerpt: '', category: 'Channeling', imageUrl: '', imageId: '', date: '2026-10-24T00:00:00.000Z', permission: false, portraitPermission: false, state: 'pending', selected: false, order: 0, showPortrait: false, verifiedPermission: false, verifiedPortraitPermission: false, permissionNote: '', revision: 'demo-2' }
+  ];
+  if (demoMode) {
+    $('demo-notice').hidden = false;
+    window.studioRpc = async (action, payload = {}) => {
+      if (action === 'list') return { reviews: demoReviews.map(r => ({ ...r })), sheetUrl: '' };
+      if (action === 'portrait') return { portrait: '' };
+      if (action === 'graphic') return { url: '#local-demo' };
+      if (action === 'create') {
+        const id = 'demo-' + Date.now();
+        demoReviews.push({ id, name: payload.name, displayName: payload.name, testimonial: payload.testimonial, excerpt: '', category: '', imageUrl: '', imageId: '', date: new Date().toISOString(), permission: !!payload.permission, portraitPermission: !!payload.permission, state: 'pending', selected: false, order: 0, showPortrait: false, verifiedPermission: false, verifiedPortraitPermission: false, permissionNote: '', revision: 'demo-' + Date.now() });
+        return { id };
+      }
+      if (action === 'save') {
+        const item = demoReviews.find(r => r.id === payload.id);
+        if (!item) throw new Error('Demo testimonial not found.');
+        Object.assign(item, payload, { revision: 'demo-' + Date.now() });
+        return { ok: true };
+      }
+      throw new Error('Unsupported local demo action.');
+    };
+  } else {
+    window.studioRpc = window.studioRpc || ((action, payload = {}) => new Promise((resolve,reject) => {
+      google.script.run.withSuccessHandler(resolve).withFailureHandler(e => reject(new Error(e.message || 'Google request failed'))).studioApi({ action, payload });
+    }));
+  }
   function message(s) { $('workspace-status').textContent = s; }
   function values() {
     return { id: active.id, revision: active.revision, state: active.state,
