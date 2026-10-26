@@ -43,10 +43,10 @@ function studioApi(request) {
     if (!Number.isInteger(order) || order < 0 || order > 100000) throw new Error('Order must be an integer from 0 to 100000');
     const note = text_(p.permissionNote || '', 1000, false);
     const verifiedPermission = p.verifiedPermission === true;
-    const verifiedPortraitPermission = p.verifiedPortraitPermission === true;
+    const verifiedPortraitPermission = verifiedPermission;
     if ((verifiedPermission || verifiedPortraitPermission) && !note) throw new Error('Record the source of permission for an existing testimonial.');
     if (p.state === 'published' && !(r.permission || verifiedPermission)) throw new Error('Publication permission is required.');
-    if (p.showPortrait && !(r.portraitPermission || verifiedPortraitPermission)) throw new Error('Portrait permission is required.');
+    if (p.showPortrait && !(r.permission || verifiedPermission)) throw new Error('Publication permission is required for the portrait.');
     const m = { state: p.state, selected: p.selected, order, displayName: text_(p.displayName,80,true), excerpt: text_(p.excerpt || '',12000,false), category: text_(p.category || '',80,false), showPortrait: p.showPortrait,
       verifiedPermission, verifiedPortraitPermission, permissionNote: note, revision: Utilities.getUuid(), updatedAt: new Date().toISOString() };
     const s = settings_(), values = s.getDataRange().getValues(), index = values.findIndex(row => String(row[0]) === r.id);
