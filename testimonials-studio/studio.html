@@ -391,13 +391,13 @@ bindRange("text-size", "textSize");
 bindRange("card-padding", "padding");
 
 document.querySelector("#background-style").addEventListener("change", (event) => { studioSettings.backgroundMode = event.target.value; renderStudio(); });
-["one", "two", "three", "four", "five", "six", "seven", "eight"].forEach((name, index) => document.querySelector(`#color-${name}`).addEventListener("input", (event) => { studioSettings.colors[index] = event.target.value; renderStudio(); }));
+["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"].forEach((name, index) => document.querySelector(`#color-${name}`).addEventListener("input", (event) => { studioSettings.colors[index] = event.target.value; renderStudio(); }));
 document.querySelector("#shuffle-gradient").addEventListener("click", () => {
     const palette = prismPalettes[Math.floor(Math.random() * prismPalettes.length)].map(color => color);
     studioSettings.colors = palette;
     studioSettings.backgroundMode = Math.random() > .5 ? "prism" : "aurora";
     document.querySelector("#background-style").value = studioSettings.backgroundMode;
-    ["one", "two", "three", "four", "five", "six", "seven", "eight"].forEach((name, index) => { document.querySelector(`#color-${name}`).value = palette[index]; });
+    ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"].forEach((name, index) => { document.querySelector(`#color-${name}`).value = palette[index]; });
     studioSettings.angle = Math.floor(Math.random() * 361);
     document.querySelector("#gradient-angle").value = studioSettings.angle;
     renderStudio();
@@ -532,7 +532,7 @@ document.querySelector("#save-drive").addEventListener("click", async () => {
         status.textContent = `${canvases.length} graphic(s) saved to Drive.`;
     } catch (error) { status.textContent = error.message; }
 });
-document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, backgroundMode: "prism", colors: [...prismPalettes[0]], softness: 72, glow: 100, textSize: 24, padding: 54 }); document.querySelector("#background-style").value = studioSettings.backgroundMode; ["one", "two", "three", "four", "five", "six", "seven", "eight"].forEach((name, index) => { document.querySelector(`#color-${name}`).value = studioSettings.colors[index]; }); document.querySelector("#gradient-angle").value = 135; document.querySelector("#background-softness").value = 72; document.querySelector("#background-glow").value = 100; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54;
+document.querySelector("#reset-settings").addEventListener("click", () => { Object.assign(studioSettings, { width: 1080, height: 1350, angle: 135, backgroundMode: "prism", colors: [...prismPalettes[0]], softness: 72, glow: 100, textSize: 24, padding: 54 }); document.querySelector("#background-style").value = studioSettings.backgroundMode; ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"].forEach((name, index) => { document.querySelector(`#color-${name}`).value = studioSettings.colors[index]; }); document.querySelector("#gradient-angle").value = 135; document.querySelector("#background-softness").value = 72; document.querySelector("#background-glow").value = 100; document.querySelector("#text-size").value = 24; document.querySelector("#card-padding").value = 54;
     document.querySelectorAll(".preset-button").forEach((button) => {
         button.classList.toggle("is-active", Number(button.dataset.width) === studioSettings.width && Number(button.dataset.height) === studioSettings.height);
     });
