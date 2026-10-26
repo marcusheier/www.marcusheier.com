@@ -6,6 +6,18 @@ Status: local implementation, simulated backend tests and browser preview. **Not
 
 Keep the simplest working architecture. Before adding a new service, deployment, project, or integration, ask: “What is the easiest way to achieve this?” Do not introduce parallel systems or extra Apps Script projects unless the existing working setup cannot meet the requirement and the trade-off is explicitly agreed first. The working production path is the original testimonial submission Apps Script, Google Sheet, Drive folder and notification flow; `Testimonials Public` and the newer `Testimonials Studio` projects are not required for that path and must not be activated or substituted without explicit agreement.
 
+## Studio design update workflow
+
+When changing only the private Studio appearance:
+
+1. Edit `studio.html` in the **Testimonials Studio** Apps Script project. Its inline `<style>` block contains the Studio HTML/CSS.
+2. Change only visual markup or CSS for design changes. Leave `core.gs`, `admin.gs`, the original `Testimonials` project, the Google Sheet, and the website untouched.
+3. Click **Save**. Saving updates the source project but does not change the live Studio.
+4. Open **Deploy → Manage deployments**, select the active Studio web-app deployment, click the pencil icon, choose **New version**, and deploy it. Keep the existing deployment URL.
+5. Test a new **Open studio** link while signed in as `info@marcusheier.com`.
+
+A new deployment version is required for HTML/CSS code changes. Script-property changes normally do not require a new version. GitHub is optional for making the live Studio change, but keep the source copy synchronized there when possible so future edits do not overwrite the work.
+
 ## Try the workspace
 
 From the project root:
