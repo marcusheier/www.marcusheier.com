@@ -147,3 +147,20 @@ python3 testimonials-studio/tools/build-testimonial-studio.py
 ```
 
 These tests use simulated Apps Script services and a minimal DOM, not Google. Browser QA checks the real rendered local UI. Google account restrictions, scopes, storage, email, Drive saves and website-origin delivery must still pass the checklist above. Current limitations: no live deployment, no drag ordering, no email retry UI (delivery state is in receipts), and no automatic import/recovery of missing legacy portraits.
+
+
+## Simple Studio editing workflow
+
+Keep the local preview and the Google Apps Script version in sync.
+
+When changing the Testimonial Studio:
+
+1. Update the local Studio source files first (studio.css, studio.js, graphics.js, demo.js, or the related HTML).
+2. Update **preview.html at the same time**. It is the local offline test entry point and must reflect the current Studio design and behavior.
+3. Open preview.html locally and test with fictional testimonials. Local testing must not contact Google Sheets, Drive, email, or production.
+4. Only after the local preview is correct, update the Apps Script copy (studio.html, plus core.gs or admin.gs only when backend behavior changed).
+5. Save and deploy a new Apps Script version only when the approved change is ready for the live Studio.
+
+Never update the live Apps Script first and discover the design problems there. The simplest path is: source files -> preview.html -> local test -> Apps Script -> deployment.
+
+If a generated or bundled studio.html is rebuilt from the local source, verify that preview.html was updated before considering the change complete.
