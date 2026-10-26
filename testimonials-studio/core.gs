@@ -40,8 +40,8 @@ function records_() {
     const m = settings.get(id) || {};
     return { id, name: unliteral_(r[1]), testimonial: unliteral_(r[2]), imageUrl: String(r[3] || ''), imageId: String(r[7] || ''),
       date: r[0] instanceof Date ? r[0].toISOString() : String(r[0] || ''),
-      permission: receipt[2] === true || m.verifiedPermission === true,
-      portraitPermission: receipt[3] === true || m.verifiedPortraitPermission === true,
+      permission: receipt[2] === true || receipt[3] === true || m.verifiedPermission === true || m.verifiedPortraitPermission === true,
+      portraitPermission: receipt[2] === true || receipt[3] === true || m.verifiedPermission === true || m.verifiedPortraitPermission === true,
       state: m.state || 'pending', selected: m.selected === true, order: Number(m.order) || 0,
       displayName: m.displayName === undefined ? unliteral_(r[1]) : m.displayName,
       excerpt: m.excerpt || '', category: m.category || '', showPortrait: m.showPortrait === true,
@@ -68,7 +68,8 @@ function portrait_(r) {
 }
 function create_(p) {
   const name = text_(p.name, 80, true), testimonial = text_(p.testimonial, 12000, true);
-  if (typeof p.permission !== 'boolean' || typeof p.portraitPermission !== 'boolean') throw new Error('Please choose publication permissions.');
+  if (typeof p.permission !== 'boolean') throw new Error('Please choose publication permission.');
+  const combinedPermission = p.permission || p.portraitPermission === true;
   receipts_(); settings_();
   const id = Utilities.getUuid(), now = new Date();
   let file, imageId = '', imageUrl = '';
@@ -79,7 +80,7 @@ function create_(p) {
   }
   // Only append: never rewrite existing rows, links, statuses, or formatting.
   sheet_().appendRow([now, literal_(name), literal_(testimonial), imageUrl, studioLink_(id), 'Pending', id, imageId]);
-  receipts_().appendRow([id, now, p.permission, p.portraitPermission, 'website-v1', 'not sent']);
+  receipts_().appendRow([id, now, combinedPermission, combinedPermission, 'website-v2', 'not sent']);
   return { id, name, testimonial, now, imageUrl };
 }
 function studioLink_(id) {
