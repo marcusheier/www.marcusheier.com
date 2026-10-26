@@ -141,12 +141,12 @@ dialog { width: min(94vw,600px); max-height: 90vh; overflow: auto; background: #
 dialog::backdrop { background: #0009; } #manual-form { display: grid; gap: 16px; }
 .studio-layout { min-height: auto; } .studio-controls { min-width: 0; } .studio-preview-frame { min-height: 0; }
 .color-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
-.color-row--eight { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .45rem; }
+.color-row--eight, .color-row--twelve { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .45rem; }
 .color-row label { color: #cfc9d8; font: .78rem var(--font-sans); }
 .color-row input { display: block; width: 100%; height: 42px; margin-top: .35rem; padding: 0; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: transparent; cursor: pointer; }
 .studio-select { width: 100%; margin: .35rem 0 .9rem; padding: .65rem .7rem; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: #302637; color: #f6eff7; font: .82rem var(--font-sans); }
 @media(max-width:1100px) { .editor-columns { grid-template-columns: 1fr; } }
-@media(max-width:700px) { h1 { font-size: 29px; } .workspace-header { align-items: start; flex-direction: column; padding: 22px 18px; } .workspace-tabs { padding: 14px 18px; } .workspace-tabs button { padding: 9px 11px; } .review-workspace { grid-template-columns: minmax(0,1fr); padding: 10px 18px 32px; } .review-library { border-right: 0; border-bottom: 1px solid #433649; padding: 0 0 18px; } #review-list { grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); } .website-preview { padding: 15px; } .editor-toolbar button { padding: 9px; } .studio-layout { display: block; } .studio-preview-area { padding: 16px; min-height: auto; } .studio-preview-frame { padding: 12px; } .color-row--eight { grid-template-columns: repeat(4, minmax(48px, 1fr)); } }
+@media(max-width:700px) { h1 { font-size: 29px; } .workspace-header { align-items: start; flex-direction: column; padding: 22px 18px; } .workspace-tabs { padding: 14px 18px; } .workspace-tabs button { padding: 9px 11px; } .review-workspace { grid-template-columns: minmax(0,1fr); padding: 10px 18px 32px; } .review-library { border-right: 0; border-bottom: 1px solid #433649; padding: 0 0 18px; } #review-list { grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); } .website-preview { padding: 15px; } .editor-toolbar button { padding: 9px; } .studio-layout { display: block; } .studio-preview-area { padding: 16px; min-height: auto; } .studio-preview-frame { padding: 12px; } .color-row--eight, .color-row--twelve { grid-template-columns: repeat(4, minmax(48px, 1fr)); } }
 
 </style>
 </head><body class="testimonial-studio-page"><div class="studio-shell">
@@ -212,15 +212,19 @@ dialog::backdrop { background: #0009; } #manual-form { display: grid; gap: 16px;
                         <option value="aurora">Aurora wash</option>
                         <option value="classic">Classic gradient</option>
                     </select>
-                    <div class="color-row color-row--eight">
+                    <div class="color-row color-row--twelve">
                         <label>Stop 1 <input id="color-one" type="color" value="#28496b"></label>
-                        <label>Stop 2 <input id="color-two" type="color" value="#75dbe8"></label>
-                        <label>Stop 3 <input id="color-three" type="color" value="#f5f2ff"></label>
-                        <label>Stop 4 <input id="color-four" type="color" value="#f255cf"></label>
-                        <label>Stop 5 <input id="color-five" type="color" value="#4979bd"></label>
-                        <label>Stop 6 <input id="color-six" type="color" value="#4c7eb8"></label>
-                        <label>Stop 7 <input id="color-seven" type="color" value="#7bd6d5"></label>
-                        <label>Stop 8 <input id="color-eight" type="color" value="#263b63"></label>
+                        <label>Stop 2 <input id="color-two" type="color" value="#4f86c6"></label>
+                        <label>Stop 3 <input id="color-three" type="color" value="#75dbe8"></label>
+                        <label>Stop 4 <input id="color-four" type="color" value="#b8f2ef"></label>
+                        <label>Stop 5 <input id="color-five" type="color" value="#f5f2ff"></label>
+                        <label>Stop 6 <input id="color-six" type="color" value="#c8a9ff"></label>
+                        <label>Stop 7 <input id="color-seven" type="color" value="#f255cf"></label>
+                        <label>Stop 8 <input id="color-eight" type="color" value="#ff8bd8"></label>
+                        <label>Stop 9 <input id="color-nine" type="color" value="#f7b1d9"></label>
+                        <label>Stop 10 <input id="color-ten" type="color" value="#4979bd"></label>
+                        <label>Stop 11 <input id="color-eleven" type="color" value="#7bd6d5"></label>
+                        <label>Stop 12 <input id="color-twelve" type="color" value="#263b63"></label>
                     </div>
                     <label class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
                     <input id="gradient-angle" type="range" min="0" max="360" value="135">
@@ -317,10 +321,10 @@ dialog::backdrop { background: #0009; } #manual-form { display: grid; gap: 16px;
 })();
 
 const prismPalettes = [
-    ["#28496b", "#75dbe8", "#f5f2ff", "#f255cf", "#4979bd", "#4c7eb8", "#7bd6d5", "#263b63"],
-    ["#1f304f", "#56d7cf", "#fff5df", "#ff7dbb", "#6958d9", "#557dc4", "#8fe5d2", "#202e4c"],
-    ["#25344d", "#8ce7f2", "#e5d8ff", "#e95fca", "#3c6db2", "#5969c9", "#82d5c5", "#263a64"],
-    ["#263d5d", "#72c9ed", "#fff1f4", "#e76cff", "#4e8d9e", "#6c82d8", "#89d5b1", "#263b63"]
+    ["#28496b", "#4f86c6", "#75dbe8", "#b8f2ef", "#f5f2ff", "#c8a9ff", "#f255cf", "#ff8bd8", "#f7b1d9", "#4979bd", "#7bd6d5", "#263b63"],
+    ["#1f304f", "#3d6fd1", "#56d7cf", "#a5f2e8", "#fff5df", "#cbbcff", "#ff7dbb", "#ff9fda", "#6958d9", "#557dc4", "#8fe5d2", "#202e4c"],
+    ["#25344d", "#4a79db", "#8ce7f2", "#d2f6ff", "#e5d8ff", "#bfa8ff", "#e95fca", "#ff9be1", "#3c6db2", "#5969c9", "#82d5c5", "#263a64"],
+    ["#263d5d", "#5688e8", "#72c9ed", "#c8f7ff", "#fff1f4", "#ddb5ff", "#e76cff", "#ffb0ed", "#4e8d9e", "#6c82d8", "#89d5b1", "#263b63"]
 ];
 const studioSettings = { width: 1080, height: 1350, angle: 135, backgroundMode: "prism", colors: [...prismPalettes[0]], softness: 72, glow: 100, textSize: 24, padding: 54 };
 
@@ -359,9 +363,11 @@ function previewBackground() {
     const softness = Math.round(25 + studioSettings.softness * .12);
     const spread = `${softness}%`;
     const positions = studioSettings.backgroundMode === "aurora"
-        ? [["12%", "10%"], ["30%", "30%"], ["54%", "12%"], ["78%", "18%"], ["38%", "55%"], ["66%", "62%"], ["82%", "88%"]]
-        : [["50%", "-8%"], ["22%", "18%"], ["42%", "38%"], ["56%", "56%"], ["75%", "36%"], ["28%", "78%"], ["76%", "88%"]];
-    return colors.slice(1).map((color, index) => `radial-gradient(circle at ${positions[index][0]} ${positions[index][1]}, ${colorWithAlpha(color, (.48 + (index % 3) * .12) * alpha)} 0%, ${colorWithAlpha(color, .04 * alpha)} ${spread}, transparent ${Math.min(100, softness + 28)}%)`).concat(`linear-gradient(${studioSettings.angle}deg, ${base}, ${edge})`).join(", ");
+        ? [["8%", "8%"], ["18%", "24%"], ["30%", "42%"], ["42%", "18%"], ["54%", "58%"], ["66%", "30%"], ["78%", "70%"], ["90%", "46%"], ["34%", "82%"], ["58%", "88%"], ["76%", "12%"], ["92%", "86%"]]
+        : [["50%", "-8%"], ["18%", "14%"], ["34%", "34%"], ["48%", "54%"], ["62%", "26%"], ["76%", "46%"], ["88%", "68%"], ["24%", "78%"], ["42%", "92%"], ["64%", "82%"], ["80%", "30%"], ["94%", "8%"]];
+    const prismLine = `linear-gradient(${studioSettings.angle}deg, ${colors.map((color, index) => `${colorWithAlpha(color, .38 * alpha)} ${Math.round(index / (colors.length - 1) * 100)}%`).join(", ")})`;
+    const glows = colors.map((color, index) => `radial-gradient(ellipse at ${positions[index][0]} ${positions[index][1]}, ${colorWithAlpha(color, (.46 + (index % 3) * .1) * alpha)} 0%, ${colorWithAlpha(color, .04 * alpha)} ${spread}, transparent ${Math.min(100, softness + 28)}%)`);
+    return [prismLine, ...glows, `linear-gradient(${studioSettings.angle}deg, ${base}, ${edge})`].join(", ");
 }
 
 function bindRange(id, key) {
@@ -434,11 +440,29 @@ function drawBackground(ctx, width, height) {
         ctx.fillStyle = gradient; ctx.fillRect(0, 0, width, height); return;
     }
     ctx.fillStyle = base; ctx.fillRect(0, 0, width, height);
+    const intensity = studioSettings.glow / 100;
+    if (studioSettings.backgroundMode === "prism") {
+        ctx.save();
+        ctx.globalCompositeOperation = "screen";
+        ctx.filter = `blur(${Math.max(8, studioSettings.softness / 3)}px)`;
+        for (let band = 0; band < 5; band += 1) {
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            colors.forEach((color, index) => gradient.addColorStop(index / (colors.length - 1), colorWithAlpha(color, .7 * intensity)));
+            ctx.fillStyle = gradient;
+            ctx.globalAlpha = .42;
+            ctx.translate(width * (.16 + band * .17), height * .5);
+            ctx.rotate((studioSettings.angle - 90) * Math.PI / 180);
+            ctx.fillRect(-width * .045, -height, width * .09, height * 2);
+            ctx.rotate(-(studioSettings.angle - 90) * Math.PI / 180);
+            ctx.translate(-width * (.16 + band * .17), -height * .5);
+        }
+        ctx.restore();
+    }
     const aurora = studioSettings.backgroundMode === "aurora";
     const positions = aurora
-        ? [[.12, .10], [.30, .30], [.54, .12], [.78, .18], [.38, .55], [.66, .62], [.82, .88]]
-        : [[.50, -.08], [.22, .18], [.42, .38], [.56, .56], [.75, .36], [.28, .78], [.76, .88]];
-    const points = colors.slice(1).map((color, index) => [positions[index][0], positions[index][1], color]);
+        ? [[.08, .08], [.18, .24], [.30, .42], [.42, .18], [.54, .58], [.66, .30], [.78, .70], [.90, .46], [.34, .82], [.58, .88], [.76, .12], [.92, .86]]
+        : [[.50, -.08], [.18, .14], [.34, .34], [.48, .54], [.62, .26], [.76, .46], [.88, .68], [.24, .78], [.42, .92], [.64, .82], [.80, .30], [.94, .08]];
+    const points = colors.map((color, index) => [positions[index][0], positions[index][1], color]);
     const radius = (0.28 + studioSettings.softness / 260) * Math.max(width, height);
     const intensity = studioSettings.glow / 100;
     ctx.globalCompositeOperation = "screen";
@@ -600,7 +624,7 @@ renderStudio();
     for (const r of filtered) {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'review-row'; b.setAttribute('aria-pressed', String(active?.id === r.id));
       const title = document.createElement('strong'), excerpt = document.createElement('span'), meta = document.createElement('small');
-      title.textContent = r.displayName || r.name; excerpt.textContent = (r.excerpt || r.testimonial).slice(0,100); meta.textContent = (r.permission ? '● Permission recorded' : '● Permission missing') + ' · ' + (r.category || 'Uncategorized'); meta.className = r.permission ? 'permission-meta is-granted' : 'permission-meta is-missing';
+      title.textContent = r.displayName || r.name; excerpt.textContent = (r.excerpt || r.testimonial).slice(0,100); meta.textContent = (r.category || 'Uncategorized') + ' · ' + (r.date ? new Date(r.date).getFullYear() : '');
       b.append(title,excerpt,meta); b.onclick = () => { if (!busy && canLeave()) openReview(r.id); }; list.append(b);
     }
     if (!filtered.length) { const p = document.createElement('p'); p.textContent = 'No testimonials in this view.'; list.append(p); }
