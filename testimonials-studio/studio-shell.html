@@ -4,7 +4,7 @@
 </head><body class="testimonial-studio-page"><div class="studio-shell">
 <header class="workspace-header"><div><p class="eyebrow">MARCUS HEIER · PRIVATE WORKSPACE</p><h1>Testimonial Studio</h1></div><div><button id="refresh">Reload</button> <button id="manual-entry">Add testimonial</button></div></header>
 <p id="demo-notice" class="demo-notice" hidden>Local demonstration · fictional examples · changes stay in this browser session · no Google requests or emails</p>
-<nav class="workspace-tabs" aria-label="Studio views"><button data-view="pending" aria-pressed="true">Pending</button><button data-view="published" aria-pressed="false">Published</button><button data-view="hidden" aria-pressed="false">Hidden</button><button data-view="carousel" aria-pressed="false">Carousel</button><button data-view="graphics" aria-pressed="false">Social graphics</button></nav>
+<nav class="workspace-tabs" aria-label="Studio views"><button data-view="reviews" aria-pressed="true">All testimonials</button><button data-view="graphics" aria-pressed="false">Social graphics</button></nav>
 <p id="workspace-status" role="status" aria-live="polite"></p>
 <main>
 <section id="reviews-panel" class="review-workspace">
@@ -20,13 +20,13 @@
 <label>Carousel order<input id="display-order" type="number" min="0" max="100000" step="1" value="0" required></label><small>Lower numbers appear first. Equal values use a stable record-ID order.</small>
 <label class="workspace-check"><input id="show-portrait" type="checkbox"> Display original portrait</label>
 <p id="permission-status"></p>
-<details><summary>Permission for an existing testimonial</summary><p>Record permission you have already received; these controls do not obtain permission from the client.</p><label class="workspace-check"><input id="verified-permission" type="checkbox"> I have documented permission for text and name</label><label class="workspace-check"><input id="verified-portrait" type="checkbox"> I have documented portrait permission</label><label>Permission source / date<textarea id="permission-note" rows="2" maxlength="1000"></textarea></label></details>
+<details><summary>Permission for an existing testimonial</summary><p>Record permission you have already received; these controls do not obtain permission from the client.</p><label class="workspace-check"><input id="verified-permission" type="checkbox"> I have documented permission to publish the text, name, and portrait</label><label>Permission source / date<textarea id="permission-note" rows="2" maxlength="1000"></textarea></label></details>
 <div class="moderation-actions"><button type="submit" id="save-settings">Save settings</button><button type="button" id="publish">Publish</button><button type="button" id="hide-review">Hide</button></div>
 </form></div>
 <details class="original-submission"><summary>Original submission</summary><p id="original-name"></p><p id="original-date"></p><p id="original-text"></p><a id="original-image" target="_blank" rel="noopener" hidden>Open original portrait in Drive</a><p><a id="original-sheet" target="_blank" rel="noopener">Open original Google Sheet</a></p><small id="original-id"></small></details>
 </div><p id="choose-review">Choose a testimonial to preview and moderate it.</p>
 </section>
-<section id="carousel-panel" hidden><h2>Website carousel</h2><p>Published, permitted and selected reviews, in display order. Use the arrows or swipe to loop.</p><div id="carousel-preview"></div></section>
+
         <section id="graphics-panel" class="studio-layout" hidden>
             <section class="studio-preview-area" aria-label="Testimonial preview">
                 <div class="studio-preview-frame" id="preview-frame">
@@ -57,25 +57,16 @@
                 </div>
 
                 <div class="control-group">
-                    <div class="control-heading"><p class="control-label">Background</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle variation</button></div>
+                    <div class="control-heading"><p class="control-label">Background</p><button type="button" class="shuffle-button" id="shuffle-gradient">↻ Shuffle colors</button></div>
                     <label class="range-label" for="background-style">Style</label>
                     <select id="background-style" class="studio-select">
-                        <option value="prism">Prism glow</option>
-                        <option value="aurora">Aurora wash</option>
-                        <option value="classic">Classic gradient</option>
+                        <option value="reference">Original reference</option><option value="prism">Editable prism lights</option>
+                        
+                        
                     </select>
-                    <div class="color-row color-row--eight">
-                        <label>Stop 1 <input id="color-one" type="color" value="#28496b"></label>
-                        <label>Stop 2 <input id="color-two" type="color" value="#75dbe8"></label>
-                        <label>Stop 3 <input id="color-three" type="color" value="#f5f2ff"></label>
-                        <label>Stop 4 <input id="color-four" type="color" value="#f255cf"></label>
-                        <label>Stop 5 <input id="color-five" type="color" value="#4979bd"></label>
-                        <label>Stop 6 <input id="color-six" type="color" value="#4c7eb8"></label>
-                        <label>Stop 7 <input id="color-seven" type="color" value="#7bd6d5"></label>
-                        <label>Stop 8 <input id="color-eight" type="color" value="#263b63"></label>
-                    </div>
-                    <label class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
-                    <input id="gradient-angle" type="range" min="0" max="360" value="135">
+                    <p class="studio-hint">Original reference reproduces your supplied image. Edit or shuffle the colors to create a prism variation.</p><div class="color-row prism-stops" aria-label="Prism color stops"><label title="Stop 1"><span class="sr-only">Stop 1</span><input id="color-one" type="color" value="#436c9c" aria-label="Prism color stop 1"></label><label title="Stop 2"><span class="sr-only">Stop 2</span><input id="color-two" type="color" value="#72cadc" aria-label="Prism color stop 2"></label><label title="Stop 3"><span class="sr-only">Stop 3</span><input id="color-three" type="color" value="#b8ece3" aria-label="Prism color stop 3"></label><label title="Stop 4"><span class="sr-only">Stop 4</span><input id="color-four" type="color" value="#f0eed6" aria-label="Prism color stop 4"></label><label title="Stop 5"><span class="sr-only">Stop 5</span><input id="color-five" type="color" value="#ffc6b0" aria-label="Prism color stop 5"></label><label title="Stop 6"><span class="sr-only">Stop 6</span><input id="color-six" type="color" value="#f58cb8" aria-label="Prism color stop 6"></label><label title="Stop 7"><span class="sr-only">Stop 7</span><input id="color-seven" type="color" value="#cb8ee0" aria-label="Prism color stop 7"></label><label title="Stop 8"><span class="sr-only">Stop 8</span><input id="color-eight" type="color" value="#929ee4" aria-label="Prism color stop 8"></label><label title="Stop 9"><span class="sr-only">Stop 9</span><input id="color-nine" type="color" value="#79b4e0" aria-label="Prism color stop 9"></label><label title="Stop 10"><span class="sr-only">Stop 10</span><input id="color-ten" type="color" value="#a7dfdc" aria-label="Prism color stop 10"></label><label title="Stop 11"><span class="sr-only">Stop 11</span><input id="color-eleven" type="color" value="#e7dafa" aria-label="Prism color stop 11"></label><label title="Stop 12"><span class="sr-only">Stop 12</span><input id="color-twelve" type="color" value="#797bb9" aria-label="Prism color stop 12"></label></div>
+                    <label hidden class="range-label" for="gradient-angle">Angle <output id="gradient-angle-value">135°</output></label>
+                    <input hidden id="gradient-angle" type="range" min="0" max="360" value="135">
                     <label class="range-label" for="background-softness">Softness <output id="background-softness-value">72</output></label>
                     <input id="background-softness" type="range" min="20" max="140" value="72">
                     <label class="range-label" for="background-glow">Glow intensity <output id="background-glow-value">100%</output></label>

@@ -1,8 +1,8 @@
 (function () {
   'use strict';
   const $ = id => document.getElementById(id);
-  const fields = ['display-name','excerpt','category','selected','display-order','show-portrait','verified-permission','verified-portrait','permission-note'];
-  let reviews = [], active = null, view = 'pending', sheetUrl = '', portrait = '', busy = false, dirty = false, loadVersion = 0;
+  const fields = ['display-name','excerpt','category','selected','display-order','show-portrait','verified-permission','permission-note'];
+  let reviews = [], active = null, view = 'reviews', sheetUrl = '', portrait = '', busy = false, dirty = false, loadVersion = 0, permissionChanged = false;
   window.studioRpc = window.studioRpc || ((action, payload = {}) => new Promise((resolve,reject) => {
     if (!window.google?.script?.run) { reject(new Error('Open the protected Google Studio URL.')); return; }
     google.script.run.withSuccessHandler(resolve).withFailureHandler(e => reject(new Error(e.message || 'Google request failed'))).studioApi({ action, payload });
@@ -12,7 +12,7 @@
     return { id: active.id, revision: active.revision, state: active.state,
       displayName: $('display-name').value, excerpt: $('excerpt').value, category: $('category').value,
       selected: $('selected').checked, order: Number($('display-order').value), showPortrait: $('show-portrait').checked,
-      verifiedPermission: $('verified-permission').checked, verifiedPortraitPermission: $('verified-portrait').checked, permissionNote: $('permission-note').value };
+      verifiedPermission: permissionChanged ? $('verified-permission').checked : !!active.verifiedPermission, verifiedPortraitPermission: permissionChanged ? $('verified-permission').checked : !!active.verifiedPortraitPermission, permissionNote: $('permission-note').value };
   }
   function paintPreview() {
     if (!active) return;
@@ -23,14 +23,16 @@
   async function openReview(id) {
     const r = reviews.find(x => x.id === id); if (!r) { message('This testimonial was not found. It has not been published.'); return; }
     const version = ++loadVersion;
-    active = r; portrait = ''; dirty = false;
+    active = r; portrait = ''; dirty = false; permissionChanged = false;
     $('review-editor').hidden = false; $('choose-review').hidden = true;
     $('editor-title').textContent = r.displayName || r.name;
     $('display-name').value = r.displayName || r.name; $('excerpt').value = r.excerpt || ''; $('category').value = r.category || '';
     $('selected').checked = !!r.selected; $('display-order').value = r.order || 0; $('show-portrait').checked = !!r.showPortrait;
     $('show-portrait').disabled = !r.imageId;
-    $('verified-permission').checked = !!r.verifiedPermission; $('verified-portrait').checked = !!r.verifiedPortraitPermission; $('permission-note').value = r.permissionNote || '';
-    $('permission-status').textContent = `Text permission: ${r.permission ? 'recorded' : 'not recorded'} · Portrait: ${r.portraitPermission ? 'recorded' : 'not recorded'} · ${r.state}`;
+    $('verified-permission').checked = !!r.verifiedPermission && !!r.verifiedPortraitPermission; $('permission-note').value = r.permissionNote || '';
+    const permitted = r.permission && (!r.imageId || r.portraitPermission);
+    $('permission-status').textContent = permitted ? '● Publication permission recorded' : '● Publication permission not fully recorded';
+    $('permission-status').className = permitted ? 'permission-granted' : 'permission-missing';
     $('original-name').textContent = r.name; $('original-text').textContent = r.testimonial; $('original-date').textContent = r.date; $('original-id').textContent = 'Record ID: ' + r.id;
     $('original-image').hidden = !r.imageUrl; $('original-image').removeAttribute('href');
     if (/^https:\/\drive\.google\.com\//.test(r.imageUrl || '')) $('original-image').href = r.imageUrl;
@@ -42,40 +44,32 @@
     }
   }
   function renderList() {
-    const list = $('review-list'); list.replaceChildren(); const filtered = reviews.filter(r => r.state === view);
-    $('review-count').textContent = `${filtered.length} ${view}`;
+    const list = $('review-list'); list.replaceChildren(); const filtered = reviews;
+    $('review-count').textContent = `${filtered.length} testimonials`;
     for (const r of filtered) {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'review-row'; b.setAttribute('aria-pressed', String(active?.id === r.id));
       const title = document.createElement('strong'), excerpt = document.createElement('span'), meta = document.createElement('small');
       title.textContent = r.displayName || r.name; excerpt.textContent = (r.excerpt || r.testimonial).slice(0,100); meta.textContent = [r.category || 'Uncategorized', r.selected ? 'Carousel selected' : 'Not selected', 'Order ' + r.order].join(' · ');
       b.append(title,excerpt,meta); b.onclick = () => { if (!busy && canLeave()) openReview(r.id); }; list.append(b);
     }
-    if (!filtered.length) { const p = document.createElement('p'); p.textContent = 'No testimonials in this view.'; list.append(p); }
+    if (!filtered.length) { const p = document.createElement('p'); p.textContent = 'No testimonials yet.'; list.append(p); }
   }
   async function showView(next, guard = true) {
     if (busy || (guard && !canLeave())) return;
     view = next;
     document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed',String(b.dataset.view === view)));
-    $('reviews-panel').hidden = !['pending','published','hidden'].includes(view); $('carousel-panel').hidden = view !== 'carousel'; $('graphics-panel').hidden = view !== 'graphics';
-    if (view === 'carousel') {
-      const selected = TestimonialCarousel.eligible(reviews); const display = [];
-      for (const r of selected) {
-        let img = '';
-        if (r.imageId && r.showPortrait && r.portraitPermission) { try { img = (await studioRpc('portrait',{id:r.id})).portrait; } catch (e) { message(e.message); } }
-        display.push({...r, portrait:img});
-      }
-      TestimonialCarousel.mount($('carousel-preview'),display);
-    } else if (view === 'graphics') {
+    $('reviews-panel').hidden = view !== 'reviews'; $('graphics-panel').hidden = view !== 'graphics';
+    if (view === 'graphics') {
       if (active) applyStudioGraphic({...active,...values()}, $('show-portrait').checked ? portrait : '');
       requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
     } else {
-      renderList(); const r = reviews.find(r => r.state === view);
-      if (!active || active.state !== view) { $('review-editor').hidden = true; $('choose-review').hidden = false; if (r) await openReview(r.id); }
+      renderList(); const r = reviews[0];
+      if (!active) { $('review-editor').hidden = true; $('choose-review').hidden = false; if (r) await openReview(r.id); }
     }
   }
   async function reload(id) {
     const result = await studioRpc('list'); reviews = result.reviews; sheetUrl = result.sheetUrl || '';
-    if (id) { const found = reviews.find(r => r.id === id); if (found) { view = found.state; await showView(view,false); await openReview(id); } else message('This review was not found.'); }
+    if (id) { const found = reviews.find(r => r.id === id); if (found) { view = 'reviews'; await showView(view,false); await openReview(id); } else message('This review was not found.'); }
     else await showView(view,false);
   }
   async function save(state) {
@@ -86,7 +80,7 @@
     catch(e) { message(e.message); }
     finally { busy = false; document.querySelectorAll('.moderation-actions button').forEach(b => b.disabled = false); }
   }
-  fields.forEach(id => $(id).addEventListener('input', () => { dirty = true; paintPreview(); }));
+  fields.forEach(id => $(id).addEventListener('input', () => { dirty = true; if (id === 'verified-permission') permissionChanged = true; paintPreview(); }));
   document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => showView(b.dataset.view));
   $('settings-form').onsubmit = e => { e.preventDefault(); save(); }; $('publish').onclick = () => save('published'); $('hide-review').onclick = () => save('hidden');
   $('refresh').onclick = () => { if (!busy && canLeave()) { dirty = false; active = null; reload().catch(e => message(e.message)); } };
