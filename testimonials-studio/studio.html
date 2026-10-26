@@ -464,7 +464,6 @@ function drawBackground(ctx, width, height) {
         : [[.50, -.08], [.18, .14], [.34, .34], [.48, .54], [.62, .26], [.76, .46], [.88, .68], [.24, .78], [.42, .92], [.64, .82], [.80, .30], [.94, .08]];
     const points = colors.map((color, index) => [positions[index][0], positions[index][1], color]);
     const radius = (0.28 + studioSettings.softness / 260) * Math.max(width, height);
-    const intensity = studioSettings.glow / 100;
     ctx.globalCompositeOperation = "screen";
     points.forEach(([x, y, color]) => {
         const gradient = ctx.createRadialGradient(x * width, y * height, 0, x * width, y * height, radius);
