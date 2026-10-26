@@ -101,7 +101,8 @@ testimonialForm?.addEventListener("submit", async (event) => {
     try {
         const image = imageInput.files?.[0];
         const imageData = image ? await prepareImage(image) : "";
-        const payload = { action: "submit", permission: document.querySelector("#publication-permission").checked, portraitPermission: document.querySelector("#portrait-permission").checked, name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
+        const permission = document.querySelector("#publication-permission").checked;
+        const payload = { action: "submit", permission, portraitPermission: permission, name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
         if (!response.ok) throw new Error("Submission failed");
         const result = await response.json();
