@@ -93,7 +93,7 @@
         schedulerButtonIsLoading = true;
         loadSchedulerStyles();
         loadSchedulerScript(function () {
-            var buttonColor = getComputedStyle(document.documentElement).getPropertyValue('--color-google-button').trim();
+            var buttonColor = getComputedStyle(document.documentElement).getPropertyValue('--color-google-button').trim() || '#414e73';
 
             if (window.calendar && window.calendar.schedulingButton) {
                 window.calendar.schedulingButton.load({

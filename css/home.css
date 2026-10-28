@@ -1,0 +1,1458 @@
+/* Homepage visual system, reused by public pages with the page-home class. */
+.page-home {
+    --color-primary: #293751;
+    --color-secondary: #49546a;
+    --color-accent: #354b59;
+    --color-accent-hover: #263b48;
+    --color-mh-purple4: #586177;
+    --color-bg-main: #d6d9dc;
+    --color-bg-soft: #e7e5df;
+    --color-text-light: #f1efea;
+    --radius-card: 22px;
+    --radius-small: 999px;
+    --gradient-button: linear-gradient(120deg, #354b59, #555570);
+    --gradient-button-hover: linear-gradient(120deg, #293e4b, #45455f);
+    --color-button-border: #667583;
+    --color-button-glow: #34465516;
+    font-weight: 400;
+    color-scheme: light;
+}
+
+.page-home h1,
+.page-home h2 {
+    font-weight: 500;
+    letter-spacing: -.035em;
+}
+
+.page-home h2 {
+    font-size: clamp(2.3rem, 4vw, 3.5rem);
+}
+
+.page-home p:not(.eyebrow, .hero-name) {
+    line-height: 1.7;
+}
+
+.page-home :is(a, button, input):focus-visible {
+    outline: 3px solid #996344;
+    outline-offset: 5px;
+}
+
+.skip-link {
+    position: fixed;
+    top: -100px;
+    left: 1rem;
+    z-index: 2000;
+    padding: .65rem 1rem;
+    background: #f1efea;
+    color: #273a45;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+.page-home #main-content {
+    scroll-margin-top: 100px;
+}
+
+.event-banner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: .4rem 2.5rem;
+    padding: .75rem 1.5rem;
+    background: linear-gradient(100deg, #bfcccf, #cec3d3 48%, #dbccc1);
+    color: #2d3b47;
+    font: 400 .8rem/1.6 Arial, sans-serif;
+}
+
+.event-banner-label {
+    text-transform: uppercase;
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+}
+
+.event-demo {
+    font-size: .72rem;
+}
+
+.page-home .event-banner {
+    text-decoration: none;
+}
+
+.page-home .event-banner:hover time {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.page-home .site-header {
+    color: #273a45;
+    border-bottom: 1px solid #45566526;
+    backdrop-filter: blur(18px);
+}
+
+.page-home .site-nav {
+    min-height: 92px;
+}
+
+.page-home .brand-logo {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(11%) saturate(1146%) hue-rotate(154deg);
+}
+
+.page-home .nav-menu {
+    gap: 1.6rem;
+}
+
+.page-home .nav-menu a {
+    color: #344650;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+}
+
+.page-home .nav-menu a:hover {
+    color: #1d2c37;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.page-home .nav-menu a[aria-current] {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.page-home .nav-menu a[href="8week.html"] {
+    padding: .5rem 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.page-home .nav-menu .nav-cta {
+    padding: .8rem 1.2rem;
+    border: 1px solid #627482;
+    background: transparent;
+    box-shadow: none;
+    color: #273a45;
+    border-radius: 999px;
+}
+
+.page-home .nav-menu .nav-cta:hover {
+    background: #eef0ed;
+}
+
+.page-home .nav-toggle {
+    border-color: #627482;
+}
+
+.page-home .nav-toggle span {
+    background: #344650;
+}
+
+.page-home .hero-section {
+    position: relative;
+    isolation: isolate;
+    width: min(100%, 1500px);
+    margin: auto;
+    grid-template-columns: 1fr 1.05fr;
+    min-height: 690px;
+}
+
+.page-home .hero-media {
+    background: transparent;
+    min-height: 690px;
+    mask-image: linear-gradient(to right, #000 80%, transparent 100%);
+}
+
+.page-home .hero-media img {
+    object-position: 50% 32%;
+    filter: none;
+    mask-image: linear-gradient(to bottom, #000 86%, transparent 100%);
+}
+
+.page-home .hero-media::after {
+    background: none;
+}
+
+.page-home .hero-content {
+    padding: 4rem 3.5rem 4rem 1rem;
+}
+
+.page-home .hero-name {
+    margin: 0 0 1.2rem;
+    color: #3a4c59;
+    font-size: .85rem;
+    letter-spacing: .23em;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+.page-home .hero-content .eyebrow {
+    margin: 0 0 1.5rem;
+    font-size: .65rem;
+}
+
+.page-home h1 {
+    max-width: 13ch;
+    font-size: clamp(3.2rem, 4.8vw, 5rem);
+    line-height: 1.02;
+}
+
+.page-home .hero-content>p:not(.eyebrow, .hero-name) {
+    max-width: 40ch;
+    font-size: 1.25rem;
+}
+
+.page-home .cta-row {
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.page-home .home-button {
+    background: var(--gradient-button);
+    color: #f5f2ec;
+    border-radius: 999px;
+    gap: 1.3rem;
+    letter-spacing: .02em;
+    text-transform: none;
+    font-size: .8rem;
+    box-shadow: none;
+}
+
+.page-home .home-button:hover {
+    background: var(--gradient-button-hover);
+}
+
+.page-home .hero-content .text-link {
+    font: 400 .85rem Arial, sans-serif;
+    text-underline-offset: 5px;
+}
+
+.page-home .section--light {
+    padding-block: 5rem 6rem;
+    background: transparent;
+}
+
+.page-home .section-inner--narrow {
+    max-width: 850px;
+}
+
+.page-home .section-inner--narrow>p:not(.eyebrow) {
+    max-width: 53ch;
+    margin-top: 1.5rem;
+}
+
+.page-home .calendar-button-wrap a {
+    border-radius: 999px !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+    letter-spacing: .03em !important;
+}
+
+.page-home .section--split {
+    width: min(calc(100% - 3rem), 1180px);
+    padding: clamp(2rem, 5vw, 4.5rem);
+    border-radius: 24px;
+    gap: 3rem;
+}
+
+.page-home .text-panel {
+    padding: 0 0 0 2rem;
+    border-color: #6b758b44;
+}
+
+.page-home .section--testimonials {
+    position: relative;
+    margin-top: 3rem;
+}
+
+.page-home .testimonial-carousel {
+    max-width: 920px;
+    margin-top: 2.5rem;
+}
+
+.page-home .testimonial-slide {
+    position: relative;
+    padding: 3.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+    border: 1px solid #f1f0ec8f;
+    border-radius: 22px;
+    background: #f3f1ee40;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 45px #39445308;
+    color: #273a45;
+    text-align: left;
+}
+
+.page-home .testimonial-slide::before {
+    content: '“';
+    display: block;
+    font: 4rem/.8 Georgia, serif;
+    color: #596b81;
+}
+
+.page-home .testimonial-slide blockquote {
+    font: 400 clamp(1.4rem, 2.5vw, 1.9rem)/1.55 var(--font-serif);
+}
+
+.page-home .testimonial-slide p {
+    color: #384a56;
+}
+
+.page-home .testimonial-client {
+    font: 600 .75rem Arial, sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.page-home .testimonial-category {
+    font: 400 .8rem Arial, sans-serif;
+}
+
+.page-home .testimonial-carousel-controls {
+    font: 400 .8rem Arial, sans-serif;
+}
+
+.page-home .testimonial-carousel-controls button {
+    background: #ecebea55;
+    border-color: #697c8a;
+    color: #344650;
+}
+
+.page-home .testimonial-carousel-controls button:hover {
+    background: #efedea;
+}
+
+.page-home .about-preview-media {
+    background: transparent;
+    min-height: 580px;
+    mask-image: linear-gradient(to right, #000 60%, transparent);
+}
+
+.page-home .about-preview-media img {
+    filter: none;
+}
+
+.page-home .link-grid {
+    max-width: 850px;
+    margin-inline: auto;
+    margin-top: 2.5rem;
+}
+
+.page-home .link-grid a {
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    min-height: 90px;
+    background: #f3f1ee40;
+    border: 1px solid #7189a3;
+    border-radius: 18px;
+    box-shadow: none;
+    color: #273a45;
+    font-weight: 500;
+}
+
+.page-home .link-grid a::after {
+    content: '↗';
+    font-size: 1.4rem;
+}
+
+.page-home .link-grid a:hover {
+    background: #f3f1ee80;
+    box-shadow: none;
+}
+
+.page-home .site-footer {
+    padding-block: 5rem 2rem;
+}
+
+.page-home .footer-newsletter {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    align-items: center;
+    gap: 4rem;
+    padding-bottom: 4rem;
+}
+
+.newsletter-art {
+    position: relative;
+    isolation: isolate;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: linear-gradient(125deg, #a1b9df, #b8addb, #d1b0cb);
+}
+
+.newsletter-art img {
+    position: absolute;
+    height: 100%;
+    width: 65%;
+    right: 0;
+    object-fit: cover;
+    object-position: 50% 20%;
+    filter: none;
+    mask-image: linear-gradient(to left, #000, transparent 100%);
+}
+
+.newsletter-art figcaption {
+    position: relative;
+    padding: 2rem;
+    color: #253945;
+}
+
+.newsletter-art span {
+    display: block;
+    font: 600 .6rem Arial, sans-serif;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+}
+
+.newsletter-art strong {
+    display: block;
+    margin-top: 3rem;
+    font: 500 2.6rem/1.05 var(--font-serif);
+    letter-spacing: -.035em;
+}
+
+.page-home .footer-newsletter .row-form {
+    display: block;
+}
+
+.page-home .footer-newsletter .ml-block-form {
+    margin-top: 1.5rem;
+}
+
+.page-home .footer-newsletter input[type="email"] {
+    background: #f2efe90a;
+    border-radius: 8px;
+}
+
+.page-home .footer-newsletter button {
+    border-radius: 999px;
+    background: #e0dce4;
+    color: #293d49;
+}
+
+.page-home .footer-newsletter button:hover {
+    background: #f2efe9;
+}
+
+.page-home #newsletter-note {
+    margin-top: .8rem;
+}
+
+.page-home .footer-content {
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.page-home .footer-brand .footer-logo {
+    border-radius: 0;
+    width: 110px;
+    height: auto;
+}
+
+.page-home .footer-icon-wrap {
+    display: none;
+}
+
+.page-home .footer-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+}
+
+.page-home .footer-links a {
+    font: 400 .8rem/1.5 Arial, sans-serif;
+    text-decoration: none;
+}
+
+.page-home .footer-links a:hover {
+    text-decoration: underline;
+}
+
+.page-home .footer-copyright {
+    max-width: 1020px;
+    margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid #f1efea33;
+    color: #e1e4e4;
+    font: 400 .72rem/1.8 Arial, sans-serif;
+    text-align: center;
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .page-home .nav-menu {
+        gap: .85rem;
+    }
+
+    .page-home .site-nav {
+        gap: 1rem;
+    }
+
+    .page-home .nav-menu a {
+        font-size: .62rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .page-home .hero-section {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-home .hero-content {
+        padding: 3rem 1.5rem 3rem .5rem;
+    }
+
+    .page-home .hero-media {
+        min-height: 610px;
+    }
+
+    .page-home h1 {
+        font-size: 3.4rem;
+    }
+
+    .page-home .section--split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .page-home .text-panel {
+        padding: 0;
+        border: 0;
+    }
+
+    .page-home .footer-newsletter {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .event-banner {
+        gap: .25rem .75rem;
+        text-align: center;
+        font-size: .72rem;
+    }
+
+    .event-banner-label {
+        width: 100%;
+    }
+
+    .page-home .site-nav {
+        min-height: 76px;
+    }
+
+    .page-home .nav-menu {
+        gap: 0;
+        border-color: #62748255;
+    }
+
+    .page-home .nav-menu a {
+        font-size: .78rem;
+    }
+
+    .page-home .hero-section {
+        grid-template-columns: 1fr;
+    }
+
+    .page-home .hero-media {
+        min-height: 400px;
+        height: 400px;
+        mask-image: linear-gradient(to bottom, #000 65%, transparent);
+    }
+
+    .page-home .hero-media img {
+        object-position: center 30%;
+        mask-image: none;
+    }
+
+    .page-home .hero-content {
+        padding: 0 1.5rem 3.5rem;
+        margin-top: -1rem;
+    }
+
+    .page-home h1 {
+        max-width: 15ch;
+        font-size: clamp(2.8rem, 9.5vw, 4rem);
+    }
+
+    .page-home .hero-name {
+        margin-bottom: .8rem;
+    }
+
+    .page-home .hero-content .eyebrow {
+        margin-bottom: 1rem;
+    }
+
+    .page-home .hero-content>p:not(.eyebrow, .hero-name) {
+        font-size: 1.15rem;
+    }
+
+    .page-home .section--light {
+        padding-block: 3rem 4rem;
+    }
+
+    .page-home .section--testimonials {
+        margin-top: 1.5rem;
+    }
+
+    .page-home .about-preview-media {
+        min-height: 390px;
+        mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    }
+
+    .page-home .about-preview-copy {
+        padding-block: 1rem 4rem;
+    }
+
+    .page-home .link-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-home .footer-newsletter {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .newsletter-art {
+        min-height: 250px;
+    }
+
+    .page-home .site-footer {
+        padding-top: 3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .page-home * {
+        transition: none !important;
+    }
+}
+
+/* Local published quote excerpts; Studio integration remains separate. */
+.page-home .home-testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.page-home .home-testimonial-grid .testimonial-slide {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-home .home-testimonial-grid blockquote {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .page-home .home-testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sharper desktop accents; retain the calm base and reserve prism color for interaction. */
+.page-home {
+    --home-prism: linear-gradient(110deg, #83b9ef 0%, #a8a1ed 50%, #e1a0cd 100%);
+    --home-button-sheen: linear-gradient(110deg, #9aafd1 0%, #b0bce0 100%);
+    --home-button-deeper: linear-gradient(110deg, #2a3461 0%, #151a30 100%);
+    --home-footer-blend: #dce1f2;
+}
+
+@media (min-width: 981px) {
+
+    .page-home .section--split {
+        border-color: #74839970;
+    }
+
+    .page-home .section--testimonials {
+        /* Replace this background with Marcus's future artwork. */
+        background: radial-gradient(ellipse at 10% 70%, #7096b680, transparent 55%), radial-gradient(ellipse at 88% 30%, #ae7fba75, transparent 48%), radial-gradient(ellipse at 58% 100%, #d3a09865, transparent 50%), #b3bfce;
+    }
+
+    .page-home .nav-menu a:not(.nav-cta) {
+        position: relative;
+        text-decoration: none;
+    }
+
+    .page-home .nav-menu a:not(.nav-cta)::after {
+        content: '';
+        position: absolute;
+        height: 3px;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        background: var(--home-prism);
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .22s ease;
+    }
+
+    .page-home .nav-menu a:not(.nav-cta):is(:hover, :focus-visible, [aria-current])::after {
+        transform: scaleX(1);
+    }
+
+    .page-home .nav-menu a[href="8week.html"]::after {
+        bottom: 0;
+    }
+
+    .page-home :is(.home-button, .nav-cta, .link-grid a, .footer-newsletter button, .testimonial-carousel-controls button) {
+        transition: background .22s ease, box-shadow .22s ease, transform .22s ease;
+    }
+
+    .page-home :is(.home-button, .nav-menu .nav-cta, .link-grid a, .footer-newsletter button, .testimonial-carousel-controls button):is(:hover, :focus-visible) {
+        background: var(--home-button-sheen);
+        color: #203443;
+        border-color: #8a9eb2;
+        box-shadow: 0 5px 20px #6f89a126;
+        transform: translateY(-2px);
+    }
+
+    .page-home .calendar-button-wrap a:is(:hover, :focus-visible) {
+        background: var(--home-button-sheen) !important;
+        color: #203443 !important;
+        border-color: #8a9eb2 !important;
+        box-shadow: 0 5px 20px #6f89a126 !important;
+    }
+}
+
+/* All slides occupy the same grid row. Its tallest card sets a stable height,
+   including while another pair is visible. No clipping or internal scrolling. */
+.page-home .home-testimonial-grid.is-carousel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1180px;
+    margin-inline: auto;
+    gap: 0 1.5rem;
+}
+
+.page-home .home-testimonial-grid.is-carousel .testimonial-slide {
+    grid-row: 1;
+    border-color: #f7f0edb3;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity .4s ease, transform .4s ease, visibility .4s;
+}
+
+.page-home .home-testimonial-grid.is-carousel .testimonial-slide.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+}
+
+.page-home .home-testimonial-grid.is-carousel blockquote {
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+
+.page-home .home-testimonial-grid.is-carousel .testimonial-carousel-controls {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+.page-home .home-testimonial-grid .testimonial-slide[hidden] {
+    display: none;
+}
+
+.page-home .home-testimonial-grid .testimonial-carousel-controls {
+    margin-top: 1.5rem;
+}
+
+.page-home .home-testimonial-grid .testimonial-carousel-controls[hidden] {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-home .nav-menu a::after {
+        transition: none;
+    }
+
+    .page-home :is(a, button):is(:hover, :focus-visible) {
+        transform: none !important;
+    }
+}
+
+/* A small step deeper into the blue/lilac reference, keeping readable mid-tones. */
+.page-home {
+    --color-bg-main: #e0e4ec;
+    background: #d5dce6;
+}
+
+.page-home .site-shell {
+    background: radial-gradient(ellipse at 90% 15%, #b4c6eb80, transparent 42%), radial-gradient(ellipse at 5% 40%, #cfb8df80, transparent 42%), #e0e4f0;
+}
+
+.page-home .site-header {
+    background: #eff1f5f2;
+    border-bottom-color: #45566533;
+}
+
+.page-home .hero-section {
+    background: radial-gradient(ellipse at 95% 25%, #e2dff0a6, transparent 60%), linear-gradient(120deg, #e7edf9, #f4edf7);
+}
+
+.page-home .section--about-preview {
+    background: #e0e4ec;
+}
+
+.page-home .about-preview-media::after {
+    background: linear-gradient(to top, #e0e4ec, transparent 14%);
+}
+
+.page-home .section--split {
+    background: linear-gradient(115deg, #ebdff29c, #d9ddf39c, #d2e0f59c);
+}
+
+.page-home .section--testimonials {
+    background: radial-gradient(ellipse at 10% 70%, #5677b66b, transparent 55%), radial-gradient(ellipse at 88% 30%, #977ca95e, transparent 48%), #404c70;
+}
+
+.page-home .section--testimonials :is(h2, .eyebrow) {
+    color: #f0edf4;
+}
+
+.page-home .section--testimonials .testimonial-slide {
+    background: #25345159;
+    color: #f2eff5;
+    box-shadow: 0 12px 45px #101b2b14;
+}
+
+.page-home .section--testimonials .home-testimonial-grid.is-carousel .testimonial-slide {
+    border-color: #d5dbe64d;
+}
+
+.page-home .section--testimonials .testimonial-slide p {
+    color: #e0dfe9;
+}
+
+.page-home .section--testimonials .testimonial-slide::before {
+    color: #b3bfd9;
+}
+
+.page-home .section--testimonials .testimonial-carousel-controls button {
+    background: #e0dfed12;
+    border-color: #c2ccdd80;
+    color: #efedf5;
+}
+
+.page-home .section--testimonials .testimonial-carousel-controls button:is(:hover, :focus-visible) {
+    background: var(--home-button-sheen);
+    color: #203443;
+}
+
+.page-home .site-footer {
+    background: #3e4e62;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-home .home-testimonial-grid.is-carousel .testimonial-slide {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* Keep position announcements available to assistive technology without visible numbering. */
+.page-home [data-carousel-count] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Light controls deepen on interaction; dark controls retain the brighter blue sheen. */
+@media (min-width: 981px) {
+    .page-home :is(.nav-menu .nav-cta, .link-grid a, .footer-newsletter button):is(:hover, :focus-visible) {
+        background: var(--home-button-deeper);
+        color: #f5f5f8;
+        border-color: #7189a3;
+    }
+}
+
+/* Inset footer: one framed panel, generous space, and a fine prism rule. */
+.page-home .site-footer {
+    padding: 8rem 0 4rem;
+    background-color: #16203b;
+    background-image: linear-gradient(180deg, var(--home-footer-blend) 0, #dce1f2f5 40px, #dce1f280 150px, #dce1f200 300px), url("../assets/background/prisma1.webp");
+    background-position: center top, center bottom;
+    background-size: 100% 100%, cover;
+    background-repeat: no-repeat;
+}
+
+.page-home .footer-panel {
+    width: min(100%, 1500px);
+    margin: 0 auto;
+    padding: 3.5rem 3.5rem 0;
+    border: 1px solid #dce4f042;
+    border-radius: 32px;
+    overflow: hidden;
+    background: linear-gradient(125deg, #2a3461, #151a30);
+    box-shadow: 0 24px 65px #34445b21, 0 3px 8px #34445b0d;
+}
+
+.page-home .footer-panel .footer-newsletter {
+    width: 100%;
+    gap: 3rem;
+    margin-bottom: 0;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid #dce4f02b;
+}
+
+.page-home .footer-panel .newsletter-art {
+    min-height: 270px;
+    border: 1px solid #f0edf133;
+    border-radius: 18px;
+}
+
+.page-home .footer-panel .footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    padding: 3rem 0;
+}
+
+.page-home .footer-panel .footer-brand {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.page-home .footer-panel .footer-logo {
+    width: 125px;
+}
+
+.page-home .footer-panel .footer-brand p {
+    margin: 1.15rem 0 .6rem;
+    color: #d8dce6;
+    font: 400 .85rem/1.6 Arial, sans-serif;
+}
+
+.page-home .footer-contact {
+    margin-top: 1rem;
+    color: #e5e6ee;
+    font: 400 .85rem/1.6 Arial, sans-serif;
+    text-decoration: none;
+}
+
+.page-home .footer-link-group {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.page-home .footer-link-group h3 {
+    color: #bdc9dc;
+    margin: .15rem 0 .7rem;
+    font: 600 .65rem/1.5 Arial, sans-serif;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.page-home .footer-link-group a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: #eef0f5;
+    font: 400 .85rem/1.6 Arial, sans-serif;
+    text-decoration: none;
+}
+
+.page-home .footer-link-group a span {
+    color: #a7b8d2;
+}
+
+.page-home :is(.footer-link-group a, .footer-contact):hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-color: #b2c9e5;
+}
+
+.page-home .footer-panel .footer-copyright {
+    position: relative;
+    max-width: none;
+    margin: 0 -3.5rem;
+    padding: 1.6rem 3.5rem;
+    border: 0;
+    background: #1726381c;
+    color: #d5dbe5;
+    text-align: left;
+    font-size: .68rem;
+    line-height: 1.8;
+}
+
+.page-home .footer-panel .footer-copyright::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: var(--home-prism);
+    opacity: .8;
+}
+
+@media (max-width: 980px) {
+    .page-home .site-footer {
+        padding-inline: 1.5rem;
+    }
+
+    .page-home .footer-panel {
+        padding: 2rem 2rem 0;
+    }
+
+    .page-home .footer-panel .footer-newsletter {
+        grid-template-columns: 1fr;
+    }
+
+    .page-home .footer-panel .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .page-home .footer-panel .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .page-home .footer-panel .footer-copyright {
+        margin-inline: -2rem;
+        padding-inline: 2rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .page-home .section--links {
+        background: linear-gradient(180deg, #dce1f200, var(--home-footer-blend)), linear-gradient(120deg, #e2d5ec, #cfdcf3);
+    }
+}
+
+/* Full public reviews: stable cards; scrolling is a no-JavaScript fallback. */
+.page-home .home-testimonial-grid.is-carousel {
+    grid-template-rows: 500px auto;
+}
+
+.page-home .home-testimonial-grid.is-carousel .testimonial-slide {
+    height: 500px;
+    min-height: 0;
+    padding: 2rem;
+}
+
+.page-home .home-testimonial-grid.is-carousel .testimonial-body {
+    flex: 1 1 0;
+    min-height: 0;
+    margin: 1rem 0;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    padding-right: .8rem;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #aabbd8 #ffffff0a;
+    font-size: 1.45rem;
+    line-height: 1.6;
+}
+
+.page-home .testimonial-body:focus-visible {
+    outline: 2px solid #bdd5f0;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.page-home .section--testimonials .testimonial-slide .review-scroll-hint {
+    margin: 0 0 .65rem;
+    color: #d4dbee;
+    font: 400 .7rem/1.4 Arial, sans-serif;
+}
+
+.page-home .review-scroll-hint[hidden] {
+    display: none;
+}
+
+.page-home .newsletter-art strong {
+    margin-top: 3.5rem;
+}
+
+/* Internal review pages keep long testimonials readable without nested scrolling. */
+.page-home .home-testimonial-grid.is-carousel .has-review-pages .testimonial-body {
+    overflow: hidden;
+    padding-right: 0;
+    scrollbar-gutter: auto;
+}
+
+.page-home .review-page-text {
+    display: block;
+}
+
+.page-home .review-page-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .6rem;
+    flex: 0 0 32px;
+    margin: 0 0 .6rem;
+}
+
+.page-home .review-page-controls[hidden] {
+    display: none;
+}
+
+.page-home .review-page-controls button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c2cee16b;
+    border-radius: 50%;
+    background: #ffffff08;
+    font: 400 1.3rem/1 Arial, sans-serif;
+    cursor: pointer;
+}
+
+.page-home .review-page-controls button:not(:disabled):is(:hover, :focus-visible) {
+    background: var(--home-button-sheen);
+    color: #203443;
+}
+
+.page-home .review-page-controls button:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.page-home .review-page-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* One calm, bright introduction containing both the portrait and 1:1 invitation. */
+.page-home .home-introduction {
+    width: min(100%, 1500px);
+    margin: 0 auto 4rem;
+    background: radial-gradient(ellipse at 95% 25%, #e2dff0a6, transparent 60%), linear-gradient(120deg, #e7edf9, #f4edf7);
+}
+
+.page-home .home-introduction .hero-section {
+    background: transparent;
+}
+
+.page-home .home-introduction .hero-content {
+    padding-block: 4rem;
+}
+
+.page-home .home-introduction .section--light {
+    padding-block: 4rem 5rem;
+}
+
+.page-home .home-introduction .section-inner--narrow {
+    max-width: 850px;
+}
+
+.page-home .section--links {
+    padding-top: 9.5rem;
+    padding-bottom: 1.5rem;
+}
+
+/* The existing 8rem footer fade plus 1.5rem here balances the eyebrow-to-card gap. */
+.page-home .home-testimonial-grid.is-moving {
+    display: block;
+    max-width: 1180px;
+}
+
+/* Fade only the card window; the navigation controls remain fully visible. */
+.page-home .testimonial-viewport {
+    --carousel-edge-fade: clamp(12px, 2.5vw, 32px);
+    width: 100%;
+    overflow: hidden;
+    padding: 1px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--carousel-edge-fade), #000 calc(100% - var(--carousel-edge-fade)), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 var(--carousel-edge-fade), #000 calc(100% - var(--carousel-edge-fade)), transparent);
+}
+@media (max-width: 768px) {
+    .page-home .testimonial-viewport { --carousel-edge-fade: 8px; }
+}
+
+.page-home .testimonial-track {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    will-change: transform;
+}
+
+.page-home .home-testimonial-grid.is-moving .testimonial-slide {
+    flex: 0 0 calc((100% - 24px) / 2);
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+}
+
+.page-home .carousel-playback {
+    font-family: Arial, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-home .testimonial-track {
+        will-change: auto;
+    }
+}
+
+/* Matching supplied artwork frames the bright opening panel. */
+.page-home .home-top-backdrop {
+    position: relative; isolation: isolate;
+    padding: 0 0 7rem;
+    background: none;
+}
+
+.page-home .home-top-backdrop .home-introduction {
+    margin-bottom: 0;
+}
+
+/* Animate only the border's gradient angle; content and box remain still. */
+@property --program-border-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.page-home .section--split {
+    margin-bottom: 5rem;
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border: 2px solid transparent;
+    background: linear-gradient(115deg, #e7dff0, #d4dff3, #d2e1f1) padding-box,
+        conic-gradient(from var(--program-border-angle), #83b9ef, #a8a1ed, #e1a0cd, #83b9ef) border-box;
+    animation: program-border-orbit 7s linear infinite;
+}
+
+@keyframes program-border-orbit {
+    to {
+        --program-border-angle: 360deg;
+    }
+}
+
+@media (min-width: 981px) {
+    .page-home .footer-panel .footer-newsletter .ml-form-formContent {
+        flex: 0 1 clamp(14rem, 18vw, 20rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-home .section--split {
+        animation: none;
+    }
+}
+
+/* Center the newsletter artwork and signup as one group inside the wide footer. */
+@media (min-width: 981px) {
+    .page-home .footer-panel .footer-newsletter {
+        max-width: 1120px;
+        margin-inline: auto;
+        grid-template-columns: minmax(0, 400px) minmax(0, 560px);
+        justify-content: center;
+    }
+
+    .page-home .footer-panel .footer-newsletter .ml-form-embedContent {
+        text-align: left;
+    }
+
+    .page-home .footer-panel .footer-newsletter .ml-form-embedContent p {
+        margin-inline: 0;
+    }
+
+    .page-home .footer-panel .footer-newsletter .ml-block-form {
+        justify-content: flex-start;
+    }
+
+    .page-home .footer-panel .footer-newsletter #newsletter-note {
+        text-align: left;
+    }
+}
+
+.page-home .nav-menu .nav-cta:is(:hover, :focus-visible) {
+    text-decoration: none;
+}
+
+.page-home .section--split>div>.eyebrow {
+    font-size: .95rem;
+    letter-spacing: .17em;
+    font-weight: 700;
+    color: #5351b4;
+    background: linear-gradient(100deg, #2473cb, #7843c0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+}
+/* Opening identity and invitation use Marcus's approved copy. */
+.page-home .hero-content h1 { max-width: none; font-size: clamp(3.5rem, 5vw, 5.25rem); }
+.page-home .hero-content .hero-tagline { max-width: 25ch; margin-top: 1.25rem; font-size: clamp(1.8rem, 2.6vw, 2.5rem); line-height: 1.15; letter-spacing: -.025em; }
+.page-home .hero-content .hero-description { margin-top: 1.5rem; font-size: 1.15rem; line-height: 1.65; max-width: 48ch; }
+.page-home .hero-content .cta-row { gap: .8rem; margin-top: 2rem; }
+
+.page-home .hero-content .home-button:is(:hover, :focus-visible) { background: var(--home-button-sheen); color: #203443; }
+.page-home .hero-content .hero-newsletter-link { align-self: flex-start; margin-top: 1.75rem; }
+
+@media (min-width: 981px) {
+    .page-home .home-introduction .hero-section { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+    .page-home .home-introduction .hero-content { order: 1; padding-inline: clamp(2rem, 4vw, 4rem); }
+    .page-home .home-introduction .hero-media { order: 2; mask-image: linear-gradient(to left, #000 60%, transparent 100%); }
+}
+
+/* A shared surface under the image fade removes the horizontal background seam. */
+.page-home main { background: linear-gradient(120deg, #e4dded, #d8e3f1); }
+.page-home .home-top-backdrop::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: url("../assets/background/prisma3-inverted.webp") center top / cover no-repeat;
+    mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 100%);
+}
+.page-home .home-top-backdrop .home-introduction {
+    border: 1px solid #cad8ea; border-top: 0;
+    border-radius: 0 0 20px 20px; overflow: hidden;
+}
+.page-home .hero-content .home-button { background: #414E73; }
+/* Keep the established spacing below the program; increase only its top clearance. */
+.page-home .section--split { margin-top: 4rem; }
+/* Portrait and text use separate areas, so the face stays crisp and unobstructed. */
+.page-home .footer-panel .newsletter-art img {
+    width: 48%; height: 100%; object-fit: cover; object-position: 50% 30%; mask-image: linear-gradient(to right, transparent 0%, #000 14%); filter: none;
+}
+.page-home .footer-panel .newsletter-art figcaption {
+    width: 52%; min-height: 270px; padding: 1.25rem;
+    display: flex; align-items: center; color: #181E37;
+}
+.page-home .footer-panel .newsletter-art strong { margin: 0; font-size: 1.75rem; line-height: 1.15; color: #181E37; }
+@media (min-width: 981px) {
+    .page-home .section--about-preview { padding: 4rem 1.5rem; gap: 3rem; }
+    .page-home .about-preview-media { width: min(100%, 520px); min-height: 0; margin: auto; border-radius: 22px; mask-image: none; }
+    .page-home .about-preview-media img { position: static; width: 100%; height: auto; object-fit: contain; filter: none; mask-image: none; }
+    .page-home .about-preview-media::after { display: none; }
+}
+
+/* Center the About pair within the same reading width as the content above. */
+.page-home .section--about-preview { display: block; }
+.page-home .about-preview-inner {
+    width: min(100%, 1180px); margin-inline: auto;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center; gap: clamp(2rem, 5vw, 4rem);
+}
+.page-home .about-preview-copy { padding: 2rem 0; }
+.page-home .about-preview-media {
+    width: min(100%, 520px); min-height: 0; margin: auto;
+    border-radius: 22px; mask-image: none; overflow: hidden;
+}
+.page-home .about-preview-media img {
+    position: static; display: block; width: 100%; height: auto;
+    object-fit: contain; filter: none; mask-image: none;
+}
+.page-home .about-preview-media::after { display: none; }
+/* A simple square portrait, with no text layer or fading over the photograph. */
+.page-home .footer-panel .newsletter-art {
+    width: 100%; max-width: 360px; aspect-ratio: 1; min-height: 0;
+    margin: 0; justify-self: center;
+}
+.page-home .footer-panel .newsletter-art img {
+    position: static; display: block; width: 100%; height: 100%;
+    object-fit: cover; object-position: center; mask-image: none; filter: none;
+}
+@media (max-width: 980px) {
+    .page-home .home-introduction .hero-section { grid-template-columns: 1fr; }
+    .page-home .home-introduction .hero-content {
+        order: 1; padding: 2.5rem clamp(1.25rem, 5vw, 3rem); margin: 0;
+    }
+    .page-home .home-introduction .hero-media {
+        order: 2; height: auto; min-height: 0; aspect-ratio: 1.15;
+        mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 85%, transparent);
+    }
+    .page-home .hero-media img { mask-image: none; object-position: center 35%; }
+    .page-home .hero-content h1 { font-size: clamp(3rem, 9vw, 4.5rem); }
+    .page-home .hero-content .hero-tagline { font-size: clamp(1.9rem, 5vw, 2.5rem); }
+    .page-home .home-top-backdrop { padding-bottom: 3rem; }
+    .page-home .section--split { margin-top: 2rem; margin-bottom: 3rem; padding: 2.5rem 1.5rem; }
+    .page-home .section--about-preview { padding: 3.5rem 1.5rem; }
+    .page-home .about-preview-inner { grid-template-columns: 1fr; max-width: 600px; gap: 1.5rem; }
+    .page-home .about-preview-copy { padding: 0; }
+    .page-home .section--links { padding-top: 4rem; }
+    .page-home .footer-panel .footer-newsletter { max-width: 600px; margin-inline: auto; }
+}
+@media (max-width: 768px) {
+    .page-home .home-introduction { width: calc(100% - 1.5rem); }
+    .page-home .hero-content .cta-row { flex-direction: column; align-items: stretch; }
+    .page-home .hero-content .home-button { width: 100%; text-align: center; justify-content: center; }
+    .page-home .section--split { width: calc(100% - 2rem); }
+    .page-home .section--testimonials { padding: 3rem 1rem; }
+    .page-home .home-testimonial-grid.is-moving .testimonial-slide { flex-basis: 100%; padding: 1.5rem; }
+    .page-home .section--links { padding-inline: 1.5rem; }
+    .page-home .site-footer { padding: 5rem 1rem 2rem; }
+    .page-home .footer-panel { padding: 1.5rem 1.5rem 0; border-radius: 24px; }
+    .page-home .footer-panel .footer-content { gap: 2rem 1rem; }
+    .page-home .footer-panel .footer-copyright { margin-inline: -1.5rem; padding-inline: 1.5rem; }
+    .page-home .footer-newsletter .ml-form-embedContent,
+    .page-home .footer-newsletter #newsletter-note { text-align: left; }
+    .page-home .footer-newsletter .ml-block-form { width: 100%; max-width: none; }
+    .page-home .footer-link-group a, .page-home .footer-contact { min-height: 44px; }
+    .page-home .nav-menu a[href="8week.html"] { color: #293751; }
+}
+
+@media (max-width: 768px) {
+    .page-home .review-page-controls { flex-basis: 44px; }
+    .page-home .review-page-controls button {
+        width: 44px; height: 44px; color: #414e73;
+        background: #ffffff30; border-color: #414e7355;
+    }
+}
+
+/* One palette for every screen size; breakpoints change layout, not colors. */
+.page-home .event-banner { background: linear-gradient(100deg, #acc4e3, #bcb4e1 48%, #d8b0ce); }
+.page-home .section--links {
+    background: linear-gradient(180deg, #dce1f200 45%, var(--home-footer-blend) 100%), linear-gradient(120deg, #e2d5ec, #cfdcf3 60%, #ddd6ef);
+}
+.page-home :is(.nav-menu .nav-cta, .link-grid a, .footer-newsletter button):is(:hover, :focus-visible) {
+    background: var(--home-button-deeper); color: #f5f5f8; border-color: #7189a3;
+}
+.page-home .review-page-controls button { color: #eef0f7; background: #ffffff08; border-color: #c2cee16b; }
+.page-home .nav-menu a[href="8week.html"] { color: #344650; }
+
+/* Keep the event announcement readable as one linked phrase on every screen. */
+.page-home .event-banner-label { letter-spacing: 0; text-transform: none; width: auto; }
+.page-events .events-preview { margin-top: 3rem; padding: 2rem; border: 1px solid #7189a3; border-radius: 22px; }
+
+/* Event title keeps the earlier compact, bold label; the date stays regular. */
+.page-home .event-banner { gap: .4rem 2rem; }
+.page-home .event-banner-label { font: 700 .72rem/1.6 Arial, sans-serif; letter-spacing: .08em; }
+.page-home .event-banner time { font-weight: 400; }
+.page-home .event-banner:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 768px) { .page-home .event-banner { gap: .25rem .75rem; } }
+
+/* Use Marcus's supplied transparent logo directly, with no mask or extra frame. */
+.page-home .footer-small-logo {
+    display: block; width: 40px; height: auto; margin: 1rem 0 0 42.5px;
+    object-fit: contain;
+}
+
+@media (max-width:768px) {
+    .page-home .footer-panel .footer-brand { align-items: center; text-align: center; }
+    .page-home .footer-small-logo { margin-inline: 0; }
+}
+
+@media (max-width:768px) {
+    .page-home .footer-link-group { align-items: center; text-align: center; }
+    .page-home .footer-link-group a { justify-content: center; text-align: center; }
+}
+
+/* A little more inset for the opening copy, preserving the portrait placement. */
+@media (min-width:981px) {
+    .page-home .home-introduction .hero-content { padding-left: calc(clamp(2rem,4vw,4rem) + 1rem); }
+}
+@media (max-width:980px) {
+    .page-home .home-introduction .hero-content { padding-left: calc(clamp(1.25rem,5vw,3rem) + .25rem); }
+}

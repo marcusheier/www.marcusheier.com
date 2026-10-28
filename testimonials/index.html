@@ -9,23 +9,49 @@
     <title>Share your experience | Marcus Heier</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/testimonials.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/event-banner.css">
+    <link rel="stylesheet" href="../css/scroll-reveal.css">
+    <link rel="stylesheet" href="../css/testimonial-page.css">
     <link rel="icon" href="../favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap" rel="stylesheet">
 </head>
 
-<body class="testimonial-page">
+<body class="page-home testimonial-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="site-shell">
+        <a class="event-banner" href="../event-w45.html">
+            <span class="event-banner-label">Next Event - <span lang="sv">GRUPPSEANS</span></span>
+            <time datetime="2026-11-07">7 November 2026</time>
+        </a>
         <header class="site-header">
             <nav class="site-nav" aria-label="Main navigation">
                 <a class="brand-link" href="../index.html" aria-label="Marcus Heier home">
                     <img class="brand-logo" src="../assets/logo/logo white.png" alt="Marcus Heier">
                 </a>
+
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                    aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="site-navigation">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../services.html">Services</a></li>
+                    <li><a href="../events.html">Events</a></li>
+                    <li><a href="../8week.html">North Star Method</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session</a></li>
+                </ul>
             </nav>
         </header>
 
-        <main class="testimonial-main">
+        <main id="main-content" class="testimonial-main home-top-backdrop">
             <section class="testimonial-intro" aria-labelledby="testimonial-heading">
                 <p class="eyebrow">A little reflection</p>
                 <h1 id="testimonial-heading">Would you like to share your experience?</h1>
@@ -60,7 +86,7 @@
 
                     <fieldset class="form-field publication-permissions" aria-describedby="publication-note">
                         <legend>Publication permission</legend>
-                        <label><input id="publication-permission" type="checkbox"><span>I give Marcus permission to publish my name, testimonial and uploaded portrait on his website and in social graphics. (Optional)</span></label>
+                        <label><input id="publication-permission" type="checkbox"><span>I give Marcus permission to publish my name and testimonial on his website and social media. (Optional)</span></label>
                         <p id="publication-note">You can submit privately without granting publication permission. New submissions are reviewed before publication. Contact info@marcusheier.com to change your permission.</p>
                     </fieldset>
 
@@ -71,24 +97,41 @@
                     </div>
 
                     <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-                    <button class="button button--primary form-submit" type="submit">Send testimonial</button>
+                    <button class="button home-button form-submit" type="submit">Send testimonial</button>
                 </form>
             </section>
         </main>
 
         <footer class="site-footer">
-            <div class="footer-content">
+            <div class="footer-panel">
+<div class="footer-content">
                 <div class="footer-brand">
                     <a href="../index.html" aria-label="Marcus Heier home">
-                        <img class="footer-logo" src="../assets/logo/logo black and white.png" alt="Marcus Heier">
+                        <img class="footer-logo" src="../assets/logo/logo white.png" alt="Marcus Heier" loading="lazy">
                     </a>
-                    <p>© HIGHER Coaching 2026</p>
+                    <img class="footer-small-logo" src="../assets/logo-footer/logo-white.png" alt="HIGHER logo" loading="lazy">
+                    <a class="footer-contact" href="mailto:info@marcusheier.com">info@marcusheier.com</a>
                 </div>
-                <div class="footer-icon-wrap"><img class="footer-icon" src="../assets/logo/logo icon.png" alt="Higher Coaching icon"></div>
-                <div class="footer-links"><a href="mailto:info@marcusheier.com">info@marcusheier.com</a></div>
+                <nav class="footer-link-group" aria-label="Explore the website">
+                    <h3>Explore</h3>
+                    <a href="../about.html">About Marcus</a>
+                    <a href="../services.html">Services</a>
+                    <a href="../8week.html">North Star Method</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+                <nav class="footer-link-group" aria-label="Connect with Marcus">
+                    <h3>Connect</h3>
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.instagram.com/marcusheier" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.youtube.com/@HIGHERLearning444" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <p class="footer-copyright">© 2026 HIGHER Coaching · Marcus Heier. All rights reserved. Please obtain written permission before reproducing or distributing original text, images, music, or other material from this website.</p>
             </div>
         </footer>
     </div>
+    <script src="../js/site.js"></script>
+    <script src="../js/scroll-reveal.js"></script>
     <script src="../js/testimonial-config.js"></script>
     <script src="../js/testimonials.js"></script>
 </body>

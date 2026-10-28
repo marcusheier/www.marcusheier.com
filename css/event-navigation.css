@@ -1,0 +1,29 @@
+/* Shared page links inside the event landing page's original dark header. */
+.page-event-w45 .nav-menu { display: flex; align-items: center; gap: 1.6rem; margin: 0; padding: 0; list-style: none; }
+.page-event-w45 .nav-menu a { position: relative; display: inline-flex; align-items: center; min-height: 44px; color: var(--event-w45-white); font: 500 .7rem/1.5 var(--event-w45-sans); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; }
+.page-event-w45 .nav-menu a:not(.nav-cta)::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; border-radius: 2px; background: linear-gradient(110deg,#83b9ef,#a8a1ed,#e1a0cd); transform: scaleX(0); transform-origin: left; transition: transform .22s ease; }
+.page-event-w45 .nav-menu a:not(.nav-cta):is(:hover,:focus-visible)::after { transform: scaleX(1); }
+.page-event-w45 .nav-menu .nav-cta { padding: .8rem 1.2rem; border: 1px solid #c2b5cd; border-radius: 999px; }
+.page-event-w45 .nav-menu .nav-cta:is(:hover,:focus-visible) { background: #392e57; }
+.page-event-w45 .nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid #c2b5cd; border-radius: 50%; background: transparent; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
+.page-event-w45 .nav-toggle span { display: block; width: 20px; height: 2px; background: var(--event-w45-white); }
+@media(max-width:1100px) and (min-width:769px) { .page-event-w45 .nav-menu { gap: .8rem; } .page-event-w45 .nav-menu a { font-size: .62rem; } .page-event-w45 .site-nav { gap: 1rem; } }
+@media(max-width:768px) {
+    .page-event-w45 .site-nav { flex-wrap: wrap; gap: .75rem; padding-block: .75rem; }
+    .page-event-w45 .nav-toggle { display: inline-flex; }
+    .page-event-w45 .nav-menu { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 1rem; border-top: 1px solid #c2b5cd55; background: #15122a; }
+    .page-event-w45 .nav-menu.is-open { display: flex; }
+    .page-event-w45 .nav-menu a { display: flex; padding: .85rem 0; }
+    .page-event-w45 .nav-menu .nav-cta { justify-content: center; padding: 1rem; margin-top: .5rem; }
+}
+@media(prefers-reduced-motion:reduce) { .page-event-w45 .nav-menu a::after { transition: none; } }
+
+/* Keep the shared desktop booking launcher out of the visual layout. */
+.booking-scheduler-popup-anchor {
+    position: fixed;
+    top: 0;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

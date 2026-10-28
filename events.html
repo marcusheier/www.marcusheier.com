@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M7REHRR77D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-M7REHRR77D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upcoming events with Marcus Heier.">
+    <title>Events | Marcus Heier</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Google Calendar styles for the official scheduling button -->
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+
+    <!-- Google Fonts - Cormorant and Parisienne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/event-banner.css">
+    <link rel="stylesheet" href="css/scroll-reveal.css">
+</head>
+
+<body class="page-home page-events">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+        <a class="event-banner" href="event-w45.html">
+            <span class="event-banner-label">Next Event - <span lang="sv">GRUPPSEANS</span></span>
+            <time datetime="2026-11-07">7 November 2026</time>
+        </a>
+        <header class="site-header">
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="brand-link" href="index.html" aria-label="Marcus Heier home">
+                    <img class="brand-logo" src="assets/logo/logo white.png" alt="Marcus Heier">
+                </a>
+
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                    aria-label="Open navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="site-navigation">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="events.html" aria-current="page">Events</a></li>
+                    <li><a href="8week.html">North Star Method</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="main-content">
+            <div class="home-top-backdrop page-opening">
+                <section class="events-list page-inner" aria-labelledby="events-heading">
+                    <h1 id="events-heading">Upcoming Events</h1>
+                    <article class="event-card" aria-labelledby="group-event-heading">
+                        <div class="event-date"><span>07</span><time datetime="2026-11-07">November 2026</time></div>
+                        <div>
+                            <p class="eyebrow">Next Event</p>
+                            <h2 id="group-event-heading" lang="sv">Gruppseans</h2>
+                            <p><time datetime="2026-11-07">7 November 2026</time></p>
+                            <p class="event-description">During this 2-hour event Marcus will lead the group through automatic writing and meditation techniques. He will also channel his Arcturian guide who will take questions from the participants. 10 spots available.</p>
+                            <a class="button home-button event-card-link" href="event-w45.html" aria-label="Read more and book Gruppseans, 7 November 2026">Read more &amp; book <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            <section class="enquiry-section" aria-labelledby="enquiry-heading">
+                <div class="page-inner">
+                    <p class="eyebrow">Event enquiries</p>
+                    <h2 id="enquiry-heading">Invite Marcus to your event.</h2>
+                    <form class="event-enquiry" data-event-enquiry method="post" target="_blank" rel="noopener noreferrer" aria-describedby="enquiry-note">
+                        <p id="enquiry-note" class="form-wide">Share your event details below. After sending, a receipt opens in a new tab.</p>
+                        <label>First name *<input name="first-name" maxlength="100" autocomplete="given-name" required></label>
+                        <label>Last name<input name="last-name" maxlength="100" autocomplete="family-name"></label>
+                        <label>Email address *<input type="email" name="email" maxlength="254" autocomplete="email" required></label>
+                        <label>Contact number<input type="tel" name="phone" maxlength="60" autocomplete="tel"></label>
+                        <label class="form-wide">Organisation / event name<input name="event-name" maxlength="200" autocomplete="organization"></label>
+                        <label>Event date<input type="date" name="event-date"></label>
+                        <label>Location<input name="location" maxlength="300"></label>
+                        <label class="form-wide">Expected audience size<input type="number" name="audience-size" min="1" max="9999999" step="1"></label>
+                        <label class="form-wide">Tell me about your event *<textarea name="message" maxlength="5000" rows="6" required></textarea></label>
+                        <input type="hidden" name="submission-id" value="">
+                        <div class="enquiry-honeypot" aria-hidden="true">
+                            <label>Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label>
+                        </div>
+                        <noscript><p class="form-wide">Please enable JavaScript to use this form, or email info@marcusheier.com.</p></noscript>
+                        <button class="button home-button form-wide" type="submit" disabled>Send event enquiry</button>
+                        <p class="form-wide" id="enquiry-feedback" role="status" hidden></p>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-panel">
+<div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" aria-label="Marcus Heier home">
+                        <img class="footer-logo" src="assets/logo/logo white.png" alt="Marcus Heier" loading="lazy">
+                    </a>
+                    <img class="footer-small-logo" src="assets/logo-footer/logo-white.png" alt="HIGHER logo" loading="lazy">
+                    <a class="footer-contact" href="mailto:info@marcusheier.com">info@marcusheier.com</a>
+                </div>
+                <nav class="footer-link-group" aria-label="Explore the website">
+                    <h3>Explore</h3>
+                    <a href="about.html">About Marcus</a>
+                    <a href="services.html">Services</a>
+                    <a href="8week.html">North Star Method</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <nav class="footer-link-group" aria-label="Connect with Marcus">
+                    <h3>Connect</h3>
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.instagram.com/marcusheier" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.youtube.com/@HIGHERLearning444" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <p class="footer-copyright">© 2026 HIGHER Coaching · Marcus Heier. All rights reserved. Please obtain written permission before reproducing or distributing original text, images, music, or other material from this website.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/site.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/scroll-reveal.js"></script>
+</body>
+
+</html>

@@ -84,11 +84,15 @@ testimonialForm?.addEventListener("submit", async (event) => {
     if (!testimonial) { setError("testimonial", "Please add your testimonial."); valid = false; }
     if (imageInput.files?.[0]?.size > 5 * 1024 * 1024) { setError("image", "Please choose an image smaller than 5 MB."); valid = false; }
     if (!valid) return;
-    if (document.querySelector("#website").value || Date.now() - startedAt < 1800) {
+    if (document.querySelector("#website").value) {
         setFormStatus("Thank you — your testimonial has been received.", true);
         testimonialForm.reset();
         imagePreview.hidden = true;
         imagePlaceholder.hidden = false;
+        return;
+    }
+    if (Date.now() - startedAt < 1800) {
+        setFormStatus("Please wait a moment, then send your testimonial again.");
         return;
     }
     if (!TESTIMONIALS_ENDPOINT) {
@@ -101,8 +105,7 @@ testimonialForm?.addEventListener("submit", async (event) => {
     try {
         const image = imageInput.files?.[0];
         const imageData = image ? await prepareImage(image) : "";
-        const permission = document.querySelector("#publication-permission").checked;
-        const payload = { action: "submit", permission, portraitPermission: permission, name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
+        const payload = { action: "submit", permission: document.querySelector("#publication-permission").checked, portraitPermission: false, name, testimonial, website: "", imageData, imageMimeType: image ? "image/jpeg" : "" };
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
         if (!response.ok) throw new Error("Submission failed");
         const result = await response.json();

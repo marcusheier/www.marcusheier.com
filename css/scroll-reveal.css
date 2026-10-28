@@ -1,0 +1,17 @@
+/* Only JS-enhanced elements start hidden; shared subtle motion across public pages. */
+.scroll-reveal {
+    opacity: 0;
+    translate: 0 22px;
+    transition: opacity .65s ease, translate .65s cubic-bezier(.2,.65,.3,1);
+}
+.scroll-reveal.is-revealed { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion:reduce) {
+    .scroll-reveal { opacity: 1; translate: none; transition: none; }
+}
+/* Keep the homepage link cards' hover effects alongside their reveal. */
+.page-home .link-grid a.scroll-reveal {
+    transition: opacity .65s ease, translate .65s cubic-bezier(.2,.65,.3,1), background .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+@media (prefers-reduced-motion:reduce) {
+    .page-home .link-grid a.scroll-reveal { transition: none; }
+}

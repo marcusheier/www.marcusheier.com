@@ -1,0 +1,64 @@
+/* Public testimonial intake: homepage chrome and palette, isolated from Studio. */
+.page-home.testimonial-page .testimonial-main {
+    padding: clamp(3.5rem, 6vw, 6rem) 1.5rem 5rem;
+}
+.page-home.testimonial-page .testimonial-intro {
+    width: min(100%, 800px);
+    margin-bottom: 3rem;
+}
+.page-home.testimonial-page .testimonial-intro :is(h1, p) { color: #f5f3f9; }
+.page-home.testimonial-page .testimonial-intro h1 {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    max-width: none;
+    text-wrap: balance;
+}
+.page-home.testimonial-page .testimonial-intro .eyebrow { color: #dce6ff; }
+.page-home.testimonial-page .testimonial-intro > p:last-child {
+    font-size: 1.2rem;
+    text-wrap: pretty;
+}
+.page-home.testimonial-page .testimonial-form-card {
+    width: min(100%, 800px);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    border: 1px solid #cad8ea;
+    border-radius: 24px;
+    background: linear-gradient(120deg, #e7edf9, #f4edf7);
+    box-shadow: 0 24px 65px #34445b21;
+}
+.page-home.testimonial-page .form-field :is(input[type="text"], textarea, input[type="file"]) {
+    min-width: 0;
+    border-color: #7189a380;
+    border-radius: 12px;
+    background: #ffffff80;
+    color: #293751;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+}
+.page-home.testimonial-page .form-field textarea { line-height: 1.6; }
+.page-home.testimonial-page :is(input, textarea):focus-visible {
+    outline: 3px solid #7189a3;
+    outline-offset: 3px;
+}
+.page-home.testimonial-page input[type="checkbox"] { accent-color: #414e73; }
+.page-home.testimonial-page input[type="file"]::file-selector-button {
+    margin-right: .8rem;
+    padding: .65rem .9rem;
+    border: 1px solid #7189a3;
+    border-radius: 999px;
+    background: #e7edf9;
+    color: #293751;
+    cursor: pointer;
+}
+.page-home.testimonial-page .form-submit { background: #414e73; color: #f5f3f9; }
+.page-home.testimonial-page .form-submit:is(:hover, :focus-visible) {
+    background: var(--home-button-sheen);
+    color: #203443;
+}
+.page-home.testimonial-page .form-submit:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 768px) {
+    .page-home.testimonial-page .testimonial-main { padding: 3rem 1rem; }
+    .page-home.testimonial-page .testimonial-intro { margin-bottom: 2rem; }
+    .page-home.testimonial-page .testimonial-form-card { padding: 1.5rem; }
+    .page-home.testimonial-page .field-meta { flex-wrap: wrap; gap: .35rem; }
+}

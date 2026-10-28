@@ -25,10 +25,18 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="css/event-banner.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/scroll-reveal.css">
 </head>
 
-<body class="page-north-star page-contact">
+<body class="page-home page-contact">
     <div class="site-shell">
+        <a class="event-banner" href="event-w45.html">
+            <span class="event-banner-label">Next Event - <span lang="sv">GRUPPSEANS</span></span>
+            <time datetime="2026-11-07">7 November 2026</time>
+        </a>
         <header class="site-header">
             <nav class="site-nav" aria-label="Main navigation">
                 <a class="brand-link" href="index.html" aria-label="Marcus Heier home">
@@ -46,14 +54,16 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
+                    <li><a href="events.html">Events</a></li>
                     <li><a href="8week.html">North Star Method</a></li>
                     <li><a href="contact.html" aria-current="page">Contact</a></li>
-                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session</a></li>
                 </ul>
             </nav>
         </header>
 
-        <main>
+        <main id="main-content">
+            <div class="home-top-backdrop page-opening">
             <section class="page-hero">
                 <div class="section-inner section-inner--narrow">
                     <p class="eyebrow">Contact</p>
@@ -64,67 +74,83 @@
                 </div>
             </section>
 
+            </div>
             <section class="section section--contact" aria-labelledby="contact-heading">
                 <div class="contact-options">
                     <p class="eyebrow">Connect</p>
                     <h2 id="contact-heading">Choose the easiest way to reach me.</h2>
 
-                    <div class="contact-link-list">
-                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">
+                    <div class="contact-link-list" aria-label="Bookings and enquiries">
+                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">
                             <span>Booking</span>
                             Book a 1:1 session
                         </a>
                         <a
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSfXEza16_Vv4qMywzHl6LTDrynu7gKvA-QJC5Rt7Y26I59Ifw/viewform?usp=publish-editor">
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSfXEza16_Vv4qMywzHl6LTDrynu7gKvA-QJC5Rt7Y26I59Ifw/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">
                             <span>Apply</span>
                             8-week program application
                         </a>
-                        <a href="mailto:info@marcusheier.com">
-                            <span>Email</span>
-                            info@marcusheier.com
+                        <a href="events.html#enquiry-heading">
+                            <span>Event enquiries</span>
+                            Invite Marcus to your event
                         </a>
-
-                        <a href="https://www.instagram.com/marcusheier">
-                            <span>Instagram</span>
-                            @marcusheier
-                        </a>
-                        <a href="https://www.youtube.com/@HIGHERLearning444">
-                            <span>YouTube</span>
-                            @HIGHERLearning444
-                        </a>
-                        <a href="testimonials/">
+                        <a href="testimonials/index.html">
                             <span>Review</span>
                             Leave a testimonial
                         </a>
                     </div>
+                    <section class="contact-social" aria-labelledby="contact-social-heading">
+                        <h3 class="eyebrow" id="contact-social-heading">Social media</h3>
+                        <div class="contact-link-list">
+                        <a href="mailto:info@marcusheier.com">
+                            <span>Email</span>
+                            info@marcusheier.com
+                        </a>
+                        <a href="https://www.instagram.com/marcusheier" target="_blank" rel="noopener noreferrer">
+                            <span>Instagram</span>
+                            @marcusheier
+                        </a>
+                        <a href="https://www.youtube.com/@HIGHERLearning444" target="_blank" rel="noopener noreferrer">
+                            <span>YouTube</span>
+                            @HIGHERLearning444
+                        </a>
+                        </div>
+                    </section>
                 </div>
             </section>
         </main>
 
         <footer class="site-footer">
-            <div class="footer-content">
+            <div class="footer-panel">
+<div class="footer-content">
                 <div class="footer-brand">
                     <a href="index.html" aria-label="Marcus Heier home">
-                        <img class="footer-logo" src="assets/logo/logo black and white.png" alt="Marcus Heier">
+                        <img class="footer-logo" src="assets/logo/logo white.png" alt="Marcus Heier" loading="lazy">
                     </a>
-                    <p>© HIGHER Coaching 2026</p>
+                    <img class="footer-small-logo" src="assets/logo-footer/logo-white.png" alt="HIGHER logo" loading="lazy">
+                    <a class="footer-contact" href="mailto:info@marcusheier.com">info@marcusheier.com</a>
                 </div>
-
-                <div class="footer-icon-wrap">
-                    <img class="footer-icon" src="assets/logo/logo icon.png" alt="Higher Coaching icon">
-                </div>
-
-                <div class="footer-links">
-                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
-                    <a href="mailto:info@marcusheier.com">info@marcusheier.com</a>
-                    <a href="https://www.instagram.com/marcusheier">Instagram</a>
-                    <a href="https://www.youtube.com/@HIGHERLearning444">YouTube</a>
-                </div>
+                <nav class="footer-link-group" aria-label="Explore the website">
+                    <h3>Explore</h3>
+                    <a href="about.html">About Marcus</a>
+                    <a href="services.html">Services</a>
+                    <a href="8week.html">North Star Method</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <nav class="footer-link-group" aria-label="Connect with Marcus">
+                    <h3>Connect</h3>
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.instagram.com/marcusheier" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.youtube.com/@HIGHERLearning444" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <p class="footer-copyright">© 2026 HIGHER Coaching · Marcus Heier. All rights reserved. Please obtain written permission before reproducing or distributing original text, images, music, or other material from this website.</p>
             </div>
         </footer>
     </div>
 
     <script src="js/site.js"></script>
+    <script src="js/scroll-reveal.js"></script>
 </body>
 
 </html>

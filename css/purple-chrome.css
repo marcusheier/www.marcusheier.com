@@ -1,0 +1,47 @@
+/* Shared navigation/footer layout, preserving the North Star and Contact palette. */
+.page-north-star .site-nav { min-height: 92px; }
+.page-north-star .nav-menu { gap: 1.6rem; }
+.page-north-star .nav-menu a { font: 500 .7rem/1.5 Arial,sans-serif; letter-spacing: .06em; color: #f1efea; text-decoration: none; }
+.page-north-star .nav-menu a[href="8week.html"] { padding: .5rem 0; border: 0; background: none; box-shadow: none; color: #f1efea; }
+.page-north-star .nav-menu .nav-cta { padding: .8rem 1.2rem; border: 1px solid #c2b5cd; border-radius: 999px; background: transparent; color: #f1efea; }
+.page-north-star .nav-menu a:not(.nav-cta) { position: relative; }
+.page-north-star .nav-menu a:not(.nav-cta)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -8px; height: 3px; border-radius: 2px; background: linear-gradient(110deg,#83b9ef,#a8a1ed,#e1a0cd); transform: scaleX(0); transform-origin: left; transition: transform .22s ease; }
+.page-north-star .nav-menu a:not(.nav-cta):is(:hover,:focus-visible,[aria-current])::after { transform: scaleX(1); }
+.page-north-star .nav-menu .nav-cta:is(:hover,:focus-visible) { color: #f1efea; background: #624760; border-color: #c2b5cd; }
+.page-north-star .site-footer { padding: 4rem 1.5rem; }
+.page-north-star .footer-panel { width: min(100%,1500px); margin: auto; padding: 3.5rem 3.5rem 0; border: 1px solid #dce4f042; border-radius: 32px; overflow: hidden; background: linear-gradient(125deg,#392e57,#241f3f); }
+.page-north-star .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1fr; align-items: start; gap: 3rem; padding-block: 3rem; }
+.page-north-star .footer-brand { align-items: flex-start; text-align: left; }
+.page-north-star .footer-logo { width: 125px; height: auto; border-radius: 0; }
+.page-north-star .footer-small-logo { display: block; width: 40px; height: auto; margin: 1rem 0 0 42.5px; }
+.page-north-star .footer-contact { margin-top: 1rem; font: 400 .85rem/1.6 Arial,sans-serif; color: #e5e6ee; text-decoration: none; }
+.page-north-star .footer-link-group { display: flex; flex-direction: column; gap: .8rem; }
+.page-north-star .footer-link-group h3 { margin: .15rem 0 .7rem; color: #c8bcd1; font: 600 .65rem/1.5 Arial,sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.page-north-star .footer-link-group a { display: flex; align-items: center; gap: .5rem; color: #eef0f5; font: 400 .85rem/1.6 Arial,sans-serif; text-decoration: none; }
+.page-north-star :is(.footer-link-group a,.footer-contact):hover { text-decoration: underline; text-underline-offset: 5px; }
+.page-north-star .footer-copyright { margin: 0 -3.5rem; padding: 1.6rem 3.5rem; border-top: 1px solid #a8a1ed; color: #d5dbe5; font: 400 .68rem/1.8 Arial,sans-serif; }
+@media(max-width:1100px) and (min-width:769px) { .page-north-star .nav-menu { gap: .85rem; } .page-north-star .nav-menu a { font-size: .62rem; } }
+@media(max-width:980px) { .page-north-star .footer-panel { padding: 2rem 2rem 0; } .page-north-star .footer-content { grid-template-columns: 1fr 1fr; gap: 2rem; } .page-north-star .footer-brand { grid-column: 1 / -1; } .page-north-star .footer-copyright { margin-inline: -2rem; padding-inline: 2rem; } }
+@media(max-width:768px) {
+    .page-north-star .site-nav { min-height: 76px; }
+    .page-north-star .nav-menu { gap: 0; }
+    .page-north-star .nav-menu a { font-size: .78rem; }
+    .page-north-star .nav-menu a:not(.nav-cta)::after { bottom: 0; }
+    .page-north-star .footer-panel { padding: 1.5rem 1.5rem 0; border-radius: 24px; }
+    .page-north-star .footer-brand { align-items: center; text-align: center; }
+    .page-north-star .footer-small-logo { margin-inline: 0; }
+    .page-north-star .footer-content { gap: 2rem 1rem; }
+    .page-north-star .footer-copyright { margin-inline: -1.5rem; padding-inline: 1.5rem; }
+    .page-north-star :is(.footer-link-group a,.footer-contact) { min-height: 44px; }
+}
+@media(prefers-reduced-motion:reduce) { .page-north-star .nav-menu a::after { transition: none; } }
+
+/* Every underline state stays gold, including current-page and exit transitions. */
+.page-north-star .nav-menu a:not(.nav-cta)::after {
+    background: var(--gradient-north-star-gold);
+}
+
+@media (max-width:768px) {
+    .page-north-star .footer-link-group { align-items: center; text-align: center; }
+    .page-north-star .footer-link-group a { justify-content: center; text-align: center; }
+}

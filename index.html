@@ -29,10 +29,20 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="css/newsletter.css">
+    <link rel="stylesheet" href="css/testimonial-carousel.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/event-banner.css">
+    <link rel="stylesheet" href="css/scroll-reveal.css">
 </head>
 
-<body>
+<body class="page-home">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="site-shell">
+        <a class="event-banner" href="event-w45.html">
+            <span class="event-banner-label">Next Event - <span lang="sv">GRUPPSEANS</span></span>
+            <time datetime="2026-11-07">7 November 2026</time>
+        </a>
         <header class="site-header">
             <nav class="site-nav" aria-label="Main navigation">
                 <a class="brand-link" href="index.html" aria-label="Marcus Heier home">
@@ -50,54 +60,46 @@
                     <li><a href="index.html" aria-current="page">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
+                    <li><a href="events.html">Events</a></li>
                     <li><a href="8week.html">North Star Method</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a></li>
+                    <li><a class="nav-cta" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session</a></li>
                 </ul>
             </nav>
         </header>
 
-        <main>
+        <main id="main-content">
+            <div class="home-top-backdrop">
+            <div class="home-introduction">
             <section class="hero-section hero-section--home">
                 <div class="hero-media">
                     <!-- Change this src to swap the homepage hero image. -->
-                    <img src="assets/images/marcus.jpg" alt="Marcus Heier">
+                    <img src="assets/images/marcus.jpg" alt="Marcus Heier" fetchpriority="high">
                 </div>
 
                 <div class="hero-content">
-                    <p class="eyebrow">Mediumship & Coaching</p>
-                    <h1>Looking for clarity, direction, and alignment in your life?</h1>
-                    <p>
-                        As a medium and coach, I offer 1:1 sessions where I share messages from Spirit to give you clear
-                        insights into your life and your next steps.
-                    </p>
-                </div>
-            </section>
-
-            <section class="section section--light" aria-labelledby="booking-heading">
-                <div class="section-inner section-inner--narrow">
-                    <p class="eyebrow">1:1 Sessions</p>
-                    <h2 id="booking-heading">A grounded space for guidance, reflection, and forward movement.</h2>
-                    <p>
-                        Each session is designed to help you understand where you are, what wants your attention, and
-                        how to move forward with confidence.
-                    </p>
-
-                    <div class="calendar-button-wrap">
-                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                    <p class="eyebrow">Channeler | Coach | Musician</p>
+                    <h1>Marcus Heier</h1>
+                    <h2 class="hero-tagline">Helping you discover and align with your inner North Star</h2>
+                    <p class="hero-description">Marcus is a channeler, a medium and a coach, as well as a musician. He helps people align with their inner truths and brings a grounded perspective on how to cultivate a personal relationship with spirit.</p>
+                    <div class="cta-row">
+                        <a class="button home-button" href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a 1-1 session</a>
+                        <a class="button home-button" href="8week.html">Explore the 8-week program</a>
                     </div>
+                    <a class="text-link hero-newsletter-link" href="#newsletter-heading">Stay connected <span aria-hidden="true">↓</span></a>
                 </div>
             </section>
+            </div>
+            </div>
 
             <section class="section section--split" aria-labelledby="course-preview-heading">
                 <div>
-                    <p class="eyebrow">8-Week Program</p>
-                    <h2 id="course-preview-heading">A deeper path for intuitive development and personal alignment.</h2>
+                    <p class="eyebrow">8-week program</p>
+                    <h2 id="course-preview-heading">A method designed to help you live life by your North Star.</h2>
                 </div>
                 <div class="text-panel">
                     <p>
-                        This 8-week program is designed to help you understand your direction, strengthen your intuitive
-                        awareness, and move forward with clarity and confidence.
+                        The North Star Method is designed to help you understand the bigger picture of your life. And to help you strengthen your inner compass so you can move forward with clarity and confidence.
                     </p>
                     <p>
                         You will not only receive insight — you will learn how to apply it, trust it, and use it in your
@@ -111,25 +113,100 @@
                 <div class="section-inner">
                     <p class="eyebrow">Testimonials</p>
                     <h2 id="testimonials-heading">Words from clients.</h2>
-                    <script src="https://widget.senja.io/widget/f0fba25d-5f2f-4308-873b-73fd2e00b4fd/platform.js" type="text/javascript" async></script>
-                    <div class="senja-embed" data-id="f0fba25d-5f2f-4308-873b-73fd2e00b4fd" data-mode="shadow" data-lazyload="false" style="display: block; width: 100%;"></div>
+                    <!-- Existing public client words, displayed locally without a remote widget. -->
+                    <div class="home-testimonial-grid" data-home-carousel role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Stephanie Wollman">Working with Marcus was my very first experience with a medium — and it exceeded anything I could have imagined
+
+From the very beginning, Marcus brought such a calm, grounded, and compassionate presence that I immediately felt safe and held. Even before I shared what I wanted to explore, he connected to an energy and accurately named the exact topic that had been on my mind — without me saying a single word. That alone was truly remarkable.
+
+It turned out that the energy he connected with was my grandfather. Within just 30 minutes, Marcus was able to offer me deep clarity and answer questions I had been carrying with me for over 15 years. The value of what came through in that short time feels truly priceless.
+What touched me just as much as the insights themselves was the way Marcus communicated them. His words were chosen with such care — mindful, precise, and yet beautifully expressed through meaningful metaphors. Everything felt deeply respectful, clear, and easy to understand.
+Beyond the emotional and spiritual depth, I also received practical guidance. Through this connection, I was given simple, actionable steps I can take to move forward and gain even more clarity on my path. The experience also felt very empowering and encouraging.  
+
+I wholeheartedly recommend Marcus — especially to anyone who may feel unsure about working with a medium. His grounded nature, authenticity, and strong sense of presence create a space of deep trust and safety. There is a profound wisdom in the way he works, and I’m truly grateful for this experience.</blockquote>
+                            <p class="testimonial-client">Stephanie Wollman</p>
+                            <p class="testimonial-category">Singer/ Songwriter, Conscious Coach</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Mitch">Marcus creates a calm, grounded space where you feel fully seen and heard. He is deeply present, intuitive, and remarkably attuned to emotion and energy. In our time together he guided me into a powerful connection with the spirit of my father that led to a profound emotional release I had not experienced in years. Marcus holds space with empathy, patience, and genuine care. His work has the capacity to help many people reconnect with themselves, their intuition, and the deeper energies guiding their lives.</blockquote>
+                            <p class="testimonial-client">Mitch</p>
+                            <p class="testimonial-category">Nervous System Coach</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Pamela Ashcroft">What stood out to me most about Marcus is his honesty, integrity, and warm, friendly approach.
+
+Rather than encouraging dependency, he guides you back to your own inner knowing. It felt genuinely empowering and refreshing, and reminded me that we all have the ability to shape our own reality.</blockquote>
+                            <p class="testimonial-client">Pamela Ashcroft</p>
+                            <p class="testimonial-category">PR Consultant</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Barbara Weatherton">I highly recommend Marcus Heier to anyone seeking intuitive guidance
+
+I met Marcus Heier shortly following the passing of my husband of 26 years.  My home had dramatically shifted from a loving, warm and thriving household into absolute emptiness when all my hopes and dreams died along with him.   My future was gone.  I suddenly had no idea who I was and where I was headed—what am I supposed to do now?  My life was totally discombobulated to say the least.   
+
+Marcus’s work as a psychic medium made a meaningful and impactful presence in my life.  Through his intuitive abilities, compassion, and professionalism, he has provided guidance and clarity during the times when I needed it the most.
+
+What sets him apart from other coaches is not only his intuitive insight, but also his grounded and respectful approach. He creates an open space that feels safe, calm and free of judgment, allowing for honest exploration and reflection. His readings are delivered with care and integrity, always focused on empowerment.
+
+In my experience, Marcus demonstrates a remarkable ability to connect with emotional undercurrents and bring forward messages that deeply resonate within my soul. Whether offering a perspective on life, transitions, relationships or personal growth, he does so with sensitivity and a genuine desire to support healing and understanding.
+
+I have found his work to be both affirming and enlightening, helping me gain a greater sense of direction and peace. His presence is steady, thoughtful, and compassionate – qualities that are essential in his line of work.
+
+I highly recommend Marcus Heier to anyone seeking intuitive guidance.</blockquote>
+                            <p class="testimonial-client">Barbara Weatherton</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Jessi Harnett">Marcus is the first coach I&#x27;ve ever had. He makes it feel very safe to be open and explore emotions deeply. Since working with him, I have practices that help me connect with my intuition and heal from past troubles. It really helps to have another perspective, especially from someone with the warmth and wisdom Marcus has!</blockquote>
+                            <p class="testimonial-client">Jessi Harnett</p>
+                            <p class="testimonial-category">Entrepreneur, Mother</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Claire Pearce">I recently had a session with Marcus and was absolutely knocked out by how quickly we connected with one another. It felt like talking to a friend.
+ In our time together we explored some ongoing struggles I’ve had along my life path which culminated in me receiving several deep insights that will be helpful long term. I now feel I can move forward, in a more ‘full and whole’ way as a person and have the compass of life, pointing firmly in the right direction, come what may.
+You really won’t regret working with Marcus, he’s experienced, gentle and knows how to use his many talents to help others become more empowered and fulfilled.</blockquote>
+                            <p class="testimonial-client">Claire Pearce</p>
+                            <p class="testimonial-category">Home Educator</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Patricia Mallet">The session with Marcus was amazing. He facilitated a connection with my spirit guide, a special moment I was longing for and that I will always cherish. His insights on how to do that on my own have also been very helpful and I am now quite excited to explore further. Marcus is a great human being with a beautiful caring heart and it is always such a pleasure to interact with him. I hope more people are able to experience and benefit from his special gifts.</blockquote>
+                            <p class="testimonial-client">Patricia Mallet</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Lexie Narsipur">Wow. Working with Marcus has been such an incredibly expansive and eye opening experience. He was able to connect to my guides and through that connection, shared their guidance with me surrounding aspects of my life that had been pulling at my attention and heart (both consciously and unconsciously). Through this guidance I have been able to see a new vision for my life as a whole and what I am meant to do during my time here on Earth. My heart is bursting with gratitude for this confirmation from my guides and the Universe, as well as for Marcus&#x27;s clear and incredibly powerful channel. Marcus truly carries his potent gifts with the grounding and humility they require and delivers the messages with such love and discernment. It felt so safe and easeful to work with him and I would 110% recommend his guidance to anyone who is seeking greater insight into their life&#x27;s purpose and next steps!</blockquote>
+                            <p class="testimonial-client">Lexie Narsipur</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Claudia Walzak">I recently had a remarkable session with Marcus. He has a kind and grounded energy and holds a safe space without judgement. This helps to make it feel like home straight away and get right into it. I talked to him about a block that keeps coming up for me and he got the message from my spirit guides that my current block is so loud at the moment and feels so intense because I’m actually ready to break through. That made so much sense and helped me to see it differently. Not trying to fight, just recognizing it from the neutral observer perspective and realizing that i have a choice. I can choose worry over it or be confident. It wasn’t a sign I was failing. It was a sign I was ready. That shift alone was worth everything. Highly recommend.</blockquote>
+                            <p class="testimonial-client">Claudia Walzak</p>
+                        </article>
+                        <article class="testimonial-slide">
+                            <blockquote class="testimonial-body" role="region" aria-label="Review by Kayla">Marcus was spot on with his intuitive message today! Instantly he felt an Arcturian guide come in, which I very much resonate with as part of my spiritual lineage. The messages that followed that were exactly what I was going through earlier today before the session. I was struggling with boundaries and the message came through that this guide wants to assist me in this area. As well, inner child healing came to the surface as an area to step further into on my healing journey. Every single message that he brought up was 100% spot on without giving him any specific details on them prior. He is very gifted in his work as a medium and bringing through the messages that want to reach us! Thank you so much for the work you are doing Marcus!! 
+~Kayla~</blockquote>
+                            <p class="testimonial-client">Kayla</p>
+                        </article>
+                        <div class="testimonial-carousel-controls" hidden>
+                            <button type="button" data-carousel-previous aria-label="Previous testimonial">←</button>
+                            <span data-carousel-count role="status" aria-live="polite" aria-atomic="true"></span>
+                            <button type="button" data-carousel-next aria-label="Next testimonial">→</button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <section class="section section--about-preview" aria-labelledby="about-preview-heading">
+                <div class="about-preview-inner">
                 <div class="about-preview-media">
                     <!-- Change this src to swap the homepage About Marcus image. -->
-                    <img src="assets/images/marcus2-web.jpg" alt="Marcus Heier">
+                    <img src="assets/images/marcus2-web.jpg" alt="Marcus Heier" loading="lazy">
                 </div>
                 <div class="about-preview-copy">
                     <p class="eyebrow">About Marcus</p>
-                    <h2 id="about-preview-heading">A calm, practical approach to spiritual development.</h2>
-                    <p>
-                        My own way of working with spirit rooted in deep curiosity around our experience here on earth.
-                        Through years of exploring my own experiences, I learned to recognize and trust the ways
-                        guidance shows up — and how to move forward with greater clarity and self-trust.
-                    </p>
+                    <h2 id="about-preview-heading">A calm, grounded approach to spiritual development.</h2>
+                    <p>My own way of working with spirit is rooted in deep curiosity about our experience here on Earth and how we can use that connection to ultimately transform our inner and outer worlds.</p>
+                    <p>Through years of exploring my own experiences, I learned to recognize and trust the ways guidance shows up for me — and how to move forward with greater clarity and self-trust.</p>
                     <a class="text-link" href="about.html">Read more about me</a>
+                </div>
                 </div>
             </section>
 
@@ -138,7 +215,7 @@
                     <p class="eyebrow">Connect</p>
                     <h2 id="links-heading">Start with the path that fits you best.</h2>
                     <div class="link-grid">
-                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
+                        <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session</a>
                         <a href="8week.html">Explore the program</a>
                     </div>
                 </div>
@@ -146,29 +223,83 @@
         </main>
 
         <footer class="site-footer">
+            <div class="footer-panel">
+<section class="footer-newsletter" aria-labelledby="newsletter-heading">
+<figure class="newsletter-art" aria-label="Portrait of Marcus Heier">
+    <img src="assets/images/marcus-footer.png" alt="Marcus Heier" loading="lazy">
+</figure>
+<div id="mlb2-47616393" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-47616393">
+<div class="ml-form-align-center ">
+<div class="ml-form-embedWrapper embedForm">
+<div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+<div class="ml-form-embedContent" style=" ">
+<h2 id="newsletter-heading">Stay Connected</h2>
+<p>Receive spiritual insights, reflections, and updates directly in your inbox.</p>
+</div>
+<form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2724032/forms/202396785029678594/subscribe" data-code="" method="post" target="_blank">
+<div class="ml-form-formContent">
+<div class="ml-form-fieldRow ml-last-item">
+<div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+<input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Your email address" required aria-describedby="newsletter-note" autocomplete="email">
+</div>
+</div>
+</div>
+<input type="hidden" name="ml-submit" value="1">
+<div class="ml-form-embedSubmit">
+<button type="submit" class="primary">Subscribe</button>
+<button disabled="disabled" style="display: none;" type="button" class="loading">
+<div class="ml-form-embedSubmitLoad"></div>
+<span class="sr-only">Loading...</span>
+</button>
+</div>
+<input type="hidden" name="anticsrf" value="true">
+</form>
+<p id="newsletter-feedback" role="status" hidden></p>
+<p id="newsletter-note">Unsubscribe anytime.</p>
+</div>
+<div class="ml-form-successBody row-success" role="status" tabindex="-1" style="display: none">
+<div class="ml-form-successContent">
+<h2>Thank you!</h2>
+<p>Thank you for signing up. If you receive a confirmation email, please click its link to complete your subscription.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
             <div class="footer-content">
                 <div class="footer-brand">
                     <a href="index.html" aria-label="Marcus Heier home">
-                        <img class="footer-logo" src="assets/logo/logo black and white.png" alt="Marcus Heier">
+                        <img class="footer-logo" src="assets/logo/logo white.png" alt="Marcus Heier" loading="lazy">
                     </a>
-                    <p>© HIGHER Coaching 2026</p>
+                    <img class="footer-small-logo" src="assets/logo-footer/logo-white.png" alt="HIGHER logo" loading="lazy">
+                    <a class="footer-contact" href="mailto:info@marcusheier.com">info@marcusheier.com</a>
                 </div>
-
-                <div class="footer-icon-wrap">
-                    <img class="footer-icon" src="assets/logo/logo icon.png" alt="Higher Coaching icon">
-                </div>
-
-                <div class="footer-links">
-                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8">Book a session</a>
-                    <a href="mailto:info@marcusheier.com">info@marcusheier.com</a>
-                    <a href="https://www.instagram.com/marcusheier">Instagram</a>
-                    <a href="https://www.youtube.com/@HIGHERLearning444">YouTube</a>
-                </div>
+                <nav class="footer-link-group" aria-label="Explore the website">
+                    <h3>Explore</h3>
+                    <a href="about.html">About Marcus</a>
+                    <a href="services.html">Services</a>
+                    <a href="8week.html">North Star Method</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <nav class="footer-link-group" aria-label="Connect with Marcus">
+                    <h3>Connect</h3>
+                    <a href="https://calendar.app.google/EeLUNfc2a21rRc5Z8" target="_blank" rel="noopener noreferrer">Book a session <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.instagram.com/marcusheier" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                    <a href="https://www.youtube.com/@HIGHERLearning444" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
+                </nav>
+            </div>
+            <p class="footer-copyright">© 2026 HIGHER Coaching · Marcus Heier. All rights reserved. Please obtain written permission before reproducing or distributing original text, images, music, or other material from this website.</p>
             </div>
         </footer>
     </div>
 
     <script src="js/site.js"></script>
+    <script src="js/newsletter.js"></script>
+    <script src="js/home.js"></script>
+    <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+    <script src="js/scroll-reveal.js"></script>
 </body>
 
 </html>

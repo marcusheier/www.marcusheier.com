@@ -1,0 +1,191 @@
+/* About and Events reuse the homepage palette, navigation and compact footer. */
+.page-inner { width: min(calc(100% - 3rem), 1180px); margin-inline: auto; }
+.page-opening { padding-bottom: 5rem; }
+.story-panel {
+    width: min(calc(100% - 3rem), 1500px); margin-inline: auto;
+    padding: clamp(2rem, 5vw, 5rem); border: 1px solid #cad8ea;
+    border-top: 0; border-radius: 0 0 22px 22px;
+    background: linear-gradient(120deg, #e7edf9, #f4edf7);
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem 4rem; align-items: center;
+}
+.page-home .story-panel h1 { max-width: 20ch; font-size: clamp(2.8rem, 4vw, 4.2rem); }
+.story-copy p:not(.eyebrow), .story-transition p { margin-top: 1.3rem; }
+.story-photo { margin: 0; overflow: hidden; border-radius: 22px; }
+.story-photo img { display: block; width: 100%; height: auto; }
+.story-transition { grid-column: 1 / -1; max-width: 850px; padding-top: 2.5rem; border-top: 1px solid #7189a355; }
+.work-section, .enquiry-section {
+    padding: 5rem 0; color: #f2eff5;
+    background: radial-gradient(ellipse at 10% 70%, #5677b66b, transparent 55%), radial-gradient(ellipse at 88% 30%, #977ca95e, transparent 48%), #404c70;
+}
+.page-home :is(.work-section,.enquiry-section) :is(h2,h3,.eyebrow) { color: #f0edf4; }
+.page-home .work-section h2.eyebrow { font: 700 .8rem/1.5 Arial,sans-serif; letter-spacing: .16em; }
+.work-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.5rem; margin-top: 2rem; }
+.work-card { padding: 2rem; border: 1px solid #d5dbe64d; border-radius: 22px; background: #25345159; }
+.work-card h3 { font-size: 2rem; font-weight: 500; margin-bottom: 1.5rem; }
+.work-card p + p { margin-top: 1.25rem; }
+.page-closing { padding: 5rem 0; background: linear-gradient(180deg, #dce1f200, #dce1f2), linear-gradient(120deg, #e2d5ec, #cfdcf3); }
+.page-closing p { margin-top: 1.25rem; max-width: 50ch; }
+.page-closing .button { margin-top: 2rem; }
+.events-list { padding-block: 4rem 0; }
+.event-card {
+    display: grid; grid-template-columns: .65fr 1.35fr; align-items: center; gap: 4rem;
+    min-height: 360px; margin-top: 3rem; padding: clamp(2rem,5vw,4rem);
+    border: 1px solid #dce4f042; border-radius: 32px;
+    background: linear-gradient(125deg, #2a3461, #151a30);
+    box-shadow: 0 24px 65px #34445b21, 0 3px 8px #34445b0d;
+}
+.event-date { padding: 2rem; border-radius: 18px; text-align: center; background: linear-gradient(125deg,#2a3461,#151a30); color: #f2eff5; }
+.event-date span { display: block; font: 400 clamp(4rem,7vw,7rem)/1.1 var(--font-serif); }
+.event-date time { font: 400 .85rem/1.5 Arial,sans-serif; }
+.enquiry-section h2 { margin: 1rem 0 3rem; }
+.event-enquiry { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.75rem; padding: clamp(1.5rem,4vw,3.5rem); border: 1px solid #d5dbe64d; border-radius: 24px; background: #25345159; }
+.event-enquiry label { display: flex; flex-direction: column; gap: .75rem; font: 500 .78rem/1.5 Arial,sans-serif; letter-spacing: .06em; }
+.event-enquiry :is(input,textarea) { width: 100%; min-width: 0; min-height: 54px; border: 1px solid #a7b8d270; border-radius: 12px; padding: .9rem 1rem; background: #151a3070; color: #f2eff5; font: 400 1rem/1.5 Arial,sans-serif; color-scheme: dark; }
+.event-enquiry textarea { resize: vertical; }
+.form-wide { grid-column: 1 / -1; }
+.event-enquiry p { font: 400 .9rem/1.7 Arial,sans-serif; }
+.event-enquiry a { color: #c8dfff; }
+.event-enquiry .home-button { min-height: 54px; background: var(--home-button-sheen); color: #203443; }
+@media (max-width:980px) {
+    .story-panel { grid-template-columns: 1fr; gap: 2.5rem; }
+    .story-photo { width: min(100%,600px); justify-self: center; }
+    .story-transition { grid-column: auto; }
+    .work-grid { grid-template-columns: 1fr; }
+    .event-card { gap: 2rem; }
+}
+@media (max-width:768px) {
+    .page-opening { padding-bottom: 3rem; }
+    .page-inner { width: calc(100% - 3rem); }
+    .story-panel { width: calc(100% - 1.5rem); padding: 2.5rem 1.5rem; }
+    .page-home .story-panel h1 { font-size: 2.8rem; }
+    .work-section, .enquiry-section, .page-closing { padding-block: 3.5rem; }
+    .work-card { padding: 1.5rem; }
+    .event-card, .event-enquiry { grid-template-columns: 1fr; }
+    .event-card { min-height: 0; gap: 2rem; padding: 1.5rem; }
+    .event-date { padding: 1.5rem; }
+    .event-date span { font-size: 4rem; }
+}
+.page-home :is(.work-section,.enquiry-section) p { color: #e0dfe9; }
+.page-home .event-enquiry .home-button:is(:hover,:focus-visible) { background: var(--home-button-deeper); color: #f5f5f8; }
+
+/* Informational book introduction, with the same palette on desktop and mobile. */
+.book-section { padding: 0 0 clamp(3.5rem, 6vw, 5rem); }
+.book-panel {
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    border: 1px solid #7189a3; border-radius: 22px;
+    background: linear-gradient(120deg, #e7edf9, #f4edf7);
+}
+.book-panel p { max-width: 65ch; margin-top: 1.5rem; }
+
+/* White text over the Events background artwork on every screen size. */
+.page-home.page-events .events-list > :is(h1, .eyebrow) { color: #ffffff; }
+
+/* Event cards share the footer's dark surface and light typography. */
+.page-home.page-events .event-card :is(h2, p, time) { color: #f1efea; }
+.page-home.page-events .event-card .eyebrow { color: #bdc9dc; }
+.event-description { margin-top: 1.5rem; max-width: 55ch; }
+
+.page-home .event-card .event-card-link {
+    margin-top: 2rem; min-height: 48px; gap: .75rem;
+    background: var(--home-button-sheen); color: #203443;
+}
+.page-home .event-card .event-card-link:is(:hover, :focus-visible) {
+    background: #e0dce4; color: #203443;
+}
+
+/* Services: the supplied order, paired images and homepage palette. */
+.services-intro { width: min(calc(100% - 3rem),1500px); margin-inline: auto; padding: clamp(2rem,5vw,5rem); border: 1px solid #cad8ea; border-top: 0; border-radius: 0 0 22px 22px; background: linear-gradient(120deg,#e7edf9,#f4edf7); }
+.page-home .services-intro h1 { max-width: 18ch; font-size: clamp(3rem,5vw,4.5rem); }
+.services-intro p:not(.eyebrow) { max-width: 48ch; margin-top: 1.5rem; }
+.services-channeling { padding: clamp(2rem,4vw,3.5rem); margin-bottom: 5rem; border: 1px solid #7189a3; border-radius: 24px; background: linear-gradient(120deg,#e7edf9,#f4edf7); }
+.services-channeling p:not(.eyebrow) { max-width: 65ch; margin-top: 1.5rem; }
+.services-channeling .text-link { display: inline-block; margin-top: 1.5rem; }
+.services-sessions { padding-block: 5rem; background: radial-gradient(ellipse at 10% 70%,#5677b66b,transparent 55%),radial-gradient(ellipse at 88% 30%,#977ca95e,transparent 48%),#404c70; }
+.sessions-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem,5vw,4rem); align-items: center; }
+.page-home .services-sessions :is(h2,p) { color: #f1efea; }
+.services-sessions p:not(.eyebrow) { margin-top: 1.25rem; }
+.services-photo { margin: 0; border-radius: 22px; overflow: hidden; }
+.services-photo img { display: block; width: 100%; height: auto; }
+.services-coaching { margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid #dce4f042; }
+.services-program { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; padding-block: 5rem; }
+.services-program p:not(.eyebrow) { margin-top: 1.5rem; }
+.services-program .home-button { margin-top: 2rem; }
+@media (max-width:980px) { .sessions-layout,.services-program { grid-template-columns: 1fr; } .services-photo { width: min(100%,560px); justify-self: center; } }
+@media (max-width:768px) { .services-intro { width: calc(100% - 1.5rem); padding: 2.5rem 1.5rem; } .services-channeling { padding: 1.5rem; margin-bottom: 3rem; } .services-sessions,.services-program { padding-block: 3.5rem; } }
+
+/* Services opens directly on the artwork, matching the Events introduction. */
+.page-home.page-services .services-intro {
+    width: min(calc(100% - 3rem),1180px);
+    padding: 4rem 0 0; border: 0; border-radius: 0; background: transparent;
+}
+.page-home.page-services .services-intro :is(h1,p) { color: #ffffff; }
+@media (max-width:768px) {
+    .page-home.page-services .services-intro { padding-top: 3rem; }
+}
+
+/* More artwork and breathing room before the first Services card. */
+.page-home.page-services .home-top-backdrop { padding-bottom: 13rem; }
+.page-home.page-services .services-program .home-button { background: #414e73; }
+.page-home.page-services .services-program .home-button:is(:hover, :focus-visible) {
+    background: var(--home-button-sheen); color: #203443;
+}
+@media (max-width:768px) {
+    .page-home.page-services .home-top-backdrop { padding-bottom: 9rem; }
+}
+
+/* Match the homepage program's surface, spacing, radius and moving prism edge. */
+.page-home .book-panel,
+.page-home .services-channeling,
+.page-home.page-contact .section--contact {
+    padding: clamp(2rem,5vw,4.5rem);
+    padding-block: clamp(3rem,6vw,5rem);
+    border: 2px solid transparent; border-radius: 24px;
+    background: linear-gradient(115deg,#e7dff0,#d4dff3,#d2e1f1) padding-box,
+        conic-gradient(from var(--program-border-angle),#83b9ef,#a8a1ed,#e1a0cd,#83b9ef) border-box;
+    animation: program-border-orbit 7s linear infinite;
+}
+@media (prefers-reduced-motion:reduce) { .page-home .book-panel, .page-home .services-channeling, .page-home.page-contact .section--contact { animation: none; } }
+
+/* Contact keeps its existing information and destinations in the homepage palette. */
+.page-home.page-contact .page-hero { background: transparent; padding-block: 4rem 1rem; }
+.page-home.page-contact .page-hero :is(h1,p) { color: #ffffff; }
+.page-home.page-contact .page-hero h1 { max-width: 20ch; margin-inline: auto; font-size: clamp(2.8rem,5vw,4.5rem); }
+.page-home.page-contact .section--contact {
+    width: min(calc(100% - 3rem),1180px); margin-bottom: 3rem;
+    display: block;
+}
+.page-home.page-contact .contact-options > :is(h2,.eyebrow) { color: #293751; }
+.page-home.page-contact .contact-link-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.page-home.page-contact .contact-link-list a {
+    background: #f3f1ee40; border-color: #7189a3; border-radius: 18px;
+    color: #273a45; box-shadow: none; overflow-wrap: anywhere;
+}
+.page-home.page-contact .contact-link-list span { color: #49546a; }
+.page-home.page-contact .contact-link-list a:is(:hover,:focus-visible) { background: var(--home-button-deeper); color: #f1efea; }
+.page-home.page-contact .contact-link-list a:is(:hover,:focus-visible) span { color: #bdc9dc; }
+@media(max-width:768px) {
+    .page-home.page-contact .contact-link-list { grid-template-columns: 1fr; }
+    .page-home.page-contact .page-hero { padding-top: 3rem; }
+}
+
+.page-home.page-contact .contact-social { margin-top: 3rem; }
+.page-home.page-contact .contact-social > .eyebrow { color: #49546a; font: 700 .74rem/1.5 var(--font-sans); letter-spacing: .12em; }
+.page-home.page-contact .contact-social .contact-link-list { margin-top: 1.25rem; }
+
+.certification-layout { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 3rem; }
+.certification-photo { width: min(100%,320px); margin: 0; justify-self: center; border-radius: 22px; overflow: hidden; }
+.certification-photo img { display: block; width: 100%; height: auto; }
+@media (min-width: 769px) {
+    .page-about .certification-layout > div { padding-left: clamp(2rem, 4vw, 4rem); }
+}
+@media (max-width:768px) { .certification-layout { grid-template-columns: 1fr; gap: 2rem; } }
+
+/* Short social introductions supplied for About and Services. */
+.page-social-section { padding-block: 3.5rem; }
+.page-social-panel { padding: clamp(1.5rem,4vw,3.5rem); border: 1px solid #7189a3; border-radius: 22px; background: linear-gradient(120deg,#e7edf9,#f4edf7); }
+.page-social-panel p:not(.eyebrow) { margin-top: 1.5rem; max-width: 55ch; }
+.page-social-panel .text-link { display: inline-block; margin-top: 1.5rem; }
+
+/* Bot trap remains outside the visual and keyboard flow. */
+.event-enquiry .enquiry-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.event-enquiry button:disabled { opacity: .6; cursor: not-allowed; }
