@@ -26,6 +26,7 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Parisienne&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/event-banner.css">
+    <link rel="stylesheet" href="css/newsletter.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/scroll-reveal.css">
@@ -122,7 +123,51 @@
 
         <footer class="site-footer">
             <div class="footer-panel">
-<div class="footer-content">
+<section class="footer-newsletter" aria-labelledby="newsletter-heading">
+<figure class="newsletter-art" aria-label="Portrait of Marcus Heier">
+    <img src="assets/images/marcus-footer.png" alt="Marcus Heier" loading="lazy">
+</figure>
+<div id="mlb2-47616393" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-47616393">
+<div class="ml-form-align-center ">
+<div class="ml-form-embedWrapper embedForm">
+<div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+<div class="ml-form-embedContent" style=" ">
+<h2 id="newsletter-heading">Stay Connected</h2>
+<p>Receive spiritual insights, reflections, and updates directly in your inbox.</p>
+</div>
+<form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2724032/forms/202396785029678594/subscribe" data-code="" method="post" target="_blank">
+<div class="ml-form-formContent">
+<div class="ml-form-fieldRow ml-last-item">
+<div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+<input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Your email address" required aria-describedby="newsletter-note" autocomplete="email">
+</div>
+</div>
+</div>
+<input type="hidden" name="ml-submit" value="1">
+<div class="ml-form-embedSubmit">
+<button type="submit" class="primary">Subscribe</button>
+<button disabled="disabled" style="display: none;" type="button" class="loading">
+<div class="ml-form-embedSubmitLoad"></div>
+<span class="sr-only">Loading...</span>
+</button>
+</div>
+<input type="hidden" name="anticsrf" value="true">
+</form>
+<p id="newsletter-feedback" role="status" hidden></p>
+<p id="newsletter-note">Unsubscribe anytime.</p>
+</div>
+<div class="ml-form-successBody row-success" role="status" tabindex="-1" style="display: none">
+<div class="ml-form-successContent">
+<h2>Thank you!</h2>
+<p>Thank you for signing up. If you receive a confirmation email, please click its link to complete your subscription.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            <div class="footer-content">
                 <div class="footer-brand">
                     <a href="index.html" aria-label="Marcus Heier home">
                         <img class="footer-logo" src="assets/logo/logo white.png" alt="Marcus Heier" loading="lazy">
@@ -150,6 +195,8 @@
     </div>
 
     <script src="js/site.js"></script>
+    <script src="js/newsletter.js"></script>
+    <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
     <script src="js/scroll-reveal.js"></script>
 </body>
 
