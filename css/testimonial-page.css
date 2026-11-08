@@ -62,3 +62,19 @@
     .page-home.testimonial-page .testimonial-form-card { padding: 1.5rem; }
     .page-home.testimonial-page .field-meta { flex-wrap: wrap; gap: .35rem; }
 }
+
+.testimonial-received {
+    box-sizing: border-box;
+    width: min(32rem, calc(100% - 2rem));
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+    border: 1px solid #c4ccdc;
+    border-radius: 1rem;
+    background: #f5f3f9;
+    color: #27344a;
+    text-align: center;
+}
+.testimonial-received::backdrop { background: rgb(24 31 52 / 65%); }
+.testimonial-received h2 { color: inherit; margin: 0 0 .75rem; }
+.testimonial-received p { margin: 0 0 1.5rem; }

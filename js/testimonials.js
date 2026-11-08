@@ -8,6 +8,7 @@ const imagePreview = document.querySelector("#image-preview");
 const imagePreviewImage = document.querySelector("#image-preview-image");
 const imagePlaceholder = document.querySelector("#image-placeholder");
 const formStatus = document.querySelector("#form-status");
+const receivedDialog = document.querySelector("#testimonial-received");
 const startedAt = Date.now();
 
 function setError(field, message = "") {
@@ -109,12 +110,13 @@ testimonialForm?.addEventListener("submit", async (event) => {
         const response = await fetch(TESTIMONIALS_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
         if (!response.ok) throw new Error("Submission failed");
         const result = await response.json();
-        if (!result.ok) throw new Error(result.error || "Submission failed");
+        if (result.ok !== true) throw new Error(result.error || "Submission failed");
         setFormStatus("Thank you — your testimonial has been received.", true);
         testimonialForm.reset();
         imagePreview.hidden = true;
         imagePlaceholder.hidden = false;
         testimonialCount.textContent = "0 characters";
+        receivedDialog?.showModal();
     } catch (error) {
         setFormStatus("Something went wrong. Please try again in a moment.");
     } finally {
