@@ -27,14 +27,27 @@
 .page-closing p { margin-top: 1.25rem; max-width: 50ch; }
 .page-closing .button { margin-top: 2rem; }
 .events-list { padding-block: 4rem 0; }
+.page-home.page-events .home-top-backdrop { padding-bottom: clamp(2.5rem, 6vw, 4rem); }
+.events-info {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+    background: #e0e4ec;
+}
+.events-info-inner {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center; gap: clamp(1.5rem, 5vw, 4rem);
+}
+.events-info-image { display: block; width: 100%; height: auto; border-radius: 22px; }
+.events-info-copy h2, .events-info-copy p:not(.eyebrow) { margin-top: 1rem; }
+.events-info-copy p:not(.eyebrow) { max-width: 54ch; }
 .event-card {
     display: grid; grid-template-columns: .65fr 1.35fr; align-items: center; gap: 4rem;
     min-height: 360px; margin-top: 3rem; padding: clamp(2rem,5vw,4rem);
     border: 1px solid #dce4f042; border-radius: 32px;
-    background: linear-gradient(125deg, #2a3461, #151a30);
+    background: var(--card-surface, linear-gradient(125deg, #2a3461, #151a30));
     box-shadow: 0 24px 65px #34445b21, 0 3px 8px #34445b0d;
 }
-.event-date { padding: 2rem; border-radius: 18px; text-align: center; background: linear-gradient(125deg,#2a3461,#151a30); color: #f2eff5; }
+.event-date { padding: 2rem; border-radius: 18px; text-align: center; background: var(--card-date, linear-gradient(125deg,#2a3461,#151a30)); color: var(--card-ink, #f2eff5); }
 .event-date span { display: block; font: 400 clamp(4rem,7vw,7rem)/1.1 var(--font-serif); }
 .event-date time { font: 400 .85rem/1.5 Arial,sans-serif; }
 .enquiry-section h2 { margin: 1rem 0 3rem; }
@@ -54,6 +67,7 @@
     .event-card { gap: 2rem; }
 }
 @media (max-width:768px) {
+    .events-info-inner { grid-template-columns: 1fr; max-width: 600px; }
     .page-opening { padding-bottom: 3rem; }
     .page-inner { width: calc(100% - 3rem); }
     .story-panel { width: calc(100% - 1.5rem); padding: 2.5rem 1.5rem; }
@@ -81,16 +95,52 @@
 .page-home.page-events .events-list > :is(h1, .eyebrow) { color: #ffffff; }
 
 /* Event cards share the footer's dark surface and light typography. */
-.page-home.page-events .event-card :is(h2, p, time) { color: #f1efea; }
-.page-home.page-events .event-card .eyebrow { color: #bdc9dc; }
-.event-description { margin-top: 1.5rem; max-width: 55ch; }
+.page-home.page-events .event-card :is(h2, h3, p, time) { color: var(--card-ink, #f1efea); }
+.page-home.page-events .event-card h3 { font-size: clamp(2.3rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.035em; }
+.page-home.page-events .event-card .eyebrow { color: var(--card-accent, #bdc9dc); }
+.event-description { margin-top: 1.5rem; max-width: 55ch; white-space: pre-line; }
+.page-events .event-card { overflow-wrap: anywhere; }
+.page-events #events-status { margin-top: 1.5rem; color: #f1efea; }
 
 .page-home .event-card .event-card-link {
     margin-top: 2rem; min-height: 48px; gap: .75rem;
-    background: var(--home-button-sheen); color: #203443;
+    background: var(--card-button, var(--home-button-sheen)); color: var(--card-button-ink, #203443);
 }
 .page-home .event-card .event-card-link:is(:hover, :focus-visible) {
-    background: #e0dce4; color: #203443;
+    background: var(--card-button-hover, #e0dce4); color: var(--card-button-ink, #203443);
+}
+
+.event-card--channeling {
+    --card-surface: radial-gradient(ellipse at 14% 23%, #2fa1ef45, transparent 55%),
+        linear-gradient(135deg, #082766, #133e9c 55%, #5940b6);
+    --card-date: #082766a6;
+    --card-ink: #f7fbff;
+    --card-accent: #b4f8ff;
+    --card-button: linear-gradient(135deg, #fff5f1 0%, #faddd3 58%, #f5cbc8 100%);
+    --card-button-ink: #06183f;
+    --card-button-hover: var(--card-button);
+}
+
+.event-card--workshop {
+    --card-surface: linear-gradient(120deg, #f4f5ff, #e3e9ff 58%, #ffd9c8);
+    --card-date: #c2ccf7;
+    --card-ink: #202b57;
+    --card-accent: #433c91;
+    --card-button: #344897;
+    --card-button-ink: #fff;
+    --card-button-hover: #283979;
+}
+
+.event-card--collective {
+    --card-surface: radial-gradient(ellipse at 100% 100%, #c83f6b5c, transparent 45%),
+        radial-gradient(ellipse at 64% 100%, #177d9380, transparent 55%),
+        linear-gradient(120deg, #11132d, #1e3471 58%, #26204b);
+    --card-date: #11132d99;
+    --card-ink: #f1efea;
+    --card-accent: #a4dce7;
+    --card-button: #b2c2ff;
+    --card-button-ink: #151c40;
+    --card-button-hover: #d6dfff;
 }
 
 /* Services: the supplied order, paired images and homepage palette. */
